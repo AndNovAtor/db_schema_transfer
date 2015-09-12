@@ -93,22 +93,20 @@ print_xml_tree(xmlRoot)
 domain_lst = []
 
 
-def create_xml_objs(root):
+def parse_domains(root):
     dom_num = 0
     domains = []
     for domain in root.find("domains"):
-        dom_num+=1
-        print("Domain", dom_num, ":")
-        print(" attr-s:", ["{}={}, ".format(k, v) for k, v in domain.attrib.items()])
-        print(domain.text, '@')
+        dom_num += 1
+        # print(" attr-s:", ["{}={}, ".format(k, v) for k, v in domain.attrib.items()])
         domains.append(ddl_classes.Domain(domain.attrib))
     return domains
-    # print(root.tag)
-    # if "tables" in rootlst and "tables" in rootlst:
-    #     print("x")
 
 
-domain_lst = create_xml_objs(xmlRoot)
+def parse_tables(root):
+    tables_num = 0
+
+domain_lst = parse_domains(xmlRoot)
 print(xmlRoot[0].tag, xmlRoot[0].attrib, xmlRoot[1].text.strip(), '3')
 print(xmlRoot[1][0].tag, xmlRoot[1][0].attrib, xmlRoot[1][0].text, '3')
 print(domain_lst)
