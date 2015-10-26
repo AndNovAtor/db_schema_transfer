@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dbd_schema version="v1.0.1.0" name="PRJADM" description="Описатедь БД PRADM">
+  <custom/>
+  <domains>
+    <domain name="BinData" type="BLOB" align="L"/>
+    <domain name="ID_Ведущей" type="LARGEINT" align="L" width="10"/>
+    <domain name="ID_предст" type="LARGEINT" align="L" width="11"/>
+    <domain name="Layout_id" type="STRING" align="L" width="200" props="case_sensitive" char_length="200"/>
+    <domain name="КодSQL" type="LARGEINT" align="L" width="10"/>
+    <domain name="КодАлгИзм" description="Код алгоритма" type="BYTE" align="L" width="3"/>
+    <domain name="КодВидаТаб" type="BYTE" align="R" width="2"/>
+    <domain name="КодВыравн." type="BYTE" align="L" width="3"/>
+    <domain name="КодДомена" type="LARGEINT" align="L" width="10"/>
+    <domain name="КодДоступа" type="BYTE" align="L" width="3"/>
+    <domain name="КодЗадачи" type="WORD" align="R" width="3"/>
+    <domain name="КодИмЭлХр" type="LARGEINT" align="L" width="11"/>
+    <domain name="КодИндекса" type="LARGEINT" align="L" width="10"/>
+    <domain name="КодКаскад" type="LARGEINT" align="L" width="10"/>
+  </domains>
+  <tables>
+    <table name="ALIGN" description="Выравнивание" ht_table_flags="s">
+      <field name="KodVyravn_" rname="КодВыравн." domain="КодВыравн." props="show_in_grid, autocalculated"/>
+      <field name="Vyravniv" rname="Выравнив" domain="Выравнив" description="Выравнивание" props="input, edit, show_in_grid, show_in_details, is_mean, required"/>
+      <constraint kind="PRIMARY" items="KodVyravn_"/>
+      <index field="Vyravniv" props="uniqueness"/>
+    </table>
+    <table name="CASCDEL" description="Каскадное удаление" ht_table_flags="s">
+      <field name="KodKaskad" rname="КодКаскад" domain="КодКаскад" props="input, show_in_grid, show_in_details, autocalculated, required"/>
+      <field name="VidKaskad" rname="ВидКаскад" domain="ВидКаскад" props="input, edit, show_in_grid, show_in_details, is_mean, required"/>
+      <constraint kind="PRIMARY" items="KodKaskad"/>
+      <index field="VidKaskad" props="uniqueness"/>
+    </table>
+    <table name="CONSTRNT" description="Ограничения таблиц" props="add, edit, delete" ht_table_flags="rws">
+      <field name="KodOgranich" rname="КодОгранич" domain="КодОгранич" props="show_in_grid, show_in_details, autocalculated"/>
+      <field name="ID_Tabliczy" rname="ID Таблицы" domain="ID Таблицы" props="input, edit, show_in_grid, show_in_details, is_mean, required"/>
+      <field name="ImyaOgranich" rname="ИмяОгранич" domain="Название" description="Имя ограничения для СУБД" props="input, edit, show_in_grid, show_in_details, is_mean"/>
+      <field name="VidOgranich" rname="ВидОгранич" domain="ВидОгранич" props="input, edit, show_in_grid, show_in_details, is_mean"/>
+      <field name="Vn_Klyuch" rname="Вн.Ключ" domain="ID Таблицы" description="Внешний ключ" props="input, edit, show_in_grid, show_in_details"/>
+      <field name="PokazKl" rname="ПоказКл" domain="ПоказКл" description="Показывать ключ" props="input, edit, show_in_grid, show_in_details"/>
+      <field name="UdNevSsyl_" rname="УдНевСсыл." domain="КодКаскад" description="Каскадное удаление" props="input, edit, show_in_grid, show_in_details"/>
+      <field name="Vyrazhenie" rname="Выражение" domain="Параметры" props="input, edit, show_in_grid, show_in_details"/>
+      <field name="KodUnikKl" rname="КодУникКл" domain="КодПоля" props="input, edit, show_in_grid, show_in_details"/>
+      <field name="DataIzmen_" rname="ДатаИзмен." domain="ДатаИзмен." props="show_in_details"/>
+      <field name="VremyaIzmen" rname="ВремяИзмен" domain="ВремяИзмен" props="show_in_details"/>
+      <field name="Otvetstv_" rname="Ответств." domain="Ответств." props="show_in_details"/>
+      <constraint kind="PRIMARY" items="KodOgranich"/>
+      <constraint kind="FOREIGN" items="ID_Tabliczy" reference="TABLES" props="cascading_delete"/>
+      <constraint kind="FOREIGN" items="KodUnikKl" reference="FIELDS" props="cascading_delete"/>
+      <constraint kind="FOREIGN" items="Otvetstv_" reference="USERS"/>
+      <constraint kind="FOREIGN" items="UdNevSsyl_" reference="CASCDEL" props="cascading_delete"/>
+      <constraint kind="FOREIGN" items="VidOgranich" reference="CONSTYPE" props="has_value_edit"/>
+      <constraint kind="FOREIGN" items="Vn_Klyuch" reference="TABLES" props="cascading_delete"/>
+      <index field="DataIzmen_"/>
+      <index field="ID_Tabliczy"/>
+      <index field="ImyaOgranich"/>
+      <index field="KodUnikKl"/>
+      <index field="Otvetstv_"/>
+      <index field="UdNevSsyl_"/>
+      <index field="VidOgranich"/>
+      <index field="Vn_Klyuch"/>
+      <index field="VremyaIzmen"/>
+    </table>
+    <table name="CONSTYPE" description="Виды ограничений" ht_table_flags="s">
+      <field name="VidOgranich" rname="ВидОгранич" domain="ВидОгранич" props="input, show_in_grid, show_in_details, required"/>
+      <field name="Nazvanie" rname="Название" domain="Название" props="input, edit, show_in_grid, show_in_details, is_mean, required"/>
+      <constraint kind="PRIMARY" items="VidOgranich"/>
+      <index field="Nazvanie" props="uniqueness"/>
+    </table>    
+  </tables>
+</dbd_schema>
