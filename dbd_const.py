@@ -113,7 +113,7 @@ create table dbd$constraints (
     table_id integer not null,                           -- идентификатор таблицы (dbd$tables)
     name varchar default(null),                          -- имя ограничения
     constraint_type char default(null),                  -- вид ограничения
-    reference integer default(null),        -- идентификатор таблицы (dbd$tables), на которую ссылается внешний ключ
+    /* reference integer default(null),        -- идентификатор таблицы (dbd$tables), на которую ссылается внешний ключ*/
     unique_key_id integer default(null),    -- (опционально) идентификатор ограничения (dbd$constraints) таблицы, на которую ссылается внешний ключ (*1*)
     has_value_edit boolean default(null),   -- признак наличия поля ввода ключа
     cascading_delete boolean default(null), -- признак каскадного удаления для внешнего ключа
@@ -124,7 +124,6 @@ create table dbd$constraints (
 create index "idx.6F902GEQ3" on dbd$constraints(table_id);
 create index "idx.6SRYJ35AJ" on dbd$constraints(name);
 create index "idx.62HLW9WGB" on dbd$constraints(constraint_type);
-create index "idx.5PQ7Q3E6J" on dbd$constraints(reference);
 create index "idx.92GH38TZ4" on dbd$constraints(unique_key_id);
 create index "idx.6IOUMJINZ" on dbd$constraints(uuid);
 
@@ -280,13 +279,11 @@ select
   dbd$constraint_details.position "position",
   dbd$schemas.name "schema",
   dbd$tables.name "table_name",
-  dbd$fields.name "field_name",
-  "references".name "reference"
+  dbd$fields.name "field_name"
 from
   dbd$constraint_details
   inner join dbd$constraints on dbd$constraint_details.constraint_id = dbd$constraints.id
   inner join dbd$tables on dbd$constraints.table_id = dbd$tables.id
-  left join dbd$tables "references" on dbd$constraints.reference = "references".id
   left join dbd$fields on dbd$constraint_details.field_id = dbd$fields.id
   Left Join dbd$schemas On dbd$tables.schema_id = dbd$schemas.id
 order by

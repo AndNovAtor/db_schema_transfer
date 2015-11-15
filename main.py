@@ -8,15 +8,11 @@ import sqlite3
 from os import remove
 
 __author__ = 'NovAtor'
-# from platform import system
 
-#
-# if system() == "Linux":
-#     dropPath = "/home/novator/Dropbox/"
-# else:
-#     dropPath = "D:/Dropbox/" if (gethostname() == "NovAtor-ПК") else "C:/Users/NovAtor/Dropbox/"
-# xmlPath = dropPath + "Programming/Python/20150221-093102/prjadm.xml"
-xml_path = "parsedbd.xml"
+
+xml_path = "D:/parsedbd.xml"
+
+
 xmlTree = ElTr.parse(xml_path)
 xmlRoot = xmlTree.getroot()
 
@@ -40,7 +36,6 @@ def parse_domains(root, domains, types=None):
         #       If want to use constraint["kind"] style, needed constraint.attrib["kind"] or changing loop with .attrib
         #
         domain_obj.name = domain_el.get("name")
-        # TODO Использование .pop() изменит объект снаружи, однако это уменшит поиск, в теории. Нужно ли заменить?
         domain_obj.description = domain_el.get("description")
         domain_obj.type = domain_el.get("type")
         if types.__class__.__name__ == "dict":
@@ -67,23 +62,23 @@ def parse_domains(root, domains, types=None):
 
 
 def parse_tables(root, in_tables, domains):
-    tabl_num = 0
-    for table in root.find("tables"):
-        tabl_num += 1
+    table_num = 0
+    for table_el in root.find("tables"):
+        table_num += 1
         table_obj = ddl_classes.Table()
 
-        table_obj.name = table.get("name", "")
-        table_obj.description = table.get("description", "")
-        table_obj.props = table.get("props", "")
-        table_obj.ht_table_flags = table.get("ht_table_flags", "")
-        table_obj.temporal_mode = table.get("temporal_mode", None)
-        table_obj.means = table.get("means", None)
+        table_obj.name = table_el.get("name", "")
+        table_obj.description = table_el.get("description", "")
+        table_obj.props = table_el.get("props", "")
+        table_obj.ht_table_flags = table_el.get("ht_table_flags", "")
+        table_obj.temporal_mode = table_el.get("temporal_mode", None)
+        table_obj.means = table_el.get("means", None)
         table_obj.fields = {}
         table_obj.pr_constraint = None
         table_obj.fr_constraints = []
-        table_obj.indexes = []
+        table_obj.indices = []
 
-        for field_dict in table.findall("field"):
+        for field_dict in table_el.findall("field"):
             field = ddl_classes.Field()
 
             field.name = field_dict.get("name", "")
@@ -91,41 +86,50 @@ def parse_tables(root, in_tables, domains):
             field.domain_name = field_dict.get("domain", "")
             field.description = field_dict.get("description", "")
             field.props = field_dict.get("props", "")
-            # TODO: domain = "{}"d for d in domain_list if d.name==self.domain_name]
-            for node in domains:
-                if node.name == field.domain_name:
-                    field.domain = node
-                    break
+            field.domain = next((d for d in domains if d.name == field.domain_name), None)
 
             table_obj.append_field(field)
         in_tables.append(table_obj)
-    return tabl_num
+    return table_num
 
 
 def parse_tables_other(root, in_tables):
     i = 0
-    for table in root.find("tables"):
+    con_num = 0
+    ind_num = 0
+    for table_el in root.find("tables"):
         table_obj = in_tables[i]
-        for constraint in table.findall("constraint"):
-            items_field = table_obj.fields[constraint.get("items")]
-            if constraint.get("kind", "") == "PRIMARY":
-                table_obj.pr_constraint = ddl_classes.PrConstraint(items_field)
+        for constraint_el in table_el.findall("constraint"):
+            con_num += 1
+            items_field = table_obj.fields[constraint_el.get("items")]
+            con_kind = constraint_el.get("kind", "")
+            con_name = constraint_el.get("name")
+            if con_kind == "PRIMARY":
+                table_obj.pr_constraint = ddl_classes.PrConstraint(items_field, con_name)
             else:
-                if constraint.get("kind", "") == "FOREIGN":
-                    ref_table = next((t for t in in_tables if t.name == constraint.get("reference")), None)
+                con_props = constraint_el.get("props", "")
+                if con_kind == "FOREIGN":
+                    ref_table = next((t for t in in_tables if t.name == constraint_el.get("reference")), None)
                     if ref_table is None:
                         # !!!!!!!!!!!!!!!!!!!!!!!!!!!! ERROR HERE !!!!!!!!!!!!!!!
                         table_obj.fr_constraints.append(ddl_classes.ForConstraint(items_field, None,
-                                                                                  constraint.get("props", "")))
+                                                                                  con_props, con_name))
                     else:
                         table_obj.fr_constraints.append(ddl_classes.ForConstraint(items_field, ref_table,
-                                                                                  constraint.get("props", "")))
-                        # else:
-                        #     print("Incorrect constraint")
-        for index in table.findall("index"):
-            table_obj.indexes.append(ddl_classes.Index(table_obj.fields[index.get("field")], index.get("props")))
+                                                                                  con_props, con_name))
+                else:
+                    if con_kind == "CHECK":
+                        table_obj.ch_constraint.append(ddl_classes.CheckConstraint(constraint_el.get("reference"),
+                                                                                   con_props, con_name),)
+                    else:
+                        print("Incorrect constraint")
+        for index in table_el.findall("index"):
+            ind_num += 0
+            table_obj.indices.append(ddl_classes.Index(table_obj.fields[index.get("field")], index.get("props",""),
+                                                       index.get("expression")))
         # ++i
         i += 1
+    return [con_num, ind_num]
 
 
 domain_lst = []
@@ -133,7 +137,7 @@ domain_lst = []
 domains_num = parse_domains(xmlRoot, domain_lst)
 tables_lst = []
 tables_num = parse_tables(xmlRoot, tables_lst, domain_lst)
-parse_tables_other(xmlRoot, tables_lst)
+con_ind_num = parse_tables_other(xmlRoot, tables_lst)
 
 
 def silentrem(filename):
@@ -147,9 +151,12 @@ db_path = splitext(xml_path)[0]+".db"
 silentrem(db_path)
 con = sqlite3.connect(db_path)
 cur = con.cursor()
+# con.isolation_level = "IMMEDIATE"
 cur.executescript(SQL_DBD_Init)
 print("Empty db-file was successfully created.")
-cur.execute("create temporary table domains_tmp (b,c,t_name,e,f,g,h,i,j,k,l,m,n,o,p);")
+cur.execute("""create temporary table domains_tmp (do_n,do_d,ty_name,do_l,do_c_l,do_pr,
+                 do_sc,do_w,do_al,do_sn,do_sln,do_ts,do_sum,do_cs,do_uuid);""")
+# cur.execute("BEGIN;")
 for domain in domain_lst:
     d_name = domain.name
     d_description = domain.description
@@ -169,11 +176,15 @@ for domain in domain_lst:
     cur.execute("insert into domains_tmp values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);", (d_name, d_description,
                 d_type_name, d_length, d_char_length, d_precision, d_scale, d_width, d_align, d_show_null,
                 d_show_lead_nulls, d_thousands_separator, d_summable, d_case_sensitive, d_uuid))
-cur.executescript("""insert into dbd$domains select null, d.b, d.c, t.id, d.e, d.f, d.g,
-                  d.h, d.i, d.j, d.k, d.l, d.m, d.n, d.o, d.p
-                  from domains_tmp d inner join dbd$data_types t on d.t_name = t.type_id;
+# print(con.isolation_level)
+# cur.execute("COMMIT;")
+cur.executescript("""BEGIN;
+                  insert into dbd$domains select null, d.do_n, d.do_d, t.id, d.do_l, d.do_c_l, d.do_pr,
+                  d.do_sc, d.do_w, d.do_al, d.do_sn, d.do_sln, d.do_ts, d.do_sum, d.do_cs, d.do_uuid
+                  from domains_tmp d inner join dbd$data_types t on d.ty_name = t.type_id;
 
-                  DROP TABLE domains_tmp;""")
+                  DROP table domains_tmp;
+                  COMMIT;""")
 con.commit()
 #   Next not supported in sqlite3 (update... set.. FROM)
 # cur.execute("update dbd$domains "
@@ -190,7 +201,8 @@ con.commit()
 #             d.summable boolean, d.case_sensitive, d.uuid, d.type_name
 #             from dbd$domains d inner join dbd$data_types t on d.type_name = t.id;""")
 # cur.execute("ALTER TABLE dbd$domains DROP COLUMN type_name;")
-con.commit()
+con.commit()  # TODO
+# cur.execute("BEGIN;")
 for table in tables_lst:
     t_name = table.name
     t_description = table.description
@@ -203,14 +215,39 @@ for table in tables_lst:
     t_uuid = uuid.uuid4().hex
     cur.execute("insert into dbd$tables values (Null,Null,?,?,?,?,?,?,?,?);", (t_name, t_description,
                 t_can_add, t_can_edit, t_can_delete, t_temporal_mode, t_means, t_uuid,))
+# cur.execute("COMMIT;")
 con.commit()
-# cur.execute("create temporary constraints_tmp table fields_tmp (t_name,a,b,c,d,d_name,f,g,h,i,j,k,l,m);")
-# cur.execute("create temporary con_details_tmp table fields_tmp (t_name,a,b,c,d,d_name,f,g,h,i,j,k,l,m);")
-# cur.execute("create temporary indices table fields_tmp (t_name,a,b,c,d,d_name,f,g,h,i,j,k,l,m);")
-# cur.execute("create temporary ind_details_tmp table fields_tmp (t_name,a,b,c,d,d_name,f,g,h,i,j,k,l,m);")
-cur.execute("create table fields_tmp (t_name,a,b,c,d,d_name,g,h,i,j,k,l,m,n);")
+cur.executescript("""create temporary table fields_tmp (t_name, fi_pos, fi_n, fi_rn, fi_d,d_name, fi_ci, fi_ce, fi_sig,
+                       fi_sid, fi_im, fi_ac, fi_req, fi_uuid);
+                     create temporary table constraints_tmp (c_id,c_t_name,c_n,c_t,c_ref_t_n, c_hve,c_cd,c_exp,c_uuid);
+                     create temporary table con_details_tmp (cd_c_id, cd_pos, f_name);
+                     create temporary table indices_tmp (ind_id, ind_t_name, ind_name, ind_loc, ind_kind, ind_uuid);
+                     create temporary table ind_details_tmp (ind_d_ind_id, ind_d_pos, ind_d_f_name,
+                       ind_d_expr,ind_d_desc);""")
+c_id = cur.execute("SELECT seq from sqlite_sequence where name = 'dbd$constraints'").fetchone()
+cur.execute("UPDATE sqlite_sequence set seq = seq + ? where name = 'dbd$constraints'", (con_ind_num[0],)).fetchone()
+con.commit()
+in_id = cur.execute("SELECT seq from sqlite_sequence where name = 'dbd$indices'").fetchone()
+cur.execute("UPDATE sqlite_sequence set seq = seq + ? where name = 'dbd$indices'", (con_ind_num[1],)).fetchone()
+# cur.execute("COMMIT;")
+con.commit()
+
+
+def init_id_from_seq(seq_result):
+    if seq_result is not None:
+        return seq_result[0]
+    else:
+        return 0
+
+c_id = init_id_from_seq(c_id)
+in_id = init_id_from_seq(in_id)
+
+cur.execute("BEGIN;")
 for table in tables_lst:
     f_pos = 0
+    con_pos = 0
+    ind_pos = 0
+    t_name = table.name
     for fld_name, field in table.fields.items():
         f_pos += 1
         f_name = fld_name
@@ -228,17 +265,69 @@ for table in tables_lst:
         cur.execute("insert into fields_tmp values (?,?,?,?,?,?,?,?,?,?,?,?,?,?);", (t_name, f_pos, f_name, f_rname,
                     f_description, f_d_name, f_can_input, f_can_edit, f_sh_in_grid, f_sh_in_det, f_is_mean,
                     f_au_calc, f_required, f_uuid))
-cur.executescript("""insert into dbd$fields select null, t.id, f.a, f.b, f.c,
-                  f.d, d.id, f.g, f.h, f.i, f.j, f.k, f.l, f.m, f.n
-                  from (fields_tmp f inner join dbd$tables t on f.t_name = t.name)
-                  inner join dbd$domains d on f.d_name = d.name;
 
-                  DROP TABLE fields_tmp;""")
+    t_constraints = [table.pr_constraint] + table.fr_constraints + [table.ch_constraint]
+    for t_constraint in t_constraints:
+        if t_constraint is not None:
+            c_id += 1
+            c_name = t_constraint.name
+            c_type = t_constraint.const_type
+            c_ref_t_n = getattr(t_constraint, "ref_name", None)
+            c_has_v_ed = ("has_value_edit" in getattr(t_constraint, "props", ""))
+            if c_type == "FOREIGN":
+                c_cas_del = ("cascading_delete" in t_constraint.props)
+            else:
+                c_cas_del = None
+            c_expr = getattr(t_constraint, "expression", None)
+            c_uuid = uuid.uuid4().hex
+            cur.execute("insert into constraints_tmp values (?,?,?,?,?,?,?,?,?);", (c_id, t_name, c_name, c_type,
+                        c_ref_t_n, c_has_v_ed, c_cas_del, c_expr, c_uuid))
+            con_pos += 1
+            con_f_name = t_constraint.item_name
+            cur.execute("insert into con_details_tmp values (?,?,?);", (c_id, con_pos, con_f_name))
+    t_indices = table.indices
+    for t_index in t_indices:
+        in_id += 1
+        in_name = t_index.name
+        in_loc = ("local" in t_index.props)
+        in_kind = next((x for x in ("uniqueness", " fulltext", " simple") if x in t_index.props.lower()), "simple")
+        in_uuid = uuid.uuid4().hex
+        cur.execute("insert into indices_tmp values (?,?,?,?,?,?);", (in_id, t_name, in_name, in_loc, in_kind, in_uuid))
+        ind_pos += 1
+        in_f_name = t_index.field_name
+        in_expr = t_index.expression
+        in_desc = ("descend" in t_index.props)
+        cur.execute("insert into ind_details_tmp values (?,?,?,?,?);", (in_id, ind_pos, in_f_name, in_expr, in_desc))
+
+cur.executescript("""BEGIN;
+                     insert into dbd$fields select null, t.id, fi_pos, fi_n, fi_rn,
+                     fi_d, d.id, fi_ci, fi_ce, fi_sig, fi_sid, fi_im, fi_ac, fi_req, fi_uuid
+                     from (fields_tmp f inner join dbd$tables t on f.t_name = t.name)
+                     inner join dbd$domains d on f.d_name = d.name;
+
+                     insert into dbd$constraints select con.c_id, t.id, con.c_n, con.c_t, ca.c_id, con.c_hve,
+                       con.c_cd, con.c_exp, con.c_uuid
+                       from (constraints_tmp con inner join (select c_id,c_t_name from constraints_tmp
+                       where c_t="PRIMARY") ca on con.c_ref_t_n=ca.c_t_name)
+                       inner join dbd$tables t on con.c_t_name=t.name;
+
+                     insert into dbd$constraint_details select null, cd.cd_c_id, cd.cd_pos, f.id
+                       from con_details_tmp cd inner join dbd$fields f on cd.f_name = f.name;
+
+                     insert into dbd$indices select i.ind_id, t.name, i.ind_name, i.ind_loc, i.ind_kind, i.ind_uuid
+                       from indices_tmp i inner join dbd$tables t on i.ind_t_name=t.name;
+
+                     insert into dbd$index_details select null, id.ind_d_ind_id, id.ind_d_pos, f.id,
+                       id.ind_d_expr, id.ind_d_desc
+                       from ind_details_tmp id inner join dbd$fields f on id.ind_d_f_name = f.name;
+
+                     DROP TABLE fields_tmp;
+                     DROP TABLE constraints_tmp;
+                     DROP TABLE con_details_tmp;
+                     DROP TABLE indices_tmp;
+                     DROP TABLE ind_details_tmp;
+
+                     COMMIT;""")
 con.commit()
-# TODO: Сделать разрешение проблемы id для constraint'ов и indexes'ов
-# for table in tables_lst:
-#     f_pos = 0
-#     for field in table.fields:
 
 print("Db-file update code executed successfully.")
-

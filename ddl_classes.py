@@ -15,8 +15,8 @@ class Domain:
 
 
 class Table:
-    def __init__(self, name_i=None, descr_i=None, props_i="", fields_lst=None, ht_table_flags="", prim_constraint=None,
-                 for_constraints=None, ind_lst=None):
+    def __init__(self, name_i=None, descr_i=None, props_i="", fields_lst=None, ht_table_flags="", prim_constraint_i=None,
+                 for_constraints_i=None, ch_const_i=None, ind_lst=None):
         self.name = name_i
         self.description = descr_i
         self.props = props_i
@@ -27,9 +27,10 @@ class Table:
         else:
             self.fields = {}
             # self.fields_name_lst = []
-        self.pr_constraint = prim_constraint
-        self.fr_constraints = for_constraints if (for_constraints.__class__.__name__ == "list") else []
-        self.indexes = ind_lst if (ind_lst.__class__.__name__ == "list") else []
+        self.pr_constraint = prim_constraint_i if (prim_constraint_i.__class__.__name__ == "PrConstraint") else None
+        self.fr_constraints = for_constraints_i if (for_constraints_i.__class__.__name__ == "list") else []
+        self.indices = ind_lst if (ind_lst.__class__.__name__ == "list") else []
+        self.ch_constraint = ch_const_i if (ch_const_i.__class__.__name__ == "CheckConstraint") else None
 
     def append_field(self, field):
         if type(field).__name__ == "Field":
@@ -56,8 +57,10 @@ class Field:
                         break
 
 
-class Constraint:
-    def _init_item(self, item_i):
+class PrConstraint:
+    const_type = "PRIMARY"
+
+    def __init__(self, item_i=None, name_i=None):
         if type(item_i).__name__ == "str":
             self.item_name = item_i
             self.item = None
@@ -68,15 +71,23 @@ class Constraint:
             else:
                 self.item_name = None
                 self.item = None
+        self.name = name_i
 
 
-class PrConstraint(Constraint):
-    def __init__(self, item_i=None):
-        self._init_item(item_i)
+class ForConstraint:
+    const_type = "FOREIGN"
 
-
-class ForConstraint(Constraint):
-    def _init_ref(self, ref_item):
+    def __init__(self, item_i=None, ref_item=None, props_i="", name_i=None):
+        if type(item_i).__name__ == "str":
+            self.item_name = item_i
+            self.item = None
+        else:
+            if type(item_i).__name__ == "Field":
+                self.item_name = item_i.name
+                self.item = item_i
+            else:
+                self.item_name = None
+                self.item = None
         if type(ref_item).__name__ == "str":
             self.ref_name = ref_item
             self.reference = None
@@ -87,15 +98,21 @@ class ForConstraint(Constraint):
             else:
                 self.ref_name = None
                 self.ref_item = None
-
-    def __init__(self, item_i=None, refer_item=None, props_i=""):
-        self._init_item(item_i)
-        self._init_ref(refer_item)
         self.props = props_i
+        self.name = name_i
+
+
+class CheckConstraint:
+    const_type = "CHECK"
+
+    def __init__(self, expression_i=None, props_i="", name_i=None):
+        self.expression = expression_i
+        self.props = props_i
+        self.name = name_i
 
 
 class Index:
-    def __init__(self, field_varr=None, props_i=""):
+    def __init__(self, field_varr=None, props_i="", expr_i=None, name_i=None):
         clazz = type(field_varr).__name__
         if clazz == "str":
             self.field_name = field_varr
@@ -108,3 +125,5 @@ class Index:
                 self.field_name = None
                 self.field = None
         self.props = props_i
+        self.name = name_i
+        self.expression = expr_i
