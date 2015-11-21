@@ -1,17 +1,27 @@
+from caseless_str_equals import caseless_equal
+
+
 class Domain:
     # TODO Нужно подумать, нужно ли где-то копирование
-    def __init__(self, name_i=None, descr_i=None, type_i=None, align_i=None, precision_i=None, props_i="", width_i=None,
-                 char_length_i=None, length_i=None, scale_i=None):
+    def __init__(self, name_i=None, descr_i=None, type_i=None, align_i=None, width_i=None, length_i=None,
+                 precision_i=None, scale_i=None, props_i="", char_length_i=None):
         self.name = name_i
         self.description = descr_i
         self.type = type_i
         self.align = align_i
+        self.length = length_i
         self.width = width_i
         self.precision = precision_i
         self.props = props_i
         self.char_length = char_length_i
-        self.length = length_i
         self.scale = scale_i
+
+    def eq(self, other):
+        if other.__class__.__name__ != "Domain":
+            return False
+        else:
+            return caseless_equal(self.type, other.type) and (self.length == other.length) \
+                   and (self.precision == other.precision) and (self.scale == other.scale)
 
 
 class Table:

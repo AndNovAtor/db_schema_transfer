@@ -14,7 +14,7 @@ xml_path = "D:/parsedbd.xml"
 
 
 xmlTree = ElTr.parse(xml_path)
-xmlRoot = xmlTree.getroot()
+xmlroot = xmlTree.getroot()
 
 
 # Next - debug function, but i still keep it
@@ -38,30 +38,34 @@ def parse_domains(root, domains, types=None):
         domain_obj.name = domain_el.get("name")
         domain_obj.description = domain_el.get("description")
         domain_obj.type = domain_el.get("type")
-        if types.__class__.__name__ == "dict":
-            if domain_obj.type is not None:
-                    types.setdefault(domain_obj.type)
+        # if types.__class__.__name__ == "dict":
+        #     if domain_obj.type is not None:
+        #             types.setdefault(domain_obj.type)
         domain_obj.align = domain_el.get("align", "L")
         domain_obj.width = domain_el.get("width")
         if domain_obj.width is not None:
             domain_obj.width = int(domain_obj.width)
+        domain_obj.length = domain_el.get("length")
+        if domain_obj.length is not None:
+            domain_obj.length = int(domain_obj.length)
         domain_obj.precision = domain_el.get("precision")
         domain_obj.props = domain_el.get("props", "")
         domain_obj.char_length = domain_el.get("char_length")
         if domain_obj.char_length is not None:
             domain_obj.char_length = int(domain_obj.char_length)
-        domain_obj.length = domain_el.get("length")
-        if domain_obj.length is not None:
-            domain_obj.length = int(domain_el.get("length"))
         domain_obj.scale = domain_el.get("scale")
         if domain_obj.scale is not None:
-            domain_obj.scale = int(domain_el.get("scale"))
+            domain_obj.scale = int(domain_obj.scale)
 
         domains.append(domain_obj)
     return dom_num
 
 
-def parse_tables(root, in_tables, domains):
+def xstr(string):
+    return str(string) if string is not None else ""
+
+
+def parse_tables(root, in_tables, domains, unnamed_domains, t_schema=None):
     table_num = 0
     for table_el in root.find("tables"):
         table_num += 1
@@ -84,9 +88,43 @@ def parse_tables(root, in_tables, domains):
             field.name = field_dict.get("name", "")
             field.rname = field_dict.get("rname", "")
             field.domain_name = field_dict.get("domain", "")
+            if field.domain_name == "":
+                un_domain_obj = ddl_classes.Domain()
+                un_domain_obj.name = field_dict.get("domain.name", "")
+                un_domain_obj.type = field_dict.get("domain.type", "")
+                un_domain_obj.description = field_dict.get("domain.description", "")
+                un_domain_obj.align = field_dict.get("domain.align", "L")
+                un_domain_obj.width = field_dict.get("domain.width")
+                if un_domain_obj.width is not None:
+                    un_domain_obj.width = int(un_domain_obj.width )
+                un_domain_obj.precision = field_dict.get("domain.precision")
+                if un_domain_obj.precision is not None:
+                    un_domain_obj.precision = int(un_domain_obj.precision)
+                un_domain_obj.length = field_dict.get("domain.length")
+                if un_domain_obj.length is not None:
+                    un_domain_obj.length = int(un_domain_obj.length)
+                un_domain_obj.scale = field_dict.get("domain.scale")
+                if un_domain_obj.scale is not None:
+                    un_domain_obj.scale = int(un_domain_obj.scale)
+                un_domain_obj.props = field_dict.get("domain.props", "")
+                un_domain_obj.char_length = field_dict.get("domain.char_length")
+                if un_domain_obj.char_length is not None:
+                    un_domain_obj.char_length = int(un_domain_obj.char_length)
+                if un_domain_obj.name is None:
+                    un_domain_obj.name = un_domain_obj.type + "[prec='" + xstr(un_domain_obj.precision) + "'len='"\
+                                + xstr(un_domain_obj.length) + "'scale='" + xstr(un_domain_obj.scale) + "']"
+                same_domain = next((item for item in unnamed_domains if un_domain_obj.eq(item)), None)
+                if same_domain is not None:
+                    field.domain_name = same_domain.name
+                    field.domain = same_domain
+                else:
+                    unnamed_domains.append(un_domain_obj)
+                    field.domain_name = un_domain_obj.name
+                    field.domain = un_domain_obj
+            else:
+                field.domain = next((d for d in domains if d.name == field.domain_name), None)
             field.description = field_dict.get("description", "")
             field.props = field_dict.get("props", "")
-            field.domain = next((d for d in domains if d.name == field.domain_name), None)
 
             table_obj.append_field(field)
         in_tables.append(table_obj)
@@ -108,12 +146,16 @@ def parse_tables_other(root, in_tables):
                 table_obj.pr_constraint = ddl_classes.PrConstraint(items_field, con_name)
             else:
                 con_props = constraint_el.get("props", "")
+                ref_t_name = constraint_el.get("reference")
                 if con_kind == "FOREIGN":
-                    ref_table = next((t for t in in_tables if t.name == constraint_el.get("reference")), None)
+                    ref_table = next((t for t in in_tables if t.name == ref_t_name), None)
                     if ref_table is None:
-                        # !!!!!!!!!!!!!!!!!!!!!!!!!!!! ERROR HERE !!!!!!!!!!!!!!!
-                        table_obj.fr_constraints.append(ddl_classes.ForConstraint(items_field, None,
-                                                                                  con_props, con_name))
+                        #    !!!  This error situation, so - incorrect xml!!!
+                        print("Reference table for last constraint (on the field '", items_field.name, "', in table '",
+                              table_obj.name, "') does not exist (a reference of table '", ref_t_name,
+                              "' does not exist in input xml file).", sep="")
+                        # table_obj.fr_constraints.append(ddl_classes.ForConstraint(items_field, None,
+                        #                                                          con_props, con_name))
                     else:
                         table_obj.fr_constraints.append(ddl_classes.ForConstraint(items_field, ref_table,
                                                                                   con_props, con_name))
@@ -125,7 +167,7 @@ def parse_tables_other(root, in_tables):
                         print("Incorrect constraint")
         for index in table_el.findall("index"):
             ind_num += 0
-            table_obj.indices.append(ddl_classes.Index(table_obj.fields[index.get("field")], index.get("props",""),
+            table_obj.indices.append(ddl_classes.Index(table_obj.fields[index.get("field")], index.get("props", ""),
                                                        index.get("expression")))
         # ++i
         i += 1
@@ -133,11 +175,11 @@ def parse_tables_other(root, in_tables):
 
 
 domain_lst = []
-# types_dict = {}
-domains_num = parse_domains(xmlRoot, domain_lst)
+unnamed_domains_lst = []
+domains_num = parse_domains(xmlroot, domain_lst)
 tables_lst = []
-tables_num = parse_tables(xmlRoot, tables_lst, domain_lst)
-con_ind_num = parse_tables_other(xmlRoot, tables_lst)
+tables_num = parse_tables(xmlroot, tables_lst, domain_lst, unnamed_domains_lst)
+con_ind_num = parse_tables_other(xmlroot, tables_lst)
 
 
 def silentrem(filename):
@@ -156,8 +198,7 @@ cur.executescript(SQL_DBD_Init)
 print("Empty db-file was successfully created.")
 cur.execute("""create temporary table domains_tmp (do_n,do_d,ty_name,do_l,do_c_l,do_pr,
                  do_sc,do_w,do_al,do_sn,do_sln,do_ts,do_sum,do_cs,do_uuid);""")
-# cur.execute("BEGIN;")
-for domain in domain_lst:
+for domain in domain_lst+unnamed_domains_lst:
     d_name = domain.name
     d_description = domain.description
     d_type_name = domain.type
@@ -176,8 +217,6 @@ for domain in domain_lst:
     cur.execute("insert into domains_tmp values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);", (d_name, d_description,
                 d_type_name, d_length, d_char_length, d_precision, d_scale, d_width, d_align, d_show_null,
                 d_show_lead_nulls, d_thousands_separator, d_summable, d_case_sensitive, d_uuid))
-# print(con.isolation_level)
-# cur.execute("COMMIT;")
 cur.executescript("""BEGIN;
                   insert into dbd$domains select null, d.do_n, d.do_d, t.id, d.do_l, d.do_c_l, d.do_pr,
                   d.do_sc, d.do_w, d.do_al, d.do_sn, d.do_sln, d.do_ts, d.do_sum, d.do_cs, d.do_uuid
@@ -186,23 +225,8 @@ cur.executescript("""BEGIN;
                   DROP table domains_tmp;
                   COMMIT;""")
 con.commit()
-#   Next not supported in sqlite3 (update... set.. FROM)
-# cur.execute("update dbd$domains "
-#             "set data_type_id = t.id "
-#             "from dbd$domains d "
-#             "inner join dbd$data_types t "
-#             "on d.type_name = t.id ")
-#   So...
-# cur.execute("""replace into dbd$domains
-#             (id, name, description, data_type_id, length, char_length,precision, scale, width, align, show_null,
-#             show_lead_nulls, thousands_separator, summable, case_sensitive, uuid, type_name)
-#             select d.id, d.name, d.description, t.id, d.length, d.char_length, d.precision,
-#             d.scale, d.width, d.align, d.show_null, d.show_lead_nulls, d.thousands_separator,
-#             d.summable boolean, d.case_sensitive, d.uuid, d.type_name
-#             from dbd$domains d inner join dbd$data_types t on d.type_name = t.id;""")
 # cur.execute("ALTER TABLE dbd$domains DROP COLUMN type_name;")
-con.commit()  # TODO
-# cur.execute("BEGIN;")
+con.commit()
 for table in tables_lst:
     t_name = table.name
     t_description = table.description
@@ -215,7 +239,6 @@ for table in tables_lst:
     t_uuid = uuid.uuid4().hex
     cur.execute("insert into dbd$tables values (Null,Null,?,?,?,?,?,?,?,?);", (t_name, t_description,
                 t_can_add, t_can_edit, t_can_delete, t_temporal_mode, t_means, t_uuid,))
-# cur.execute("COMMIT;")
 con.commit()
 cur.executescript("""create temporary table fields_tmp (t_name, fi_pos, fi_n, fi_rn, fi_d,d_name, fi_ci, fi_ce, fi_sig,
                        fi_sid, fi_im, fi_ac, fi_req, fi_uuid);
@@ -229,7 +252,6 @@ cur.execute("UPDATE sqlite_sequence set seq = seq + ? where name = 'dbd$constrai
 con.commit()
 in_id = cur.execute("SELECT seq from sqlite_sequence where name = 'dbd$indices'").fetchone()
 cur.execute("UPDATE sqlite_sequence set seq = seq + ? where name = 'dbd$indices'", (con_ind_num[1],)).fetchone()
-# cur.execute("COMMIT;")
 con.commit()
 
 
@@ -248,19 +270,19 @@ for table in tables_lst:
     con_pos = 0
     ind_pos = 0
     t_name = table.name
-    for fld_name, field in table.fields.items():
+    for fld_name, fld_obj in table.fields.items():
         f_pos += 1
         f_name = fld_name
-        f_rname = field.rname
-        f_description = field.description
-        f_d_name = field.domain_name
-        f_can_input = ("input" in field.props)
-        f_can_edit = ("edit" in field.props)
-        f_sh_in_grid = ("show_in_grid" in field.props)
-        f_sh_in_det = ("show_in_details" in field.props)
-        f_is_mean = ("is_mean" in field.props)
-        f_au_calc = ("autocalculated" in field.props)
-        f_required = ("required" in field.props)
+        f_rname = fld_obj.rname
+        f_description = fld_obj.description
+        f_d_name = fld_obj.domain_name
+        f_can_input = ("input" in fld_obj.props)
+        f_can_edit = ("edit" in fld_obj.props)
+        f_sh_in_grid = ("show_in_grid" in fld_obj.props)
+        f_sh_in_det = ("show_in_details" in fld_obj.props)
+        f_is_mean = ("is_mean" in fld_obj.props)
+        f_au_calc = ("autocalculated" in fld_obj.props)
+        f_required = ("required" in fld_obj.props)
         f_uuid = uuid.uuid4().hex
         cur.execute("insert into fields_tmp values (?,?,?,?,?,?,?,?,?,?,?,?,?,?);", (t_name, f_pos, f_name, f_rname,
                     f_description, f_d_name, f_can_input, f_can_edit, f_sh_in_grid, f_sh_in_det, f_is_mean,
