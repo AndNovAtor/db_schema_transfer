@@ -2,7 +2,6 @@ from caseless_str_equals import caseless_equal
 
 
 class Domain:
-    # TODO Нужно подумать, нужно ли где-то копирование
     def __init__(self, name_i=None, descr_i=None, type_i=None, align_i=None, width_i=None, length_i=None,
                  precision_i=None, scale_i=None, props_i="", char_length_i=None):
         self.name = name_i
@@ -33,10 +32,8 @@ class Table:
         self.ht_table_flags = ht_table_flags
         if fields_lst.__class__ == list:
             self.fields = {fld.name: fld for fld in fields_lst if fields_lst.__class__ == Field}
-            # self.fields_name_lst = [fld.name for fld in fields_lst if fields_lst.__class__ == Field"]
         else:
             self.fields = {}
-            # self.fields_name_lst = []
         self.pr_constraint = prim_constraint_i if (prim_constraint_i.__class__ == PrConstraint) else None
         self.fr_constraints = for_constraints_i if (for_constraints_i.__class__ == list) else []
         self.indices = ind_lst if (ind_lst.__class__ == list) else []

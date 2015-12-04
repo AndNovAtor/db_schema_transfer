@@ -45,7 +45,6 @@ class XmlSchemaParsing:
     def _xml_parse_domains(self):
         if self.xml_root is not None and type(self.xml_root) == ElTr.Element:
             for domain_el in self.xml_root.find("domains"):
-                # print(" attr-s:", ["{}={}, ".format(k, v) for k, v in domain.attrib.items()])
                 domain_obj = ddl_classes.Domain()
                 #
 #                !!! Bellow use constraint.get("kind", ""), but type of constraint - not dict. It's Element (etree)
@@ -157,8 +156,6 @@ class XmlSchemaParsing:
                             print("Reference table for last constraint (on the field '", items_field.name,
                                   "', in table '", table_obj.name, "') does not exist (a reference of table '",
                                   ref_t_name, "' does not exist in input xml file).", sep="")
-                            # table_obj.fr_constraints.append(ddl_classes.ForConstraint(items_field, None,
-                            #                                                          con_props, con_name))
                         else:
                             table_obj.fr_constraints.append(ddl_classes.ForConstraint(items_field, ref_table,
                                                                                       con_props, con_name))
