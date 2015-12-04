@@ -51,3 +51,5 @@ __pycache__/
 *.db
 parseddl.xml
 parme.xml
+tasks.xml
+temp.py
