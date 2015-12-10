@@ -86,7 +86,12 @@ class XmlSchemaParsing:
             table_obj.pr_constraint = None
             table_obj.fr_constraints = []
             table_obj.indices = []
+            self.schema.tables.append(table_obj)
 
+    def _xml_parse_table_fields(self):
+        table_ind = 0
+        for table_el in self.xml_root.find("tables"):
+            table_obj = self.schema.tables[table_ind]
             for field_dict in table_el.findall("field"):
                 field = ddl_classes.Field()
 
@@ -115,7 +120,7 @@ class XmlSchemaParsing:
                     un_domain_obj.char_length = field_dict.get("domain.char_length")
                     if un_domain_obj.char_length is not None:
                         un_domain_obj.char_length = int(un_domain_obj.char_length)
-                    if un_domain_obj.name is None:
+                    if un_domain_obj.name is "":
                         un_domain_obj.name = un_domain_obj.type + "[prec='" + xstr(un_domain_obj.precision) + "'len='"\
                                     + xstr(un_domain_obj.length) + "'scale='" + xstr(un_domain_obj.scale) + "']"
                     same_domain = next((item for item in self.schema.un_domains if un_domain_obj.eq(item)), None)
@@ -132,9 +137,9 @@ class XmlSchemaParsing:
                 field.props = field_dict.get("props", "")
 
                 table_obj.append_field(field)
-            self.schema.tables.append(table_obj)
+            table_ind += 1
 
-    def _xml_parse_tables_con(self):
+    def _xml_parse_tables_cons(self):
         i = 0
         con_num = 0
         for table_el in self.xml_root.find("tables"):
@@ -168,7 +173,7 @@ class XmlSchemaParsing:
             i += 1
         return con_num
 
-    def _xml_parse_tables_ind(self):
+    def _xml_parse_tables_indices(self):
         i = 0
         ind_num = 0
         for table_el in self.xml_root.find("tables"):
@@ -185,8 +190,9 @@ class XmlSchemaParsing:
             self._xml_parse_schema_data()
             self._xml_parse_domains()
             self._xml_parse_tables()
-            self.schema.con_num = self._xml_parse_tables_con()
-            self.schema.ind_num = self._xml_parse_tables_ind()
+            self._xml_parse_table_fields()
+            self.schema.con_num = self._xml_parse_tables_cons()
+            self.schema.ind_num = self._xml_parse_tables_indices()
         return self
 
     def init_xml_root(self, file_path):
