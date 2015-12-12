@@ -100,9 +100,10 @@ class XmlSchemaParsing:
                 field.domain_name = field_dict.get("domain", "")
                 if field.domain_name == "":
                     un_domain_obj = ddl_classes.Domain()
-                    un_domain_obj.name = field_dict.get("domain.name", "")
+                    un_domain_obj.name = ""
+                    # un_domain_obj.name = field_dict.get("domain.name", "")
                     un_domain_obj.type = field_dict.get("domain.type", "")
-                    un_domain_obj.description = field_dict.get("domain.description", "")
+                    # un_domain_obj.description = field_dict.get("domain.description", "")
                     un_domain_obj.align = field_dict.get("domain.align", "L")
                     un_domain_obj.width = field_dict.get("domain.width")
                     if un_domain_obj.width is not None:
@@ -120,17 +121,18 @@ class XmlSchemaParsing:
                     un_domain_obj.char_length = field_dict.get("domain.char_length")
                     if un_domain_obj.char_length is not None:
                         un_domain_obj.char_length = int(un_domain_obj.char_length)
-                    if un_domain_obj.name is "":
-                        un_domain_obj.name = un_domain_obj.type + "[prec='" + xstr(un_domain_obj.precision) + "'len='"\
-                                    + xstr(un_domain_obj.length) + "'scale='" + xstr(un_domain_obj.scale) + "']"
-                    same_domain = next((item for item in self.schema.un_domains if un_domain_obj.eq(item)), None)
-                    if same_domain is not None:
-                        field.domain_name = same_domain.name
-                        field.domain = same_domain
-                    else:
-                        self.schema.un_domains.append(un_domain_obj)
-                        field.domain_name = un_domain_obj.name
-                        field.domain = un_domain_obj
+                    # if un_domain_obj.name is "":
+                    #   un_domain_obj.name = un_domain_obj.type + "[prec='" + xstr(un_domain_obj.precision) + "'len='"\
+                    #                 + xstr(un_domain_obj.length) + "'scale='" + xstr(un_domain_obj.scale) + "']"
+
+                    # same_domain = next((item for item in self.schema.un_domains if un_domain_obj.eq(item)), None)
+                    # if same_domain is not None:
+                    #     field.domain_name = same_domain.name
+                    #     field.domain = same_domain
+                    # else:
+                    self.schema.un_domains.append(un_domain_obj)
+                    field.domain_name = un_domain_obj.name
+                    field.domain = un_domain_obj
                 else:
                     field.domain = next((d for d in self.schema.domains if d.name == field.domain_name), None)
                 field.description = field_dict.get("description", "")

@@ -40,7 +40,8 @@ create table dbd$domains (
     thousands_separator boolean default(null),  -- нужен ли разделитель тысяч?
     summable boolean default(null),             -- признак того, что поле является суммируемым
     case_sensitive boolean default(null),       -- признак необходимости регистронезависимого поиска для поля
-    uuid varchar unique not null COLLATE NOCASE -- уникальный идентификатор домена
+    uuid varchar unique default(null) COLLATE NOCASE -- уникальный идентификатор домена
+    --uuid varchar unique not null COLLATE NOCASE -- уникальный идентификатор домена
 );
 
 create index "idx.FZX832TFV" on dbd$domains(data_type_id);

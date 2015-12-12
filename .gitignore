@@ -49,6 +49,7 @@ Temporary Items
 .idea/
 __pycache__/
 *.db
+*.bak
 parseddl.xml
 parme.xml
 tasks.xml
