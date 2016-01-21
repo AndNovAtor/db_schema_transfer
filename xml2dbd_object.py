@@ -92,8 +92,11 @@ class XmlSchemaParsing:
         table_ind = 0
         for table_el in self.xml_root.find("tables"):
             table_obj = self.schema.tables[table_ind]
+            table_field_pos = 0
             for field_dict in table_el.findall("field"):
                 field = ddl_classes.Field()
+
+                table_field_pos += 1
 
                 field.name = field_dict.get("name", "")
                 field.rname = field_dict.get("rname", "")
@@ -137,6 +140,7 @@ class XmlSchemaParsing:
                     field.domain = next((d for d in self.schema.domains if d.name == field.domain_name), None)
                 field.description = field_dict.get("description", "")
                 field.props = field_dict.get("props", "")
+                field.position = table_field_pos
 
                 table_obj.append_field(field)
             table_ind += 1

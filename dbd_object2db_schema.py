@@ -118,10 +118,8 @@ class SchemaToSqliteDb:
                             fi_sig, fi_sid, fi_im, fi_ac, fi_req, fi_uuid,
                             d_ty_name, d_l, d_c_l, d_pr, d_sc, d_w, d_al, d_sn, d_sln, d_ts, d_sum, d_cs);""")
         for table in self.schema.tables:
-            f_pos = 0
             t_name = table.name
             for fld_name, fld_obj in table.fields.items():
-                f_pos += 1
                 f_name = fld_name
                 f_rname = fld_obj.rname
                 f_description = fld_obj.description
@@ -150,6 +148,8 @@ class SchemaToSqliteDb:
                 f_au_calc = ("autocalculated" in fld_obj.props)
                 f_required = ("required" in fld_obj.props)
                 f_uuid = uuid.uuid4().hex
+
+                f_pos = fld_obj.position
                 self.cursor.execute("insert into fields_tmp values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,"
                                     "?,?);", (t_name, f_pos, f_name, f_rname, f_description, f_d_name, f_can_input,
                                               f_can_edit, f_sh_in_grid, f_sh_in_det, f_is_mean, f_au_calc, f_required,

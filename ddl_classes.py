@@ -55,6 +55,8 @@ class Field:
         self.domain = None
         self.props = props_i
 
+        self.position = None
+
     def init_domain(self, domains):
         if type(domains) == list:
             for domain_item in domains:
