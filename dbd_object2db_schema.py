@@ -220,9 +220,10 @@ class SchemaToSqliteDb:
                     con_pos += 1
                     con_f_name = t_constraint.item_name
                     self.cursor.execute("insert into con_details_tmp values (?,?,?);", (c_id, con_pos, con_f_name))
+        self.connect.commit()
         self.cursor.executescript("""insert into dbd$constraints select con.c_id, t.id, con.c_n, con.c_t, ca.c_id,
                                        con.c_hve, con.c_cd, con.c_exp, con.c_uuid
-                                       from (constraints_tmp con inner join (select c_id, c_t_name
+                                       from (constraints_tmp con left join (select c_id, c_t_name
                                          from constraints_tmp where c_t="PRIMARY") ca on con.c_ref_t_n=ca.c_t_name)
                                        inner join dbd$tables t on con.c_t_name=t.name;
 

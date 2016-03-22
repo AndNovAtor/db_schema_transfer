@@ -3,6 +3,7 @@ from os.path import isfile
 
 from dbd_object2db_schema import SchemaToSqliteDb
 from xml2dbd_object import XmlSchemaParsing
+from db_schema2dbd_obj import get_db_schema
 
 
 def parse_xml(xml_path):
@@ -17,6 +18,14 @@ def parse_xml(xml_path):
         else:
             print("Schema was not created")
 
+
+def parse_sq_schema(db_path):
+    if not isfile(db_path):
+        print("Error! Get db file path:", db_path)
+        print("This file does not exist")
+    else:
+        get_db_schema(db_path)
+
 parser = argparse.ArgumentParser()
 parser.add_argument("-x2sq", "--xmltosqlite",
                     help="filepath to db schema xml file that will be parse into sqlite database file "
@@ -28,7 +37,7 @@ args = parser.parse_args()
 if args.xmltosqlite:
     parse_xml(args.xmltosqlite)
 if args.sqlitetoxml:
-    pass #  parse_sq_db2xml(args.sqlitetoxml)
+    parse_sq_schema(args.sqlitetoxml)
 else:
     print("No arguments")
     parser.print_help()

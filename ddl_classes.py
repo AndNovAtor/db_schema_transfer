@@ -24,8 +24,8 @@ class Domain:
 
 
 class Table:
-    def __init__(self, name_i=None, descr_i=None, props_i="", fields_lst=None, ht_table_flags="", prim_constraint_i=None,
-                 for_constraints_i=None, ch_const_i=None, ind_lst=None):
+    def __init__(self, name_i=None, descr_i=None, props_i="", fields_lst=None, ht_table_flags="", means_i="",
+                 prim_constraint_i=None, for_constraints_i=None, ch_const_i=None, ind_lst=None):
         self.name = name_i
         self.description = descr_i
         self.props = props_i
@@ -34,6 +34,7 @@ class Table:
             self.fields = {fld.name: fld for fld in fields_lst if fields_lst.__class__ == Field}
         else:
             self.fields = {}
+        self.means = means_i
         self.pr_constraint = prim_constraint_i if (prim_constraint_i.__class__ == PrConstraint) else None
         self.fr_constraints = for_constraints_i if (for_constraints_i.__class__ == list) else []
         self.indices = ind_lst if (ind_lst.__class__ == list) else []
@@ -44,6 +45,20 @@ class Table:
             if (field.name is not None) and (field.name is not ""):
                 self.fields[field.name] = field  # Add field with name as adding item to a dict
                 # self.fields_name_lst.append(field.name)
+
+    def append_constraint(self, constr):
+        if constr.__class__ == PrConstraint:
+            self.pr_constraint = constr
+        else:
+            if constr.__class__ == CheckConstraint:
+                self.ch_constraint = constr
+            else:
+                if constr.__class__ == ForConstraint:
+                    self.fr_constraints.append(constr)
+
+    def append_index(self, ind):
+        if type(ind) == Index:
+            self.indices.append(ind)
 
 
 class Field:
@@ -64,6 +79,11 @@ class Field:
                     if domain_item.name == self.domain_name:
                         self.domain = domain_item
                         break
+
+    def set_domain(self, domain_i):
+        if type(domain_i) == Domain:
+            self.domain = domain_i
+            self.domain_name = domain_i.name
 
 
 class PrConstraint:
