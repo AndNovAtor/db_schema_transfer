@@ -25,36 +25,38 @@ class Domain:
 
 class Table:
     def __init__(self, name_i=None, descr_i=None, props_i="", fields_lst=None, ht_table_flags="", means_i="",
-                 prim_constraint_i=None, for_constraints_i=None, ch_const_i=None, ind_lst=None):
+                 prim_constraints_i=None, for_constraints_i=None, ch_consts_i=None, ind_lst=None):
         self.name = name_i
         self.description = descr_i
         self.props = props_i
         self.ht_table_flags = ht_table_flags
         if fields_lst.__class__ == list:
-            self.fields = {fld.name: fld for fld in fields_lst if fields_lst.__class__ == Field}
+            self.fields = fields_lst
+            self.fields_map = {fld.name: fld for fld in fields_lst if fields_lst.__class__ == Field}
         else:
-            self.fields = {}
+            self.fields = []
+            self.fields_map = {}
         self.means = means_i
-        self.pr_constraint = prim_constraint_i if (prim_constraint_i.__class__ == PrConstraint) else None
+        self.pr_constraints = prim_constraints_i if (prim_constraints_i.__class__ == list) else []
         self.fr_constraints = for_constraints_i if (for_constraints_i.__class__ == list) else []
         self.indices = ind_lst if (ind_lst.__class__ == list) else []
-        self.ch_constraint = ch_const_i if (ch_const_i.__class__ == CheckConstraint) else None
+        self.ch_constraints = ch_consts_i if (ch_consts_i.__class__ == list) else []
 
     def append_field(self, field):
         if type(field) == Field:
             if (field.name is not None) and (field.name is not ""):
-                self.fields[field.name] = field  # Add field with name as adding item to a dict
-                # self.fields_name_lst.append(field.name)
+                self.fields.append(field)
+                self.fields_map[field.name] = field  # Add field with name as adding item to a dict
 
     def append_constraint(self, constr):
-        if constr.__class__ == PrConstraint:
-            self.pr_constraint = constr
+        if constr.__class__ == ForConstraint:
+            self.fr_constraints.append(constr)
         else:
-            if constr.__class__ == CheckConstraint:
-                self.ch_constraint = constr
+            if constr.__class__ == PrConstraint:
+                self.pr_constraints.append(constr)
             else:
-                if constr.__class__ == ForConstraint:
-                    self.fr_constraints.append(constr)
+                if constr.__class__ == CheckConstraint:
+                    self.ch_constraints.append(constr)
 
     def append_index(self, ind):
         if type(ind) == Index:
@@ -130,14 +132,26 @@ class ForConstraint:
         self.props = props_i
         self.name = name_i
 
+        self.position = None
+
 
 class CheckConstraint:
     const_type = "CHECK"
 
-    def __init__(self, expression_i=None, props_i="", name_i=None):
+    def __init__(self, expression_i="", field_item=None, name_i=None):
         self.expression = expression_i
-        self.props = props_i
         self.name = name_i
+        if field_item.__class__ == ddl_classes.Field:
+            self.item = field_item
+            self.item_name = field_item.name
+        else:
+            if field_item.__class__ == str:
+                self.item = None
+                self.item_name = field_item
+            else:
+                self.item = None
+                self.item_name = None
+        
 
 
 class Index:
@@ -156,6 +170,8 @@ class Index:
         self.props = props_i
         self.name = name_i
         self.expression = expr_i
+
+        self.position = None
 
 
 class Schema:

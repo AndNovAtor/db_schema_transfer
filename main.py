@@ -1,9 +1,10 @@
 import argparse
 from os.path import isfile
 
-from dbd_object2db_schema import SchemaToSqliteDb
+from dbd_object2sqlite_schema import SchemaToSqliteDb
 from xml2dbd_object import XmlSchemaParsing
-from db_schema2dbd_obj import get_db_schema
+from sqlite_schema2dbd_obj import SqliteDbToSchema
+from dbd_obj2xml import DbdSchemaToXml
 
 
 def parse_xml(xml_path):
@@ -24,7 +25,14 @@ def parse_sq_schema(db_path):
         print("Error! Get db file path:", db_path)
         print("This file does not exist")
     else:
-        get_db_schema(db_path)
+        schema_parse_obj = SqliteDbToSchema().get_db_schema(db_path)
+        if schema_parse_obj is not None:
+            if DbdSchemaToXml(schema_parse_obj.schema, db_path).write_schema():
+                print("All successful")
+            else:
+                print("Xml was not created")
+        else:
+            print("Schema object was not created was not created")
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-x2sq", "--xmltosqlite",
@@ -34,10 +42,13 @@ parser.add_argument("-sq2x", "--sqlitetoxml",
                     help="filepath to db schema in sqlite db-file that will be parse into xml file",
                     metavar='sqlite_db_to_xml_path')
 args = parser.parse_args()
+was_no_arguments = True
 if args.xmltosqlite:
     parse_xml(args.xmltosqlite)
+    was_no_arguments = False
 if args.sqlitetoxml:
     parse_sq_schema(args.sqlitetoxml)
-else:
+    was_no_arguments = False
+if was_no_arguments:
     print("No arguments")
     parser.print_help()

@@ -1,0 +1,2072 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dbd_schema fulltext_engine="ORACLE TEXT" name="TASKS" version="1.2">
+  <custom/>
+  <domains>
+    <domains align="L" name="BinData" type=""/>
+    <domains align="L" char_length="15" name="CODE" type="" width="15"/>
+    <domains align="L" description="Идентификатор пункта содерж." name="ID пункта" type="Идентификатор пункта содерж." width="8"/>
+    <domains align="L" name="ID статьи" type="" width="11"/>
+    <domains align="L" name="IDC" type="" width="5"/>
+    <domains align="L" name="ID_descr" type="" width="11"/>
+    <domains align="L" char_length="200" name="Layout_id" props="case_sensitive" type="" width="200"/>
+    <domains align="L" description="Номер" name="N" type="Номер" width="8"/>
+    <domains align="L" char_length="20" name="N Исходящ" type="" width="20"/>
+    <domains align="L" char_length="20" name="N письма" type="" width="20"/>
+    <domains align="L" char_length="6" name="N счета" type="" width="6"/>
+    <domains align="L" char_length="10" name="N_Рексофт" type="" width="10"/>
+    <domains align="L" name="TextData" type=""/>
+    <domains align="L" description="Первичный ключ таблицы ACCOUNT" name="id_ACC" type="Первичный ключ таблицы ACCOUNT" width="11"/>
+    <domains align="L" description="Первичный ключ таблицы ACT" name="id_ACT" type="Первичный ключ таблицы ACT" width="11"/>
+    <domains align="L" description="Первичный ключ таблицы CNTR_VID" name="id_CNTR_V" type="Первичный ключ таблицы CNTR_VID" width="11"/>
+    <domains align="L" description="Первичный ключ таблицы CONTROL" name="id_CONTROL" type="Первичный ключ таблицы CONTROL" width="11"/>
+    <domains align="L" description="Первичный ключ таблицы CONT_CTG" name="id_CONT_C" type="Первичный ключ таблицы CONT_CTG" width="11"/>
+    <domains align="L" description="Первичный ключ таблицы CONT_TIP" name="id_CONT_T" type="Первичный ключ таблицы CONT_TIP" width="11"/>
+    <domains align="L" description="Первичный ключ таблицы DEPENDEN" name="id_DEPEND" type="Первичный ключ таблицы DEPENDEN" width="11"/>
+    <domains align="L" description="Первичный ключ таблицы DETAILS" name="id_DETAILS" type="Первичный ключ таблицы DETAILS" width="11"/>
+    <domains align="L" description="Первичный ключ таблицы GRTASKS" name="id_GRTASKS" type="Первичный ключ таблицы GRTASKS" width="11"/>
+    <domains align="L" description="Первичный ключ таблицы INST_CON" name="id_INST_C" type="Первичный ключ таблицы INST_CON" width="11"/>
+    <domains align="L" description="Первичный ключ таблицы LC_TEACH" name="id_LC_TEAC" type="Первичный ключ таблицы LC_TEACH" width="11"/>
+    <domains align="L" description="Первичный ключ таблицы OB_BAZ" name="id_OB_BAZ" type="Первичный ключ таблицы OB_BAZ" width="11"/>
+    <domains align="L" description="Первичный ключ таблицы PHOTOTAB" name="id_PHOTOT" type="Первичный ключ таблицы PHOTOTAB" width="11"/>
+    <domains align="L" description="Первичный ключ таблицы PRNCMDS" name="id_PRNCMDS" type="Первичный ключ таблицы PRNCMDS" width="11"/>
+    <domains align="L" description="Первичный ключ таблицы PROGRAMM" name="id_PROGRAM" type="Первичный ключ таблицы PROGRAMM" width="11"/>
+    <domains align="L" description="Первичный ключ таблицы PROJ_TIP" name="id_PROJ_T" type="Первичный ключ таблицы PROJ_TIP" width="11"/>
+    <domains align="L" description="Первичный ключ таблицы PR_TEACH" name="id_PR_TEAC" type="Первичный ключ таблицы PR_TEACH" width="11"/>
+    <domains align="L" description="Первичный ключ таблицы RIGHTS" name="id_RIGHTS" type="Первичный ключ таблицы RIGHTS" width="11"/>
+    <domains align="L" description="Первичный ключ таблицы TAB_RTS" name="id_TAB_RTS" type="Первичный ключ таблицы TAB_RTS" width="11"/>
+    <domains align="L" description="Первичный ключ таблицы TASKSCTG" name="id_TASKSCT" type="Первичный ключ таблицы TASKSCTG" width="11"/>
+    <domains align="L" description="Первичный ключ таблицы TAS_POST" name="id_TAS_POS" type="Первичный ключ таблицы TAS_POST" width="11"/>
+    <domains align="L" description="Первичный ключ таблицы TAS_TIME" name="id_TAS_TIM" type="Первичный ключ таблицы TAS_TIME" width="11"/>
+    <domains align="L" char_length="45" name="mmFileExt" type="" width="45"/>
+    <domains align="L" char_length="40" description="Путь" name="mmFileName" type="Путь" width="40"/>
+    <domains align="L" char_length="8" name="mmSubName" type="" width="8"/>
+    <domains align="L" char_length="128" name="АдресОрг." type="" width="128"/>
+    <domains align="L" name="Актуальна" type="" width="3"/>
+    <domains align="L" char_length="10" name="БИК" type="" width="10"/>
+    <domains align="L" char_length="50" name="Банк" type="" width="50"/>
+    <domains align="L" name="БезОбъект." type="" width="3"/>
+    <domains align="L" name="Ввод" type="" width="3"/>
+    <domains align="L" char_length="10" description="Версия, Редакция" name="Верс\Редак" type="Версия, Редакция" width="10"/>
+    <domains align="L" char_length="30" description="Версия переданной программы" name="ВерсПрогр" type="Версия переданной программы" width="30"/>
+    <domains align="L" description="Вид проблемы" name="ВидПроблем" type="Вид проблемы" width="2"/>
+    <domains align="L" name="Визуализ." type="" width="3"/>
+    <domains align="L" name="ВремСтатус" type="" width="8"/>
+    <domains align="L" name="Время" type="" width="5"/>
+    <domains align="L" description="Время заявки" name="ВремяЗаявк" type="Время заявки" width="8"/>
+    <domains align="L" name="ВремяИзмен" type="" width="5"/>
+    <domains align="L" name="ВремяНач" type="" width="8"/>
+    <domains align="L" name="ВремяПост." type="" width="8"/>
+    <domains align="L" name="ВремяСеанс" type="" width="5"/>
+    <domains align="L" name="ВремяСозд" type="" width="8"/>
+    <domains align="L" name="Выборки" type="" width="3"/>
+    <domains align="L" name="Выдана" type="" width="3"/>
+    <domains align="L" description="Высокий приоритет" name="ВысокПриор" type="Высокий приоритет" width="3"/>
+    <domains align="L" name="Гражд." type="" width="3"/>
+    <domains align="L" char_length="20" name="Грамотн." type="" width="20"/>
+    <domains align="L" name="Дата" type="" width="10"/>
+    <domains align="L" name="ДатаАктуал" type="" width="10"/>
+    <domains align="L" name="ДатаВыдачи" type="" width="10"/>
+    <domains align="L" description="Дата выпуска" name="ДатаВыпуск" type="Дата выпуска" width="10"/>
+    <domains align="L" name="ДатаЗаявки" type="" width="10"/>
+    <domains align="L" name="ДатаИзмен." type="" width="10"/>
+    <domains align="L" name="ДатаКонтак" type="" width="10"/>
+    <domains align="L" name="ДатаКонца" type="" width="10"/>
+    <domains align="L" name="ДатаНачал." type="" width="10"/>
+    <domains align="L" name="ДатаОбъед." type="" width="10"/>
+    <domains align="L" name="ДатаОплаты" type="" width="10"/>
+    <domains align="L" name="ДатаОтправ" type="" width="10"/>
+    <domains align="L" name="ДатаПост." type="" width="10"/>
+    <domains align="L" name="ДатаСеанса" type="" width="10"/>
+    <domains align="L" description="Дата установки статуса" name="ДатаСтатус" type="Дата установки статуса" width="10"/>
+    <domains align="L" name="ДатаУвольн" type="" width="10"/>
+    <domains align="L" name="Длительн" type="" width="5"/>
+    <domains align="L" char_length="50" name="Должность" type="" width="50"/>
+    <domains align="L" char_length="6" name="Дом" type="" width="6"/>
+    <domains align="L" description="Заблокирован пользователь" name="Заблокиров" type="Заблокирован пользователь" width="3"/>
+    <domains align="L" name="Заметки" type="" width="3000"/>
+    <domains align="L" description="Трудозатраты" name="Затраты" precision="16" props="summable, show_null" scale="2" type="Трудозатраты" width="6"/>
+    <domains align="L" name="Зачтено" type="" width="3"/>
+    <domains align="L" char_length="250" description="Значение текста" name="ЗначТекст" props="case_sensitive" type="Значение текста" width="250"/>
+    <domains align="L" name="ИНН" precision="16" type="" width="12"/>
+    <domains align="L" name="Изм.Отчет" type="" width="3"/>
+    <domains align="L" description="Изменять только свои записи" name="ИзменЛичн" type="Изменять только свои записи" width="3"/>
+    <domains align="L" name="Изменение" type="" width="3"/>
+    <domains align="L" char_length="30" name="Имя" type="" width="30"/>
+    <domains align="L" char_length="10" name="Имя поля" type="" width="10"/>
+    <domains align="L" char_length="43" name="ИмяАдреса" type="" width="43"/>
+    <domains align="L" char_length="30" name="ИмяИсточн" type="" width="30"/>
+    <domains align="L" char_length="35" name="ИмяПольз." type="" width="35"/>
+    <domains align="L" char_length="30" name="ИмяПриемн" type="" width="30"/>
+    <domains align="L" char_length="60" name="ИмяСименс" type="" width="60"/>
+    <domains align="L" char_length="8" name="ИмяСтанции" type="" width="8"/>
+    <domains align="L" char_length="30" name="ИмяФайла" type="" width="30"/>
+    <domains align="L" char_length="50" name="ИмяЭлемент" type="" width="50"/>
+    <domains align="L" name="ИндексМеню" type="" width="2"/>
+    <domains align="L" name="Категория" type="" width="3"/>
+    <domains align="R" char_length="6" name="Кв." type="" width="6"/>
+    <domains align="L" char_length="250" description="Ключ системных настроек" name="КлючНастр" props="case_sensitive" type="Ключ системных настроек" width="250"/>
+    <domains align="L" char_length="4" name="Код в КУПе" type="" width="4"/>
+    <domains align="L" description="Код адреса" name="КодАдреса" type="Код адреса" width="5"/>
+    <domains align="L" name="КодВажн." type="" width="1"/>
+    <domains align="L" name="КодВедомст" type="" width="2"/>
+    <domains align="L" name="КодВерсии" type="" width="11"/>
+    <domains align="L" name="КодВидРаб" type="" width="2"/>
+    <domains align="L" name="КодВх\Исх" type="" width="1"/>
+    <domains align="L" name="КодГос-ва" type="" width="4"/>
+    <domains align="L" name="КодГруппы" type="" width="5"/>
+    <domains align="L" description="Код договора" name="КодДоговор" type="Код договора" width="5"/>
+    <domains align="L" name="КодДопЛиц" type="" width="10"/>
+    <domains align="L" name="КодЖурнВх" type="" width="11"/>
+    <domains align="L" name="КодЖурнИсх" type="" width="11"/>
+    <domains align="L" name="КодЗадачи" type="" width="12"/>
+    <domains align="L" name="КодИмЭлХр" type="" width="11"/>
+    <domains align="L" name="КодИнстр" type="" width="6"/>
+    <domains align="L" name="КодИстории" type="" width="11"/>
+    <domains align="L" name="КодКлиента" type="" width="4"/>
+    <domains align="L" description="Код команды печати" name="КодКоманды" type="Код команды печати" width="2"/>
+    <domains align="L" name="КодКонтакт" type="" width="11"/>
+    <domains align="L" name="КодЛиценз" type="" width="11"/>
+    <domains align="L" name="КодМастера" type="" width="3"/>
+    <domains align="L" description="Код элемента" length="4" name="КодМеню" precision="3" type="Код элемента"/>
+    <domains align="L" name="КодМенюОбс" type="" width="11"/>
+    <domains align="L" name="КодМульти" type="" width="3"/>
+    <domains align="L" name="КодНасПунк" type="" width="3"/>
+    <domains align="L" name="КодОбласти" type="" width="3"/>
+    <domains align="L" name="КодОбъедин" type="" width="3"/>
+    <domains align="L" name="КодОргМ1" type="" width="11"/>
+    <domains align="L" name="КодОрганиз" type="" width="5"/>
+    <domains align="L" name="КодОтдела" type="" width="1"/>
+    <domains align="L" description="Код параметра" name="КодПарам" type="Код параметра" width="2"/>
+    <domains align="L" name="КодПередач" type="" width="1"/>
+    <domains align="L" name="КодПисьмВх" type="" width="11"/>
+    <domains align="L" name="КодПисьмИс" type="" width="11"/>
+    <domains align="L" name="КодПлПор" type="" width="5"/>
+    <domains align="L" name="КодПодразд" type="" width="2"/>
+    <domains align="L" length="5" name="КодПольз." precision="2" type=""/>
+    <domains align="L" name="КодПоступл" type="" width="2"/>
+    <domains align="L" description="Код принтера" name="КодПринт" type="Код принтера" width="3"/>
+    <domains align="L" name="КодПриорит" type="" width="1"/>
+    <domains align="L" name="КодПроблем" type="" width="5"/>
+    <domains align="L" description="Пункт содержания постановки" length="10" name="КодПункта" precision="2" type="Пункт содержания постановки"/>
+    <domains align="L" name="КодРабКонт" type="" width="11"/>
+    <domains align="L" name="КодРайона" type="" width="3"/>
+    <domains align="L" description="Результат" name="КодРезульт" type="Результат" width="2"/>
+    <domains align="L" name="КодРексофт" type="" width="6"/>
+    <domains align="L" name="КодРешения" type="" width="5"/>
+    <domains align="L" name="КодСеанса" type="" width="12"/>
+    <domains align="L" name="КодСотрудн" type="" width="4"/>
+    <domains align="L" name="КодСтанции" type="" width="4"/>
+    <domains align="L" name="КодСтатуса" type="" width="1"/>
+    <domains align="L" name="КодТаблицы" type="" width="5"/>
+    <domains align="L" name="КодТексВх" type="" width="11"/>
+    <domains align="L" name="КодТексЗад" type="" width="11"/>
+    <domains align="L" name="КодТексЗая" type="" width="11"/>
+    <domains align="L" name="КодТексИсх" type="" width="11"/>
+    <domains align="L" name="КодТекста" type="" width="9"/>
+    <domains align="L" description="Код типа ресурсов" name="КодТипРес" type="Код типа ресурсов" width="2"/>
+    <domains align="L" description="Код тип.решения" name="КодТипРеш" type="Код тип.решения" width="5"/>
+    <domains align="L" name="КодТипа" type="" width="1"/>
+    <domains align="L" length="2" name="КодТипаКон" precision="2" type=""/>
+    <domains align="L" name="КодТочност" type="" width="1"/>
+    <domains align="L" name="КодУдостов" type="" width="5"/>
+    <domains align="L" name="КодХран" type="" width="11"/>
+    <domains align="L" char_length="7" name="КодЦБДУИГ" type="" width="7"/>
+    <domains align="L" name="КодЭкспорт" type="" width="10"/>
+    <domains align="L" description="Код электронного адреса" name="КодЭлАдрОр" type="Код электронного адреса" width="5"/>
+    <domains align="L" description="Код электронного адреса" name="КодЭлАдрес" type="Код электронного адреса" width="5"/>
+    <domains align="L" description="Кол-во райотделов" name="КолРайотд" type="Кол-во райотделов" width="2"/>
+    <domains align="L" name="КоличСтрок" type="" width="11"/>
+    <domains align="L" name="КонтрКлюч" type="" width="3"/>
+    <domains align="L" char_length="30" description="Контрольный параметр" name="КонтрПарам" type="Контрольный параметр" width="30"/>
+    <domains align="L" char_length="20" description="Корреспондентский счет" name="Кор/счет" type="Корреспондентский счет" width="20"/>
+    <domains align="L" char_length="60" name="Критичн-ть" type="" width="60"/>
+    <domains align="L" name="ЛинияСлуж." type="" width="2"/>
+    <domains align="L" char_length="6" name="ЛичнПароль" type="" width="6"/>
+    <domains align="L" char_length="21" name="Логин" type="" width="21"/>
+    <domains align="L" char_length="10" name="Междуг.Код" type="" width="10"/>
+    <domains align="L" char_length="100" name="Мотивация" type="" width="100"/>
+    <domains align="L" char_length="30" name="НазвГИЦ" type="" width="30"/>
+    <domains align="L" char_length="30" name="НазвОбласт" type="" width="30"/>
+    <domains align="L" char_length="30" name="НазвОбъед." type="" width="30"/>
+    <domains align="L" char_length="60" name="НазвПодр." type="" width="60"/>
+    <domains align="L" char_length="50" name="НазвПолное" type="" width="50"/>
+    <domains align="L" char_length="15" name="НазвПоступ" type="" width="15"/>
+    <domains align="L" char_length="20" name="НазвПрогр." type="" width="20"/>
+    <domains align="L" char_length="140" description="Название пункта содержания" name="НазвПункта" type="Название пункта содержания" width="140"/>
+    <domains align="L" char_length="30" name="НазвРайона" type="" width="30"/>
+    <domains align="L" char_length="30" name="НазвТипа" type="" width="30"/>
+    <domains align="L" char_length="100" name="Название" type="" width="100"/>
+    <domains align="L" char_length="30" name="Наименован" type="" width="30"/>
+    <domains align="L" char_length="30" description="Населенный пункт" name="НаселПункт" type="Населенный пункт" width="30"/>
+    <domains align="L" description="Не актуально" name="НеАктуальн" type="Не актуально" width="3"/>
+    <domains align="L" name="НеВыбирать" type="" width="3"/>
+    <domains align="L" name="НеПоказыв." type="" width="3"/>
+    <domains align="L" name="НеПротокол" type="" width="3"/>
+    <domains align="L" description="Номер" name="НомУдост." type="Номер" width="5"/>
+    <domains align="L" name="Номер" type="" width="6"/>
+    <domains align="L" char_length="10" description="Номер документа" name="НомерДокум" type="Номер документа" width="10"/>
+    <domains align="L" char_length="5" name="ОКОНХ" type="" width="5"/>
+    <domains align="L" char_length="8" name="ОКПО" type="" width="8"/>
+    <domains align="L" name="Объекты" type="" width="3"/>
+    <domains align="L" name="ОбъемЧасов" type="" width="3"/>
+    <domains align="L" name="Ограничен." type="" width="3"/>
+    <domains align="L" description="Срок окончания лицензии" name="ОкончЛицен" type="Срок окончания лицензии" width="10"/>
+    <domains align="L" char_length="240" name="Описание" type="" width="240"/>
+    <domains align="L" char_length="155" name="ОрганФМС" type="" width="155"/>
+    <domains align="L" char_length="150" description="Название организации" name="Организац." type="Название организации" width="150"/>
+    <domains align="L" name="Ответств." type="" width="10"/>
+    <domains align="L" name="Отправлен" type="" width="3"/>
+    <domains align="L" name="ОтчетыОкна" type="" width="3"/>
+    <domains align="L" name="Оценка" precision="16" scale="2" type="" width="3"/>
+    <domains align="L" name="Очередь" type="" width="1"/>
+    <domains align="L" name="ПоВыборке" type="" width="3"/>
+    <domains align="L" char_length="30" description="Подразделение (заполн.для УВД)" name="Подразд." type="Подразделение (заполн.для УВД)" width="30"/>
+    <domains align="L" char_length="80" name="Подсказка" type="" width="80"/>
+    <domains align="L" char_length="10" name="Поле" type="" width="10"/>
+    <domains align="L" char_length="100" description="Полное наименование" name="ПолноеНаим" type="Полное наименование" width="100"/>
+    <domains align="L" name="Порядок" type="" width="3"/>
+    <domains align="L" char_length="100" description="Право использования" name="ПравоИспол" type="Право использования" width="100"/>
+    <domains align="L" char_length="120" name="Примечание" type="" width="120"/>
+    <domains align="L" char_length="20" name="Приоритет" type="" width="20"/>
+    <domains align="L" char_length="100" name="ПричОтказа" type="" width="100"/>
+    <domains align="L" name="Проблемн." type="" width="3"/>
+    <domains align="L" name="Просмотр" type="" width="3"/>
+    <domains align="L" char_length="30" description="Расчетный счет" name="Р/счет" type="Расчетный счет" width="30"/>
+    <domains align="L" name="Раздел" type="" width="2"/>
+    <domains align="L" char_length="7" name="Расширение" type="" width="7"/>
+    <domains align="L" name="Регион" type="" width="3"/>
+    <domains align="L" char_length="50" name="РодПадеж" type="" width="50"/>
+    <domains align="R" name="СБК" type="" width="2"/>
+    <domains align="L" description="Сетевой адрес" name="СетевАдрес" type="Сетевой адрес" width="5"/>
+    <domains align="L" char_length="3" description="Символ команды печати" name="СимвКоманд" type="Символ команды печати" width="3"/>
+    <domains align="L" char_length="6" name="СистПароль" type="" width="6"/>
+    <domains align="L" name="Слияние" type="" width="3"/>
+    <domains align="L" name="Событ" type="" width="3"/>
+    <domains align="L" char_length="20" name="СокрНазв." type="" width="20"/>
+    <domains align="L" name="Состояние" type="" width="1"/>
+    <domains align="L" name="Сохр.Файл" type="" width="3"/>
+    <domains align="L" name="Список" type="" width="3"/>
+    <domains align="L" description="Ожидаемый срок завершения" name="Срок" type="Ожидаемый срок завершения" width="10"/>
+    <domains align="L" char_length="20" name="Статус" type="" width="20"/>
+    <domains align="L" name="Статья" type="" width="10000"/>
+    <domains align="L" char_length="50" description="Управляющая последовательность" name="СтрКоманды" type="Управляющая последовательность" width="50"/>
+    <domains align="R" description="Сумма по договору" name="Сумма" precision="16" type="Сумма по договору" width="12"/>
+    <domains align="L" char_length="9" name="Таблица" type="" width="9"/>
+    <domains align="L" char_length="50" name="Телефон" type="" width="50"/>
+    <domains align="L" char_length="120" name="Тема" type="" width="120"/>
+    <domains align="R" name="Тип файла" type="" width="3"/>
+    <domains align="L" char_length="10" name="ТипАдреса" type="" width="10"/>
+    <domains align="L" description="Тип договора" name="ТипДоговор" type="Тип договора" width="3"/>
+    <domains align="L" name="ТипКонтакт" type="" width="2"/>
+    <domains align="L" name="ТипОбуч." type="" width="2"/>
+    <domains align="L" name="ТипПрогр." type="" width="2"/>
+    <domains align="L" name="ТипСотруд." type="" width="3"/>
+    <domains align="L" name="ТипЭкспорт" type="" width="3"/>
+    <domains align="L" char_length="15" name="Точность" type="" width="15"/>
+    <domains align="L" description="Удалять только свои записи" name="УдалЛичн" type="Удалять только свои записи" width="3"/>
+    <domains align="L" description="Права на удаление" name="Удаление" type="Права на удаление" width="3"/>
+    <domains align="L" char_length="15" name="Улица" type="" width="15"/>
+    <domains align="L" name="УровГрам." type="" width="2"/>
+    <domains align="L" name="Уровень" props="show_null" type="" width="3"/>
+    <domains align="L" name="Успех" type="" width="3"/>
+    <domains align="L" char_length="35" name="ФИО" type="" width="35"/>
+    <domains align="L" name="Фонд" type="" width="3"/>
+    <domains align="L" char_length="40" name="ХешПароль" props="case_sensitive" type="" width="40"/>
+  </domains>
+  <tables>
+    <table access_level="0" description="Счета" ht_table_flags="rws" name="ACCOUNT" props="add, edit">
+      <field domain="id_ACC" name="id_ACC" props="autocalculated" rname="id_ACC" type=""/>
+      <field domain="КодДоговор" name="KodDogovor" props="input, edit, show_in_details" rname="КодДоговор" type=""/>
+      <field domain="N счета" name="N_scheta" props="input, edit, show_in_grid, show_in_details, required" rname="N счета" type=""/>
+      <field domain="Дата" name="DataScheta" props="input, edit, show_in_grid, show_in_details, required" rname="ДатаСчета" type=""/>
+      <field domain.align="L" domain.length="20" domain.precision="3" domain.type="" name="Summa" props="input, edit, show_in_grid, show_in_details" rname="Сумма" type=""/>
+      <field domain.align="L" domain.length="10" domain.precision="3" domain.type="" name="DataOplaty" props="input, edit, show_in_details" rname="ДатаОплаты" type=""/>
+      <field domain.align="L" domain.length="10" domain.precision="3" domain.type="" name="Primechanie" props="input, edit, show_in_details" rname="Примечание" type=""/>
+      <constraint items="id_ACC" kind="PRIMARY"/>
+      <constraint items="KodDogovor" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="UtvZakazch_"/>
+      <index field="DataOplaty"/>
+      <index field="DataScheta"/>
+      <index field="KodDogovor"/>
+      <index field="N_scheta"/>
+      <index field="Summa"/>
+    </table>
+    <table access_level="0" description="Акты о выполненных работах" ht_table_flags="rws" name="ACT" props="add, edit">
+      <field domain="id_ACT" name="id_ACT" props="autocalculated" rname="id_ACT" type=""/>
+      <field domain="КодДоговор" name="KodDogovor" props="input, edit, show_in_grid, show_in_details, is_mean" rname="КодДоговор" type=""/>
+      <field domain="КодКлиента" name="Klient" props="input, edit, show_in_grid, show_in_details, is_mean" rname="Клиент" type=""/>
+      <field domain="Отправлен" name="Otpravlen" props="input, edit, show_in_grid, show_in_details" rname="Отправлен" type=""/>
+      <field description="Дата утверждения Поставщиком" domain="Дата" name="UtvPostav_" props="input, edit, show_in_grid, show_in_details" rname="УтвПостав." type="Дата утверждения Поставщиком"/>
+      <field description="Дата утверждения Заказчиком" domain="Дата" name="UtvZakazch_" props="input, edit, show_in_grid, show_in_details" rname="УтвЗаказч." type="Дата утверждения Заказчиком"/>
+      <field description="Сумма по акту" domain="Сумма" name="SummaAkta" props="input, edit, show_in_details" rname="СуммаАкта" type="Сумма по акту"/>
+      <constraint items="id_ACT" kind="PRIMARY"/>
+      <constraint items="Klient" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="Klient"/>
+      <constraint items="KodDogovor" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="UtvZakazch_"/>
+      <index field="Klient"/>
+      <index field="KodDogovor"/>
+      <index field="Otpravlen"/>
+      <index field="SummaAkta"/>
+      <index field="UtvPostav_"/>
+      <index field="UtvZakazch_"/>
+    </table>
+    <table access_level="0" description="Адреса" ht_table_flags="rws" name="ADDRESS" props="add, edit">
+      <field domain="КодАдреса" name="KodAdresa" props="show_in_details, autocalculated" rname="КодАдреса" type=""/>
+      <field domain="КодКлиента" name="KodKlienta" props="input, edit, show_in_details, is_mean" rname="КодКлиента" type=""/>
+      <field domain="Регион" name="Region" props="input, show_in_grid, show_in_details, is_mean" rname="Регион" type=""/>
+      <field domain="КодНасПунк" name="NaselPunkt" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="НаселПункт" type=""/>
+      <field domain="Улица" name="Ulicza" props="input, edit, show_in_grid, show_in_details, required" rname="Улица" type=""/>
+      <field domain="Дом" name="Dom" props="input, edit, show_in_grid, show_in_details, required" rname="Дом" type=""/>
+      <field domain="Кв." name="Kv_" props="input, edit, show_in_grid, show_in_details" rname="Кв." type=""/>
+      <constraint items="KodAdresa" kind="PRIMARY"/>
+      <constraint items="KodKlienta" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="Klient"/>
+      <constraint items="NaselPunkt" kind="FOREIGN" reference="KolRajotd"/>
+      <constraint items="Region" kind="FOREIGN" reference="KodDogovor"/>
+      <index field="Dom"/>
+      <index field="KodKlienta"/>
+      <index field="Kv_"/>
+      <index field="NaselPunkt"/>
+      <index field="Region"/>
+      <index field="Ulicza"/>
+    </table>
+    <table access_level="0" description="Статьи" ht_table_flags="rws" name="ARTICLES" props="add, edit, delete">
+      <field domain="ID пункта" name="ID_punkta" props="show_in_details" rname="ID пункта" type=""/>
+      <field domain="TextData" name="TextData" props="input, edit, show_in_details" rname="TextData" type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <field domain="ID статьи" name="ID_stati" props="show_in_grid, show_in_details, autocalculated" rname="ID статьи" type=""/>
+      <constraint items="ID_stati" kind="PRIMARY"/>
+      <constraint items="ID_punkta" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="id_ACT"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <index field="DataIzmen_"/>
+      <index field="ID_punkta" props="ID_punkta"/>
+      <index field="Otvetstv_"/>
+      <index field="TextData"/>
+      <index field="VremyaIzmen"/>
+    </table>
+    <table access_level="0" description="Банковские реквиз. организаций" ht_table_flags="rws" name="BANC_REC" props="add, edit, delete">
+      <field domain="КодКлиента" name="KodKlienta" props="input, show_in_grid, show_in_details, is_mean, required" rname="КодКлиента" type=""/>
+      <field domain="Банк" name="Bank" props="input, edit, show_in_grid, show_in_details, required" rname="Банк" type=""/>
+      <field domain="Р/счет" name="Rschet" props="input, edit, show_in_grid, show_in_details" rname="Р/счет" type=""/>
+      <field domain="Кор/счет" name="Korschet" props="input, edit, show_in_grid, show_in_details" rname="Кор/счет" type=""/>
+      <field domain="ИНН" name="INN" props="input, edit, show_in_grid, show_in_details" rname="ИНН" type=""/>
+      <field domain="БИК" name="BIK" props="input, edit, show_in_grid, show_in_details" rname="БИК" type=""/>
+      <field domain="ОКПО" name="OKPO" props="input, edit, show_in_grid, show_in_details" rname="ОКПО" type=""/>
+      <field domain="ОКОНХ" name="OKONX" props="input, edit, show_in_grid, show_in_details" rname="ОКОНХ" type=""/>
+      <constraint items="KodKlienta" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="Klient"/>
+      <index field="BIK"/>
+      <index field="INN"/>
+      <index field="KodKlienta" props="KodKlienta"/>
+      <index field="Korschet"/>
+      <index field="OKONX"/>
+      <index field="OKPO"/>
+      <index field="Rschet"/>
+    </table>
+    <table access_level="0" description="Справочник категорий" ht_table_flags="rws" name="CATEGORY" props="add, edit, delete">
+      <field domain="Категория" name="Kategoriya" props="input, show_in_grid, show_in_details, autocalculated" rname="Категория" type=""/>
+      <field domain="Наименован" name="Naimenovan" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Наименован" type=""/>
+      <field domain="ПолноеНаим" name="PolnoeNaim" props="input, edit, show_in_details" rname="ПолноеНаим" type=""/>
+      <constraint items="Kategoriya" kind="PRIMARY"/>
+      <index field="Naimenovan" props="Naimenovan"/>
+    </table>
+    <table access_level="0" description="Выданные удостоверения" ht_table_flags="rws" name="CERTIFIC" props="add, edit">
+      <field domain="КодУдостов" name="KodUdostov" props="show_in_details, autocalculated" rname="КодУдостов" type=""/>
+      <field description="Владелец удостоверения" domain="КодСотрудн" name="KodSotrudn" props="input, edit, show_in_details, is_mean, required" rname="КодСотрудн" type="Владелец удостоверения"/>
+      <field domain="НомУдост." name="NomUdost_" props="input, edit, show_in_grid, show_in_details, required" rname="НомУдост." type=""/>
+      <field domain="ДатаВыдачи" name="DataVydachi" props="input, edit, show_in_grid, show_in_details" rname="ДатаВыдачи" type=""/>
+      <field description="Сотрудник,отв.за выдачу" domain="КодПольз." name="KodPolz_" props="input, edit, show_in_grid, show_in_details, is_mean" rname="КодПольз." type="Сотрудник,отв.за выдачу"/>
+      <constraint items="KodUdostov" kind="PRIMARY"/>
+      <constraint items="KodSotrudn" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="DataIzmen_"/>
+      <index field="DataVydachi"/>
+      <index field="KodPolz_"/>
+      <index field="KodSotrudn"/>
+      <index field="NomUdost_" props="NomUdost_"/>
+    </table>
+    <table access_level="0" description="Справочник разделов" ht_table_flags="rws" name="CHAP_REF">
+      <field domain="Раздел" name="Razdel" props="show_in_grid, show_in_details" rname="Раздел" type=""/>
+      <field domain="Наименован" name="Naimenovan" props="show_in_grid, show_in_details, is_mean" rname="Наименован" type=""/>
+      <constraint items="Razdel" kind="PRIMARY"/>
+    </table>
+    <table access_level="0" description="Клиенты" ht_table_flags="rws" name="CLIENT" props="add, edit">
+      <field domain="КодКлиента" name="KodKlienta" props="show_in_details, autocalculated" rname="КодКлиента" type=""/>
+      <field domain="Организац." name="Organizacz_" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Организац." type=""/>
+      <field description="Ведомство" domain="КодВедомст" name="KodVedomst" props="input, edit, show_in_details, required" rname="КодВедомст" type="Ведомство"/>
+      <field domain="Подразд." name="Podrazd_" props="show_in_details" rname="Подразд." type=""/>
+      <field domain="Фонд" name="Fond" props="show_in_details" rname="Фонд" type=""/>
+      <constraint items="KodKlienta" kind="PRIMARY"/>
+      <constraint items="KodVedomst" kind="FOREIGN" props="has_value_edit" reference="DataPost_"/>
+      <index field="Fond"/>
+      <index field="KodVedomst"/>
+      <index field="Organizacz_" props="Organizacz_"/>
+      <index field="Podrazd_"/>
+    </table>
+    <table access_level="0" description="Контрольные параметры" ht_table_flags="rws" name="CNTR_PAR" props="add">
+      <field domain="КодПарам" name="KodParam" props="show_in_details, autocalculated" rname="КодПарам" type=""/>
+      <field description="Контролировать" domain="КонтрПарам" name="KontrParam" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="КонтрПарам" type="Контролировать"/>
+      <constraint items="KodParam" kind="PRIMARY"/>
+      <index field="KontrParam" props="KontrParam"/>
+    </table>
+    <table access_level="0" description="Предмет договора" ht_table_flags="rws" name="CNTR_VID" props="add, edit, delete">
+      <field domain="id_CNTR_V" name="id_CNTR_V" props="autocalculated" rname="id_CNTR_V" type=""/>
+      <field domain="КодДоговор" name="KodDogovor" props="input, edit, show_in_grid, show_in_details, required" rname="КодДоговор" type=""/>
+      <field domain="ТипДоговор" name="TipDogovor" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="ТипДоговор" type=""/>
+      <constraint items="id_CNTR_V" kind="PRIMARY"/>
+      <constraint items="KodDogovor" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="UtvZakazch_"/>
+      <constraint items="TipDogovor" kind="FOREIGN" props="has_value_edit" reference="DataPost_"/>
+      <index field="KodDogovor"/>
+      <index field="TipDogovor"/>
+    </table>
+    <table access_level="0" description="Описание заявки" ht_table_flags="rws" name="CNT_PRIM" props="add, edit, delete">
+      <field domain="КодКонтакт" name="KodKontakt" props="show_in_grid, show_in_details, required" rname="КодКонтакт" type=""/>
+      <field domain="TextData" name="TextData" props="input, edit, show_in_details" rname="TextData" type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <constraint items="KodKontakt" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="Naimenovan"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <index field="DataIzmen_"/>
+      <index field="KodKontakt" props="KodKontakt"/>
+      <index field="Otvetstv_"/>
+      <index field="TextData"/>
+      <index field="VremyaIzmen"/>
+    </table>
+    <table access_level="0" description="Содержание" ht_table_flags="rws" name="CONTENTS" props="add, edit, delete">
+      <field domain="ID пункта" name="ID_punkta" props="show_in_grid, show_in_details, autocalculated" rname="ID пункта" type=""/>
+      <field domain="КодПункта" name="KodPunkta" props="input, edit, show_in_details" rname="КодПункта" type=""/>
+      <field domain="СБК" name="SBK" props="show_in_details" rname="СБК" type=""/>
+      <field domain="НазвПункта" name="NazvPunkta" props="input, edit, show_in_grid, show_in_details, is_mean" rname="НазвПункта" type=""/>
+      <field description="Постановка соответствует коду" domain="Актуальна" name="Aktualna" props="input, edit, show_in_details" rname="Актуальна" type="Постановка соответствует коду"/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <constraint items="ID_punkta" kind="PRIMARY"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <index field="Aktualna"/>
+      <index field="DataIzmen_"/>
+      <index field="KodPunkta" props="KodPunkta"/>
+      <index field="Otvetstv_"/>
+      <index field="SBK"/>
+      <index field="VremyaIzmen"/>
+    </table>
+    <table access_level="0" description="Документы оплаты" ht_table_flags="rws" name="CONTRACT" props="add, edit">
+      <field domain="КодДоговор" name="KodDogovor" props="show_in_details, autocalculated" rname="КодДоговор" type=""/>
+      <field domain="НомерДокум" name="NomerDokum" props="input, edit, show_in_grid, show_in_details, is_mean" rname="НомерДокум" type=""/>
+      <field domain="КодКлиента" name="Platelshhik" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Плательщик" type=""/>
+      <field domain="Регион" name="Region" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Регион" type=""/>
+      <field description="Дата договора с" domain="ДатаНачал." name="DataNachal_" props="input, edit, show_in_grid, show_in_details" rname="ДатаНачал." type="Дата договора с"/>
+      <field description="Дата договора по" domain="ДатаКонца" name="DataKoncza" props="input, edit, show_in_grid, show_in_details, required" rname="ДатаКонца" type="Дата договора по"/>
+      <field domain="КолРайотд" name="KolRajotd" props="input, edit, show_in_grid, show_in_details" rname="КолРайотд" type=""/>
+      <field domain="ПравоИспол" name="PravoIspol" props="input, edit, show_in_details" rname="ПравоИспол" type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <field domain="ДатаПост." name="DataPost_" props="show_in_details" rname="ДатаПост." type=""/>
+      <field domain="ВремяПост." name="VremyaPost_" props="show_in_details" rname="ВремяПост." type=""/>
+      <field domain="Ответств." name="KtoVvel" props="show_in_details" rname="КтоВвел" type=""/>
+      <constraint items="KodDogovor" kind="PRIMARY"/>
+      <constraint items="KtoVvel" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <constraint items="Platelshhik" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="Klient"/>
+      <constraint items="Region" kind="FOREIGN" props="has_value_edit" reference="KodDogovor"/>
+      <index field="DataIzmen_"/>
+      <index field="DataKoncza"/>
+      <index field="DataNachal_"/>
+      <index field="DataPost_"/>
+      <index field="KolRajotd"/>
+      <index field="KtoVvel"/>
+      <index field="NomerDokum" props="NomerDokum"/>
+      <index field="Otvetstv_"/>
+      <index field="Platelshhik"/>
+      <index field="Region"/>
+      <index field="VremyaIzmen"/>
+      <index field="VremyaPost_"/>
+    </table>
+    <table access_level="0" description="Контроль" ht_table_flags="rws" name="CONTROL" props="add, edit">
+      <field domain="id_CONTROL" name="id_CONTROL" props="autocalculated" rname="id_CONTROL" type=""/>
+      <field domain="КодДоговор" name="KodDogovor" props="input, show_in_grid, show_in_details" rname="КодДоговор" type=""/>
+      <field domain="КодПарам" name="KodParam" props="input, show_in_grid, show_in_details, is_mean" rname="КодПарам" type=""/>
+      <constraint items="id_CONTROL" kind="PRIMARY"/>
+      <constraint items="KodDogovor" kind="FOREIGN" props="cascading_delete" reference="UtvZakazch_"/>
+      <constraint items="KodParam" kind="FOREIGN" props="has_value_edit" reference="UtvPostav_"/>
+      <index field="KodDogovor"/>
+      <index field="KodParam"/>
+    </table>
+    <table access_level="0" description="Категории содержания" ht_table_flags="rws" name="CONT_CTG" props="add, edit, delete">
+      <field domain="id_CONT_C" name="id_CONT_C" props="autocalculated" rname="id_CONT_C" type=""/>
+      <field domain="ID пункта" name="ID_punkta" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="ID пункта" type=""/>
+      <field domain="Категория" name="Kategoriya" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Категория" type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <constraint items="id_CONT_C" kind="PRIMARY"/>
+      <constraint items="ID_punkta" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="id_ACT"/>
+      <constraint items="Kategoriya" kind="FOREIGN" props="has_value_edit" reference="Primechanie"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <index field="DataIzmen_"/>
+      <index field="ID_punkta"/>
+      <index field="Kategoriya"/>
+      <index field="Otvetstv_"/>
+      <index field="VremyaIzmen"/>
+    </table>
+    <table access_level="0" description="Тип.решения в контактах" ht_table_flags="rws" name="CONT_TIP" props="add, edit, delete">
+      <field domain="id_CONT_T" name="id_CONT_T" props="autocalculated" rname="id_CONT_T" type=""/>
+      <field domain="КодКонтакт" name="KodKontakt" props="input, edit, show_in_grid, show_in_details, required" rname="КодКонтакт" type=""/>
+      <field domain="КодТипРеш" name="KodTipResh" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="КодТипРеш" type=""/>
+      <field domain="ДатаПост." name="DataPost_" props="show_in_details" rname="ДатаПост." type=""/>
+      <field domain="ВремяПост." name="VremyaPost_" props="show_in_details" rname="ВремяПост." type=""/>
+      <field domain="Ответств." name="KtoVvel" props="show_in_details" rname="КтоВвел" type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <constraint items="id_CONT_T" kind="PRIMARY"/>
+      <constraint items="KodKontakt" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="Naimenovan"/>
+      <constraint items="KodTipResh" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodKontakt"/>
+      <constraint items="KtoVvel" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <index field="DataIzmen_"/>
+      <index field="DataPost_"/>
+      <index field="KodKontakt"/>
+      <index field="KodTipResh"/>
+      <index field="KtoVvel"/>
+      <index field="Otvetstv_"/>
+      <index field="VremyaIzmen"/>
+      <index field="VremyaPost_"/>
+    </table>
+    <table access_level="0" description="Работа по заявке" ht_table_flags="rws" name="CON_TIME" props="add, edit, delete">
+      <field domain="КодРабКонт" name="KodRabKont" props="show_in_details, autocalculated" rname="КодРабКонт" type=""/>
+      <field description="Контакт" domain="КодКонтакт" name="KodKontakt" props="show_in_details" rname="КодКонтакт" type="Контакт"/>
+      <field description="Вид работы" domain="КодВидРаб" name="KodVidRab" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="КодВидРаб" type="Вид работы"/>
+      <field domain="Дата" name="Data" props="input, edit, show_in_grid, show_in_details, required" rname="Дата" type=""/>
+      <field domain="Время" name="Vremya" props="input, edit, show_in_details, required" rname="Время" type=""/>
+      <field description="Пользователь" domain="КодСотрудн" name="KodSotrudn" props="input, edit, show_in_details" rname="КодСотрудн" type="Пользователь"/>
+      <field description="Ответственный" domain="КодМастера" name="KodMastera" props="input, edit, show_in_details, is_mean, required" rname="КодМастера" type="Ответственный"/>
+      <field domain="Затраты" name="Zatraty" props="input, edit, show_in_details, required" rname="Затраты" type=""/>
+      <field description="Причина отказа" domain="ПричОтказа" name="PrichOtkaza" props="input, edit, show_in_details" rname="ПричОтказа" type="Причина отказа"/>
+      <field domain="КодПольз." name="KodPolz_" props="show_in_details" rname="КодПольз." type=""/>
+      <field domain="КодЗадачи" name="KodZadachi" props="input, edit, show_in_details" rname="КодЗадачи" type=""/>
+      <field domain="Примечание" name="Primechanie" props="input, edit, show_in_details" rname="Примечание" type=""/>
+      <field domain="TextData" name="TextData" props="input, edit, show_in_details" rname="TextData" type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <field domain="ДатаПост." name="DataPost_" props="show_in_details" rname="ДатаПост." type=""/>
+      <field domain="ВремяПост." name="VremyaPost_" props="show_in_details" rname="ВремяПост." type=""/>
+      <field domain="Ответств." name="KtoVvel" props="show_in_details" rname="КтоВвел" type=""/>
+      <constraint items="KodRabKont" kind="PRIMARY"/>
+      <constraint items="KodKontakt" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="Naimenovan"/>
+      <constraint items="KodMastera" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodUdostov"/>
+      <constraint items="KodSotrudn" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="DataIzmen_"/>
+      <constraint items="KodVidRab" kind="FOREIGN" props="has_value_edit" reference="Otvetstv_"/>
+      <constraint items="KodZadachi" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="VremyaPost_"/>
+      <constraint items="KtoVvel" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <index field="Data"/>
+      <index field="DataIzmen_"/>
+      <index field="DataPost_"/>
+      <index field="KodKontakt"/>
+      <index field="KodMastera"/>
+      <index field="KodPolz_"/>
+      <index field="KodSotrudn"/>
+      <index field="KodVidRab"/>
+      <index field="KodZadachi"/>
+      <index field="KtoVvel"/>
+      <index field="Otvetstv_"/>
+      <index field="PrichOtkaza"/>
+      <index field="Vremya"/>
+      <index field="VremyaIzmen"/>
+      <index field="VremyaPost_"/>
+      <index field="Zatraty"/>
+    </table>
+    <table access_level="0" description="Входящие официальные письма" ht_table_flags="rws" name="CORR_IN" props="add, edit, delete">
+      <field domain="КодПисьмВх" name="KodPismVx" props="show_in_details, autocalculated" rname="КодПисьмВх" type=""/>
+      <field domain="КодРабКонт" name="KodRabKont" props="show_in_details" rname="КодРабКонт" type=""/>
+      <field domain="N письма" name="N_pisma" props="input, edit, show_in_grid, show_in_details, is_mean" rname="N письма" type=""/>
+      <field domain="Дата" name="Data" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Дата" type=""/>
+      <field description="Организация" domain="КодКлиента" name="KodKlienta" props="input, edit, show_in_details, is_mean" rname="КодКлиента" type="Организация"/>
+      <field description="Кому адресовано" domain="КодМастера" name="Komu" props="input, edit, show_in_grid, show_in_details, required" rname="Кому" type="Кому адресовано"/>
+      <field domain="КодСотрудн" name="Podpis" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Подпись" type=""/>
+      <field description="Исполнитель" domain="КодСотрудн" name="Ispolnit_" props="input, edit, show_in_grid, show_in_details" rname="Исполнит." type="Исполнитель"/>
+      <field domain="Примечание" name="Primechanie" props="input, edit, show_in_details" rname="Примечание" type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <field domain="ДатаПост." name="DataPost_" props="show_in_details" rname="ДатаПост." type=""/>
+      <field domain="ВремяПост." name="VremyaPost_" props="show_in_details" rname="ВремяПост." type=""/>
+      <field domain="Ответств." name="KtoVvel" props="show_in_details" rname="КтоВвел" type=""/>
+      <constraint items="KodPismVx" kind="PRIMARY"/>
+      <constraint items="Ispolnit_" kind="FOREIGN" props="cascading_delete" reference="DataIzmen_"/>
+      <constraint items="KodKlienta" kind="FOREIGN" props="cascading_delete" reference="Klient"/>
+      <constraint items="KodRabKont" kind="FOREIGN" props="cascading_delete" reference="Ulicza"/>
+      <constraint items="Komu" kind="FOREIGN" props="cascading_delete" reference="KodUdostov"/>
+      <constraint items="KtoVvel" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <constraint items="Podpis" kind="FOREIGN" props="cascading_delete" reference="DataIzmen_"/>
+      <index field="Data"/>
+      <index field="DataIzmen_"/>
+      <index field="DataPost_"/>
+      <index field="Ispolnit_"/>
+      <index field="KodKlienta"/>
+      <index field="KodRabKont"/>
+      <index field="Komu"/>
+      <index field="KtoVvel"/>
+      <index field="N_pisma"/>
+      <index field="Otvetstv_"/>
+      <index field="Podpis"/>
+      <index field="VremyaIzmen"/>
+      <index field="VremyaPost_"/>
+    </table>
+    <table access_level="0" description="Исходящие официальные письма" ht_table_flags="rws" name="CORR_OUT" props="add, edit, delete">
+      <field domain="КодПисьмИс" name="KodPismIs" props="show_in_grid, show_in_details, autocalculated" rname="КодПисьмИс" type=""/>
+      <field domain="КодРабКонт" name="KodRabKont" props="show_in_details" rname="КодРабКонт" type=""/>
+      <field domain="N Исходящ" name="N_pisma" props="input, edit, show_in_grid, show_in_details, is_mean" rname="N письма" type=""/>
+      <field domain="Дата" name="Data" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Дата" type=""/>
+      <field description="Организация" domain="КодКлиента" name="KodKlienta" props="input, edit, show_in_details, is_mean" rname="КодКлиента" type="Организация"/>
+      <field description="Кому адресовано" domain="КодСотрудн" name="KodSotrudn" props="input, edit, show_in_grid, show_in_details, required" rname="КодСотрудн" type="Кому адресовано"/>
+      <field description="Подпись" domain="КодМастера" name="KodMastera" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="КодМастера" type="Подпись"/>
+      <field description="Исполнитель" domain="КодМастера" name="Ispolnit_" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Исполнит." type="Исполнитель"/>
+      <field domain="Примечание" name="Primechanie" props="input, edit, show_in_details" rname="Примечание" type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <field domain="ДатаПост." name="DataPost_" props="show_in_details" rname="ДатаПост." type=""/>
+      <field domain="ВремяПост." name="VremyaPost_" props="show_in_details" rname="ВремяПост." type=""/>
+      <field domain="Ответств." name="KtoVvel" props="show_in_details" rname="КтоВвел" type=""/>
+      <constraint items="KodPismIs" kind="PRIMARY"/>
+      <constraint items="Ispolnit_" kind="FOREIGN" props="cascading_delete" reference="KodUdostov"/>
+      <constraint items="KodKlienta" kind="FOREIGN" props="cascading_delete" reference="Klient"/>
+      <constraint items="KodMastera" kind="FOREIGN" props="cascading_delete" reference="KodUdostov"/>
+      <constraint items="KodRabKont" kind="FOREIGN" props="cascading_delete" reference="Ulicza"/>
+      <constraint items="KodSotrudn" kind="FOREIGN" props="cascading_delete" reference="DataIzmen_"/>
+      <constraint items="KtoVvel" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <index field="Data"/>
+      <index field="DataIzmen_"/>
+      <index field="DataPost_"/>
+      <index field="Ispolnit_"/>
+      <index field="KodKlienta"/>
+      <index field="KodMastera"/>
+      <index field="KodRabKont"/>
+      <index field="KodSotrudn"/>
+      <index field="KtoVvel"/>
+      <index field="N_pisma"/>
+      <index field="Otvetstv_"/>
+      <index field="VremyaIzmen"/>
+      <index field="VremyaPost_"/>
+    </table>
+    <table access_level="0" description="Зависимости" ht_table_flags="rws" name="DEPENDEN" props="add, edit, delete">
+      <field domain="id_DEPEND" name="id_DEPEND" props="autocalculated" rname="id_DEPEND" type=""/>
+      <field description="Предшествующая" domain="КодЗадачи" name="Predshestv" props="input, edit, show_in_grid, show_in_details, required" rname="Предшеств" type="Предшествующая"/>
+      <field description="Последующая" domain="КодЗадачи" name="Posleduyushh" props="input, edit, show_in_grid, show_in_details, required" rname="Последующ" type="Последующая"/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <constraint items="id_DEPEND" kind="PRIMARY"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <constraint items="Posleduyushh" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="VremyaPost_"/>
+      <constraint items="Predshestv" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="VremyaPost_"/>
+      <index field="DataIzmen_"/>
+      <index field="Otvetstv_"/>
+      <index field="Posleduyushh"/>
+      <index field="Predshestv"/>
+      <index field="VremyaIzmen"/>
+    </table>
+    <table access_level="0" description="~О~писание задачи" ht_table_flags="rws" name="DESCRIPT" props="add, edit, delete">
+      <field domain="КодЗадачи" name="KodZadachi" props="show_in_grid, show_in_details" rname="КодЗадачи" type=""/>
+      <field domain="TextData" name="TextData" props="input, edit, show_in_details" rname="TextData" type=""/>
+      <field domain="ID_descr" name="ID_descr" props="show_in_details, autocalculated" rname="ID_descr" type=""/>
+      <constraint items="ID_descr" kind="PRIMARY"/>
+      <constraint items="KodZadachi" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="VremyaPost_"/>
+      <index field="KodZadachi" props="KodZadachi"/>
+      <index field="TextData"/>
+    </table>
+    <table access_level="0" description="Меню обстановок" ht_table_flags="rws" name="DESKMENU" props="add, edit, delete">
+      <field domain="КодМенюОбс" name="KodMenyuObs" props="show_in_grid, show_in_details, autocalculated" rname="КодМенюОбс" type=""/>
+      <field domain="КодМеню" name="KodMenyu" props="input, edit, show_in_grid, show_in_details, required" rname="КодМеню" type=""/>
+      <field domain="ИмяЭлемент" name="ImyaElement" props="input, edit, show_in_grid, show_in_details, is_mean" rname="ИмяЭлемент" type=""/>
+      <field description="Расположение" domain="ИндексМеню" name="IndeksMenyu" props="input, edit, show_in_grid, show_in_details, required" rname="ИндексМеню" type="Расположение"/>
+      <field description="Вид элемента" domain="Раздел" name="Razdel" props="input, edit, show_in_grid, show_in_details, required" rname="Раздел" type="Вид элемента"/>
+      <field domain="Уровень" name="Uroven" props="input, edit, show_in_grid, show_in_details" rname="Уровень" type=""/>
+      <field domain="КодХран" name="Resurs" props="input, edit, show_in_details" rname="Ресурс" type=""/>
+      <field domain="СБК" name="SBK" props="show_in_details" rname="СБК" type=""/>
+      <field domain="КодТаблицы" name="KodTabliczy" props="input, edit, show_in_grid, show_in_details" rname="КодТаблицы" type=""/>
+      <field domain="Подсказка" name="Podskazka" props="input, edit, show_in_details" rname="Подсказка" type=""/>
+      <field domain="Изм.Отчет" name="Izm_Otchet" props="input, edit, show_in_details" rname="Изм.Отчет" type=""/>
+      <field domain="Сохр.Файл" name="Soxr_Fajl" props="input, edit, show_in_details" rname="Сохр.Файл" type=""/>
+      <field domain="ПоВыборке" name="PoVyborke" props="input, edit, show_in_details" rname="ПоВыборке" type=""/>
+      <field domain="БезОбъект." name="BezObekt_" props="input, edit, show_in_details" rname="БезОбъект." type=""/>
+      <field domain="НеВыбирать" name="NeVybirat" props="input, edit, show_in_details" rname="НеВыбирать" type=""/>
+      <field domain="НеПоказыв." name="NePokazyv_" props="input, edit, show_in_details" rname="НеПоказыв." type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="input, edit, show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="input, edit, show_in_details" rname="ВремяИзмен" type=""/>
+      <constraint items="KodMenyuObs" kind="PRIMARY"/>
+      <constraint items="IndeksMenyu" kind="FOREIGN" props="has_value_edit" reference="KodSotrudn"/>
+      <constraint items="KodTabliczy" kind="FOREIGN" props="has_value_edit" reference="Kategoriya"/>
+      <constraint items="Razdel" kind="FOREIGN" props="has_value_edit" reference="SummaAkta"/>
+      <constraint items="Resurs" kind="FOREIGN" props="has_value_edit" reference="ID_stati"/>
+      <index field="BezObekt_"/>
+      <index field="DataIzmen_"/>
+      <index field="IndeksMenyu"/>
+      <index field="Izm_Otchet"/>
+      <index field="KodMenyu" props="KodMenyu"/>
+      <index field="KodTabliczy"/>
+      <index field="NePokazyv_"/>
+      <index field="NeVybirat"/>
+      <index field="PoVyborke"/>
+      <index field="Razdel"/>
+      <index field="Resurs"/>
+      <index field="SBK"/>
+      <index field="Soxr_Fajl"/>
+      <index field="Uroven"/>
+      <index field="VremyaIzmen"/>
+    </table>
+    <table access_level="0" description="Протокол сеанса" ht_table_flags="rws" name="DETAILS" props="delete">
+      <field domain="id_DETAILS" name="id_DETAILS" props="autocalculated" rname="id_DETAILS" type=""/>
+      <field domain="КодСеанса" name="KodSeansa" props="edit, show_in_details" rname="КодСеанса" type=""/>
+      <field domain="КодМенюОбс" name="KodMenyuObs" props="edit, show_in_grid, show_in_details" rname="КодМенюОбс" type=""/>
+      <field domain="ДатаИзмен." name="DataRaboty" props="edit, show_in_grid, show_in_details" rname="ДатаРаботы" type=""/>
+      <field domain="ВремяИзмен" name="VremyaRabot" props="edit, show_in_grid, show_in_details" rname="ВремяРабот" type=""/>
+      <constraint items="id_DETAILS" kind="PRIMARY"/>
+      <constraint items="KodMenyuObs" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="VremyaIzmen"/>
+      <constraint items="KodSeansa" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="Otvetstv_"/>
+      <index field="DataRaboty"/>
+      <index field="KodMenyuObs"/>
+      <index field="KodSeansa"/>
+      <index field="VremyaRabot"/>
+    </table>
+    <table access_level="0" description="Имена элементов хранилища" ht_table_flags="rws" name="DM_ALIAS" props="add, edit">
+      <field domain="КодИмЭлХр" name="KodImElXr" props="show_in_grid, show_in_details, autocalculated" rname="КодИмЭлХр" type=""/>
+      <field domain="ИмяЭлемент" name="ImyaElement" props="input, edit, show_in_grid, show_in_details, required" rname="ИмяЭлемент" type=""/>
+      <field domain="КодХран" name="KodXran" props="show_in_details, required" rname="КодХран" type=""/>
+      <constraint items="KodImElXr" kind="PRIMARY"/>
+      <constraint items="KodXran" kind="FOREIGN" props="has_value_edit" reference="ID_stati"/>
+      <index field="ImyaElement" props="ImyaElement"/>
+      <index field="KodXran"/>
+    </table>
+    <table access_level="0" description="Подробности по договору" ht_table_flags="rws" name="DOC_PRIM" props="add, edit, delete">
+      <field domain="КодДоговор" name="KodDogovor" props="input, show_in_grid, show_in_details" rname="КодДоговор" type=""/>
+      <field domain="Заметки" name="Zametki" props="input, edit, show_in_details" rname="Заметки" type=""/>
+      <constraint items="KodDogovor" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="UtvZakazch_"/>
+      <index field="KodDogovor" props="KodDogovor"/>
+    </table>
+    <table access_level="0" description="Хранилище" ht_table_flags="rws" name="DSKSTRG" props="add, edit">
+      <field domain="КодХран" name="KodXran" props="show_in_grid, show_in_details, autocalculated" rname="КодХран" type=""/>
+      <field domain="Описание" name="Opisanie" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Описание" type=""/>
+      <field domain="BinData" name="BinData" props="show_in_details" rname="BinData" type=""/>
+      <field domain="ИмяФайла" name="ImyaFajla" props="input, edit, show_in_grid, show_in_details" rname="ИмяФайла" type=""/>
+      <field domain="КодТипРес" name="KodTipRes" props="input, edit, show_in_details, required" rname="КодТипРес" type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <constraint items="KodXran" kind="PRIMARY"/>
+      <constraint items="KodTipRes" kind="FOREIGN" props="has_value_edit" reference="ID_punkta"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <index field="DataIzmen_"/>
+      <index field="KodTipRes"/>
+      <index field="Otvetstv_"/>
+      <index field="VremyaIzmen"/>
+    </table>
+    <table access_level="0" description="Протокол экспорта информации" ht_table_flags="rws" name="EXP_PRN">
+      <field domain="КодЭкспорт" name="KodEksport" props="show_in_details, autocalculated" rname="КодЭкспорт" type=""/>
+      <field domain="КодСеанса" name="KodSeansa" props="show_in_details" rname="КодСеанса" type=""/>
+      <field domain="ИмяИсточн" name="ImyaIstochn" props="edit, show_in_grid, show_in_details" rname="ИмяИсточн" type=""/>
+      <field domain="ИмяПриемн" name="ImyaPriemn" props="edit, show_in_grid, show_in_details" rname="ИмяПриемн" type=""/>
+      <field domain="ТипЭкспорт" name="TipEksport" props="edit, show_in_grid, show_in_details, is_mean" rname="ТипЭкспорт" type=""/>
+      <field domain="Успех" name="Uspex" props="edit, show_in_grid, show_in_details" rname="Успех" type=""/>
+      <field domain="ВремяНач" name="VremyaNach" props="edit, show_in_grid, show_in_details" rname="ВремяНач" type=""/>
+      <field domain="Длительн" name="Dliteln" props="edit, show_in_grid, show_in_details" rname="Длительн" type=""/>
+      <field domain="ВремяСозд" name="VremyaSozd" props="show_in_details" rname="ВремяСозд" type=""/>
+      <constraint items="KodEksport" kind="PRIMARY"/>
+      <constraint items="KodSeansa" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="Otvetstv_"/>
+      <constraint items="TipEksport" kind="FOREIGN" props="has_value_edit" reference="KodKontakt"/>
+      <index field="KodSeansa"/>
+      <index field="TipEksport"/>
+      <index field="Uspex"/>
+    </table>
+    <table access_level="0" description="Электронные адреса сотрудников" ht_table_flags="rws" name="E_MAILLC" props="add, edit, delete">
+      <field domain="КодЭлАдрес" name="KodElAdres" props="show_in_details, autocalculated" rname="КодЭлАдрес" type=""/>
+      <field domain="КодСотрудн" name="KodSotrudn" props="show_in_details" rname="КодСотрудн" type=""/>
+      <field domain="ИмяАдреса" name="ImyaAdresa" props="input, edit, show_in_grid, show_in_details" rname="ИмяАдреса" type=""/>
+      <field domain="КодТипа" name="KodTipa" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="КодТипа" type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <constraint items="KodElAdres" kind="PRIMARY"/>
+      <constraint items="KodSotrudn" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="DataIzmen_"/>
+      <constraint items="KodTipa" kind="FOREIGN" props="has_value_edit" reference="VremyaIzmen"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <index field="DataIzmen_"/>
+      <index field="ImyaAdresa"/>
+      <index field="KodSotrudn"/>
+      <index field="KodTipa"/>
+      <index field="Otvetstv_"/>
+      <index field="VremyaIzmen"/>
+    </table>
+    <table access_level="0" description="Электронные адреса организаций" ht_table_flags="rws" name="E_MAILOR" props="add, edit, delete">
+      <field domain="КодЭлАдрОр" name="KodElAdres" props="show_in_details, autocalculated" rname="КодЭлАдрес" type=""/>
+      <field domain="КодКлиента" name="KodKlienta" props="input, edit, show_in_grid, show_in_details" rname="КодКлиента" type=""/>
+      <field domain="ИмяАдреса" name="ImyaAdresa" props="input, edit, show_in_grid, show_in_details, required" rname="ИмяАдреса" type=""/>
+      <field domain="КодТипа" name="KodTipa" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="КодТипа" type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <constraint items="KodElAdres" kind="PRIMARY"/>
+      <constraint items="KodKlienta" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="Klient"/>
+      <constraint items="KodTipa" kind="FOREIGN" props="has_value_edit" reference="VremyaIzmen"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <index field="DataIzmen_"/>
+      <index field="ImyaAdresa"/>
+      <index field="KodKlienta"/>
+      <index field="KodTipa"/>
+      <index field="Otvetstv_"/>
+      <index field="VremyaIzmen"/>
+    </table>
+    <table access_level="0" description="Группы задач" ht_table_flags="rws" name="GROUPS" props="add, edit">
+      <field domain="КодГруппы" name="KodGruppy" props="input, show_in_grid, show_in_details, autocalculated, required" rname="КодГруппы" type=""/>
+      <field domain="Название" name="Nazvanie" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Название" type=""/>
+      <field domain="Срок" name="Srok" props="input, edit, show_in_grid, show_in_details, required" rname="Срок" type=""/>
+      <field domain="Актуальна" name="Aktualna" props="input, edit, show_in_grid, show_in_details" rname="Актуальна" type=""/>
+      <field domain="ВысокПриор" name="VysokPrior" props="input, edit, show_in_grid, show_in_details" rname="ВысокПриор" type=""/>
+      <field domain="ДатаВыпуск" name="DataVypusk" props="input, edit, show_in_grid, show_in_details, is_mean" rname="ДатаВыпуск" type=""/>
+      <field domain="ДатаПост." name="DataPost_" props="show_in_details" rname="ДатаПост." type=""/>
+      <field domain="ВремяПост." name="VremyaPost_" props="show_in_details" rname="ВремяПост." type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <field description="Примечание" domain="TextData" name="TextData" props="input, edit, show_in_details" rname="TextData" type="Примечание"/>
+      <constraint items="KodGruppy" kind="PRIMARY"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <index field="Aktualna"/>
+      <index field="DataPost_"/>
+      <index field="DataVypusk"/>
+      <index field="Nazvanie"/>
+      <index field="Otvetstv_"/>
+      <index field="Srok"/>
+      <index field="VremyaPost_"/>
+      <index field="VysokPrior"/>
+    </table>
+    <table access_level="0" description="Задачи по группам" ht_table_flags="rws" name="GRTASKS" props="add, edit, delete">
+      <field domain="id_GRTASKS" name="id_GRTASKS" props="autocalculated" rname="id_GRTASKS" type=""/>
+      <field domain="КодГруппы" name="KodGruppy" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="КодГруппы" type=""/>
+      <field domain="КодЗадачи" name="KodZadachi" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="КодЗадачи" type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <constraint items="id_GRTASKS" kind="PRIMARY"/>
+      <constraint items="KodGruppy" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="Bank"/>
+      <constraint items="KodZadachi" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="VremyaPost_"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <index field="DataIzmen_"/>
+      <index field="KodGruppy"/>
+      <index field="KodZadachi"/>
+      <index field="Otvetstv_"/>
+      <index field="VremyaIzmen"/>
+    </table>
+    <table access_level="0" description="История изменения статуса" ht_table_flags="rws" name="HIS_STAT" props="delete">
+      <field domain="КодИстории" name="KodIstorii" props="show_in_details, autocalculated" rname="КодИстории" type=""/>
+      <field domain="КодКонтакт" name="KodKontakt" props="input, edit, show_in_grid, show_in_details" rname="КодКонтакт" type=""/>
+      <field domain="КодСтатуса" name="KodStatusa" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="КодСтатуса" type=""/>
+      <field domain="ДатаСтатус" name="DataStatus" props="input, edit, show_in_grid, show_in_details, required" rname="ДатаСтатус" type=""/>
+      <field domain="ВремСтатус" name="VremStatus" props="input, edit, show_in_details" rname="ВремСтатус" type=""/>
+      <field description="Отвественный за статус" domain="КодМастера" name="OtvZaStat" props="edit, show_in_details" rname="ОтвЗаСтат" type="Отвественный за статус"/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <constraint items="KodIstorii" kind="PRIMARY"/>
+      <constraint items="KodKontakt" kind="FOREIGN" props="cascading_delete" reference="Naimenovan"/>
+      <constraint items="KodStatusa" kind="FOREIGN" props="has_value_edit" reference="VremyaIzmen"/>
+      <constraint items="OtvZaStat" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodUdostov"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <index field="DataIzmen_"/>
+      <index field="DataStatus"/>
+      <index field="KodKontakt"/>
+      <index field="KodStatusa"/>
+      <index field="OtvZaStat"/>
+      <index field="Otvetstv_"/>
+      <index field="VremStatus"/>
+      <index field="VremyaIzmen"/>
+    </table>
+    <table access_level="0" description="Инструкции" ht_table_flags="rws" name="INSTRUC" props="add, edit, delete">
+      <field domain="КодИнстр" name="KodInstr" props="show_in_grid, show_in_details, autocalculated" rname="КодИнстр" type=""/>
+      <field domain="НазвПолное" name="NazvPolnoe" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="НазвПолное" type=""/>
+      <field description="Программа" domain="ТипПрогр." name="TipProgr_" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="ТипПрогр." type="Программа"/>
+      <field domain="Статья" name="Statya" props="input, edit, show_in_details" rname="Статья" type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <constraint items="KodInstr" kind="PRIMARY"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <constraint items="TipProgr_" kind="FOREIGN" props="has_value_edit" reference="SBK"/>
+      <index field="DataIzmen_"/>
+      <index field="NazvPolnoe"/>
+      <index field="Otvetstv_"/>
+      <index field="TipProgr_"/>
+      <index field="VremyaIzmen"/>
+    </table>
+    <table access_level="0" description="Инструкции по контактам" ht_table_flags="rws" name="INST_CON" props="add, edit, delete">
+      <field domain="id_INST_C" name="id_INST_C" props="autocalculated" rname="id_INST_C" type=""/>
+      <field domain="КодКонтакт" name="KodKontakt" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="КодКонтакт" type=""/>
+      <field domain="КодИнстр" name="KodInstr" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="КодИнстр" type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <constraint items="id_INST_C" kind="PRIMARY"/>
+      <constraint items="KodInstr" kind="FOREIGN" reference="BIK"/>
+      <constraint items="KodKontakt" kind="FOREIGN" props="cascading_delete" reference="Naimenovan"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <index field="DataIzmen_"/>
+      <index field="KodInstr"/>
+      <index field="KodKontakt"/>
+      <index field="Otvetstv_"/>
+      <index field="VremyaIzmen"/>
+    </table>
+    <table access_level="0" description="Реестр представления листалок" ht_table_flags="rws" name="LAYOUTS" props="add, edit, delete">
+      <field domain="Layout_id" name="Layout_id" props="show_in_grid, show_in_details, required" rname="Layout_id" type=""/>
+      <field domain="BinData" name="BinData" props="show_in_details" rname="BinData" type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <index field="DataIzmen_"/>
+      <index field="Layout_id" props="Layout_id"/>
+      <index field="VremyaIzmen"/>
+    </table>
+    <table access_level="0" description="Заявки" ht_table_flags="rws" name="LC_CONT" props="add, edit, delete">
+      <field domain="КодКонтакт" name="KodKontakt" props="show_in_details, autocalculated" rname="КодКонтакт" type=""/>
+      <field description="Вид поступления" domain="КодПоступл" name="KodPostupl" props="input, edit, show_in_details, required" rname="КодПоступл" type="Вид поступления"/>
+      <field description="Пользователь" domain="КодСотрудн" name="KodSotrudn" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="КодСотрудн" type="Пользователь"/>
+      <field description="Тема (кратк.описание проблемы)" domain="Примечание" name="Primechanie" props="input, edit, show_in_grid, show_in_details, required" rname="Примечание" type="Тема (кратк.описание проблемы)"/>
+      <field description="Программа" domain="ТипПрогр." name="TipProgr_" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="ТипПрогр." type="Программа"/>
+      <field description="Дата заявки" domain="ДатаКонтак" name="DataKontak" props="input, edit, show_in_grid, show_in_details, required" rname="ДатаКонтак" type="Дата заявки"/>
+      <field domain="ВремяЗаявк" name="VremyaZayavk" props="input, edit, show_in_details, required" rname="ВремяЗаявк" type=""/>
+      <field description="Мотивация (данные приказа)" domain="Мотивация" name="Motivacziya" props="input, edit, show_in_details" rname="Мотивация" type="Мотивация (данные приказа)"/>
+      <field domain="КодМастера" name="Kem_prinyat" props="input, edit, show_in_grid, show_in_details, required" rname="Кем принят" type=""/>
+      <field description="Тип заявки" domain="КодТипаКон" name="KodTipaKon" props="input, edit, show_in_details, required" rname="КодТипаКон" type="Тип заявки"/>
+      <field description="Статус" domain="КодСтатуса" name="KodStatusa" props="input, edit, show_in_grid, show_in_details, required" rname="КодСтатуса" type="Статус"/>
+      <field domain="ДатаСтатус" name="DataStatus" props="input, edit, show_in_details, required" rname="ДатаСтатус" type=""/>
+      <field domain="ВремСтатус" name="VremStatus" props="input, edit, show_in_details, required" rname="ВремСтатус" type=""/>
+      <field description="Отвественный за статус" domain="КодМастера" name="OtvZaStat" props="input, edit, show_in_details" rname="ОтвЗаСтат" type="Отвественный за статус"/>
+      <field description="Приоритет" domain="КодПриорит" name="KodPriorit" props="input, edit, show_in_details, is_mean, required" rname="КодПриорит" type="Приоритет"/>
+      <field description="Кому передан" domain="КодМастера" name="Komu_pered" props="input, edit, show_in_grid, show_in_details" rname="Кому перед" type="Кому передан"/>
+      <field description="Куда передавать данные?" domain="КодПередач" name="KodPeredach" props="input, edit, show_in_details, is_mean" rname="КодПередач" type="Куда передавать данные?"/>
+      <field description="Номер заявки на сайте Рексофт" domain="N_Рексофт" name="N_Reksoft" props="input, edit, show_in_details" rname="N_Рексофт" type="Номер заявки на сайте Рексофт"/>
+      <field domain="КодВх\Исх" name="KodVxIsx" props="input, edit, show_in_details, required" rname="КодВх\Исх" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="ДатаПост." name="DataPost_" props="show_in_details" rname="ДатаПост." type=""/>
+      <field domain="ВремяПост." name="VremyaPost_" props="show_in_details" rname="ВремяПост." type=""/>
+      <field domain="Ответств." name="KtoVvel" props="show_in_details" rname="КтоВвел" type=""/>
+      <constraint items="KodKontakt" kind="PRIMARY"/>
+      <constraint items="Kem_prinyat" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodUdostov"/>
+      <constraint items="KodPeredach" kind="FOREIGN" props="has_value_edit" reference="Otvetstv_"/>
+      <constraint items="KodPostupl" kind="FOREIGN" props="has_value_edit" reference="Region"/>
+      <constraint items="KodPriorit" kind="FOREIGN" props="has_value_edit" reference="KodParam"/>
+      <constraint items="KodSotrudn" kind="FOREIGN" props="cascading_delete" reference="DataIzmen_"/>
+      <constraint items="KodStatusa" kind="FOREIGN" props="has_value_edit" reference="VremyaIzmen"/>
+      <constraint items="KodTipaKon" kind="FOREIGN" props="has_value_edit" reference="id_CONT_C"/>
+      <constraint items="KodVxIsx" kind="FOREIGN" props="has_value_edit" reference="NomerDokum"/>
+      <constraint items="Komu_pered" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodUdostov"/>
+      <constraint items="KtoVvel" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <constraint items="OtvZaStat" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodUdostov"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <constraint items="TipProgr_" kind="FOREIGN" props="has_value_edit" reference="SBK"/>
+      <index field="DataIzmen_"/>
+      <index field="DataKontak"/>
+      <index field="DataPost_"/>
+      <index field="DataStatus"/>
+      <index field="Kem_prinyat"/>
+      <index field="KodPeredach"/>
+      <index field="KodPostupl"/>
+      <index field="KodPriorit"/>
+      <index field="KodSotrudn"/>
+      <index field="KodStatusa"/>
+      <index field="KodTipaKon"/>
+      <index field="KodVxIsx"/>
+      <index field="Komu_pered"/>
+      <index field="KtoVvel"/>
+      <index field="Motivacziya"/>
+      <index field="N_Reksoft"/>
+      <index field="OtvZaStat"/>
+      <index field="Otvetstv_"/>
+      <index field="TipProgr_"/>
+      <index field="VremStatus"/>
+      <index field="VremyaIzmen"/>
+      <index field="VremyaPost_"/>
+      <index field="VremyaZayavk"/>
+    </table>
+    <table access_level="0" description="Обучение" ht_table_flags="rws" name="LC_TEACH" props="add, edit, delete">
+      <field domain="id_LC_TEAC" name="id_LC_TEAC" props="autocalculated" rname="id_LC_TEAC" type=""/>
+      <field domain="КодСотрудн" name="KodSotrudn" props="input, edit, show_in_grid, show_in_details" rname="КодСотрудн" type=""/>
+      <field domain="ТипОбуч." name="TipObuch_" props="input, edit, show_in_grid, show_in_details, required" rname="ТипОбуч." type=""/>
+      <field domain="ОбъемЧасов" name="ObemCHasov" props="input, edit, show_in_grid, show_in_details, required" rname="ОбъемЧасов" type=""/>
+      <field domain="ДатаНачал." name="DataNachal_" props="input, edit, show_in_grid, show_in_details" rname="ДатаНачал." type=""/>
+      <field domain="ДатаКонца" name="DataKoncza" props="input, edit, show_in_grid, show_in_details" rname="ДатаКонца" type=""/>
+      <field domain="Зачтено" name="Zachteno" props="input, edit, show_in_grid, show_in_details" rname="Зачтено" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <constraint items="id_LC_TEAC" kind="PRIMARY"/>
+      <constraint items="KodSotrudn" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="DataIzmen_"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <constraint items="TipObuch_" kind="FOREIGN" props="has_value_edit" reference="DataIzmen_"/>
+      <index field="DataIzmen_"/>
+      <index field="DataKoncza"/>
+      <index field="DataNachal_"/>
+      <index field="KodSotrudn"/>
+      <index field="ObemCHasov"/>
+      <index field="Otvetstv_"/>
+      <index field="TipObuch_"/>
+      <index field="VremyaIzmen"/>
+      <index field="Zachteno"/>
+    </table>
+    <table access_level="0" description="Добавлены новые точки" ht_table_flags="rws" name="LIC_NADD" props="add, edit">
+      <field domain="КодДопЛиц" name="KodDopLicz" props="show_in_grid, show_in_details, autocalculated" rname="КодДопЛиц" type=""/>
+      <field domain="КодЛиценз" name="KodLiczenz" props="input, edit, show_in_grid, show_in_details, required" rname="КодЛиценз" type=""/>
+      <field domain="СетевАдрес" name="SetevAdres" props="input, edit, show_in_grid, show_in_details, is_mean" rname="СетевАдрес" type=""/>
+      <field domain="Регион" name="Region" props="input, edit, show_in_details, is_mean" rname="Регион" type=""/>
+      <field domain="КодКлиента" name="KodKlienta" props="input, edit, show_in_details, is_mean" rname="КодКлиента" type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <field domain="ДатаПост." name="DataPost_" props="show_in_details" rname="ДатаПост." type=""/>
+      <field domain="ВремяПост." name="VremyaPost_" props="show_in_details" rname="ВремяПост." type=""/>
+      <field domain="Ответств." name="KtoVvel" props="show_in_details" rname="КтоВвел" type=""/>
+      <constraint items="KodDopLicz" kind="PRIMARY"/>
+      <constraint items="KodKlienta" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="Klient"/>
+      <constraint items="KodLiczenz" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodPolz_"/>
+      <constraint items="KtoVvel" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <constraint items="Region" kind="FOREIGN" props="has_value_edit" reference="KodDogovor"/>
+      <index field="DataIzmen_"/>
+      <index field="DataPost_"/>
+      <index field="KodKlienta"/>
+      <index field="KodLiczenz"/>
+      <index field="KtoVvel"/>
+      <index field="Otvetstv_"/>
+      <index field="Region"/>
+      <index field="SetevAdres"/>
+      <index field="VremyaIzmen"/>
+      <index field="VremyaPost_"/>
+    </table>
+    <table access_level="0" description="Мастера" ht_table_flags="rws" name="MASTERS" props="add, edit, delete">
+      <field domain="КодМастера" name="KodMastera" props="input, show_in_grid, show_in_details, autocalculated" rname="КодМастера" type=""/>
+      <field domain="Имя" name="Imya" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Имя" type=""/>
+      <field domain="НеВыбирать" name="NeVybirat" props="input, edit, show_in_details" rname="НеВыбирать" type=""/>
+      <field domain="НеПоказыв." name="NePokazyv_" props="input, edit, show_in_details" rname="НеПоказыв." type=""/>
+      <constraint items="KodMastera" kind="PRIMARY"/>
+      <index field="Imya" props="Imya"/>
+      <index field="NePokazyv_"/>
+      <index field="NeVybirat"/>
+    </table>
+    <table access_level="0" description="Элементы меню" ht_table_flags="rws" name="MENUITEM">
+      <field domain="ИндексМеню" name="IndeksMenyu" props="input, show_in_grid, show_in_details" rname="ИндексМеню" type=""/>
+      <field description="Расположение" domain="Название" name="Naimenovan" props="show_in_grid, show_in_details, is_mean" rname="Наименован" type="Расположение"/>
+      <constraint items="IndeksMenyu" kind="PRIMARY"/>
+    </table>
+    <table access_level="0" description="Внешние средства" ht_table_flags="rws" name="MULTIDEF">
+      <field domain="mmFileName" name="mmFileName" props="input, edit, show_in_grid, show_in_details, required" rname="mmFileName" type=""/>
+      <field domain="КодМульти" name="KodMulti" props="input, show_in_grid, show_in_details, autocalculated, required" rname="КодМульти" type=""/>
+      <field domain="mmSubName" name="mmSubName" props="input, edit, show_in_grid, show_in_details, required" rname="mmSubName" type=""/>
+      <field domain="mmFileExt" name="mmFileExt" props="input, edit, show_in_grid, show_in_details" rname="mmFileExt" type=""/>
+      <field domain="Название" name="Nazvanie" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Название" type=""/>
+      <constraint items="KodMulti" kind="PRIMARY"/>
+      <index field="Nazvanie"/>
+      <index field="mmFileExt"/>
+      <index field="mmFileName"/>
+      <index field="mmSubName" props="mmSubName"/>
+    </table>
+    <table access_level="0" description="Объединенные базы" ht_table_flags="rws" name="OB_BAZ" props="add, edit, delete">
+      <field domain="id_OB_BAZ" name="id_OB_BAZ" props="autocalculated" rname="id_OB_BAZ" type=""/>
+      <field domain="КодРайона" name="KodRajona" props="input, edit, show_in_grid, show_in_details" rname="КодРайона" type=""/>
+      <field domain="КодОбъедин" name="KodObedin" props="input, edit, show_in_grid, show_in_details" rname="КодОбъедин" type=""/>
+      <field domain="ДатаОбъед." name="DataObed_" props="input, edit, show_in_grid, show_in_details, required" rname="ДатаОбъед." type=""/>
+      <constraint items="id_OB_BAZ" kind="PRIMARY"/>
+      <constraint items="KodObedin" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="DataKoncza"/>
+      <constraint items="KodRajona" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodPunkta"/>
+      <index field="KodObedin"/>
+      <index field="KodRajona"/>
+    </table>
+    <table access_level="0" description="Платежные поручения" ht_table_flags="rws" name="PAYMENT" props="add, edit">
+      <field domain="КодПлПор" name="KodPlPor" props="input, show_in_details, autocalculated, required" rname="КодПлПор" type=""/>
+      <field domain="N" name="N" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="N" type=""/>
+      <field domain="Дата" name="Data" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Дата" type=""/>
+      <constraint items="KodPlPor" kind="PRIMARY"/>
+      <index field="Data"/>
+      <index field="N"/>
+    </table>
+    <table access_level="0" description="Справочник команд печати" ht_table_flags="rws" name="PCMDS">
+      <field domain="КодКоманды" name="KodKomandy" props="show_in_grid, show_in_details, autocalculated" rname="КодКоманды" type=""/>
+      <field domain="Название" name="Nazvanie" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Название" type=""/>
+      <field domain="СимвКоманд" name="SimvKomand" props="input, edit, show_in_grid, show_in_details, required" rname="СимвКоманд" type=""/>
+      <constraint items="KodKomandy" kind="PRIMARY"/>
+      <index field="Nazvanie"/>
+      <index field="SimvKomand" props="SimvKomand"/>
+    </table>
+    <table access_level="0" description="Привязка фото" ht_table_flags="rws" name="PHOTOTAB">
+      <field domain="id_PHOTOT" name="id_PHOTOT" props="autocalculated" rname="id_PHOTOT" type=""/>
+      <field description="Сущность,с которой связ. фото" domain="Таблица" name="Tab_Obekt" props="input, edit, show_in_grid, show_in_details, required" rname="Таб.Объект" type="Сущность,с которой связ. фото"/>
+      <field description="Таблица описаний фото" domain="Таблица" name="Tab_Foto" props="input, edit, show_in_grid, show_in_details, required" rname="Таб.Фото" type="Таблица описаний фото"/>
+      <field description="Имя ключа связи в сущности" domain="Имя поля" name="KlyuchObekt" props="input, edit, show_in_grid, show_in_details, required" rname="КлючОбъект" type="Имя ключа связи в сущности"/>
+      <field description="Имя ключа связи в таблице фото" domain="Имя поля" name="KlyuchFoto" props="input, edit, show_in_grid, show_in_details, required" rname="КлючФото" type="Имя ключа связи в таблице фото"/>
+      <constraint items="id_PHOTOT" kind="PRIMARY"/>
+      <index field="KlyuchFoto"/>
+      <index field="KlyuchObekt"/>
+      <index field="Tab_Foto" props="Tab_Foto"/>
+      <index field="Tab_Obekt" props="Tab_Obekt"/>
+    </table>
+    <table access_level="0" description="Команды принтеров" ht_table_flags="rws" name="PRNCMDS" props="add, edit, delete">
+      <field domain="id_PRNCMDS" name="id_PRNCMDS" props="autocalculated" rname="id_PRNCMDS" type=""/>
+      <field domain="КодПринт" name="KodPrint" props="input, edit, show_in_grid, show_in_details, required" rname="КодПринт" type=""/>
+      <field domain="КодКоманды" name="KodKomandy" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="КодКоманды" type=""/>
+      <field domain="СтрКоманды" name="StrKomandy" props="input, edit, show_in_grid, show_in_details, required" rname="СтрКоманды" type=""/>
+      <constraint items="id_PRNCMDS" kind="PRIMARY"/>
+      <constraint items="KodKomandy" kind="FOREIGN" props="has_value_edit" reference="Naimenovan"/>
+      <constraint items="KodPrint" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="Podrazd_"/>
+      <index field="KodKomandy"/>
+      <index field="KodPrint"/>
+    </table>
+    <table access_level="0" description="Справочник принтеров" ht_table_flags="rws" name="PRNS" props="add, edit, delete">
+      <field domain="КодПринт" name="KodPrint" props="show_in_details, autocalculated" rname="КодПринт" type=""/>
+      <field description="ИмяПринтера" domain="Название" name="ImyaPrint" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="ИмяПринт" type="ИмяПринтера"/>
+      <constraint items="KodPrint" kind="PRIMARY"/>
+      <index field="ImyaPrint"/>
+    </table>
+    <table access_level="0" description="Проблема" ht_table_flags="rws" name="PROBL" props="add, edit, delete">
+      <field domain="КодПроблем" name="KodProblem" props="show_in_grid, show_in_details, autocalculated" rname="КодПроблем" type=""/>
+      <field domain="ВидПроблем" name="VidProblem" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="ВидПроблем" type=""/>
+      <field domain="Примечание" name="Primechanie" props="input, edit, show_in_grid, show_in_details, is_mean" rname="Примечание" type=""/>
+      <field domain="Заметки" name="Zametki" props="input, edit, show_in_details" rname="Заметки" type=""/>
+      <field domain="ДатаПост." name="DataPost_" props="show_in_details" rname="ДатаПост." type=""/>
+      <field domain="ВремяПост." name="VremyaPost_" props="show_in_details" rname="ВремяПост." type=""/>
+      <field domain="Ответств." name="KtoVvel" props="show_in_details" rname="КтоВвел" type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <constraint items="KodProblem" kind="PRIMARY"/>
+      <constraint items="KtoVvel" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <constraint items="VidProblem" kind="FOREIGN" props="has_value_edit" reference="KodDogovor"/>
+      <index field="DataIzmen_"/>
+      <index field="DataPost_"/>
+      <index field="KtoVvel"/>
+      <index field="Otvetstv_"/>
+      <index field="Primechanie"/>
+      <index field="VidProblem"/>
+      <index field="VremyaIzmen"/>
+      <index field="VremyaPost_"/>
+    </table>
+    <table access_level="0" description="Программы" ht_table_flags="rws" name="PROGRAMM" props="add, edit, delete">
+      <field domain="id_PROGRAM" name="id_PROGRAM" props="autocalculated" rname="id_PROGRAM" type=""/>
+      <field domain="КодДоговор" name="KodDogovor" props="input, edit, show_in_grid, show_in_details, required" rname="КодДоговор" type=""/>
+      <field domain="ТипПрогр." name="TipProgr_" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="ТипПрогр." type=""/>
+      <constraint items="id_PROGRAM" kind="PRIMARY"/>
+      <constraint items="KodDogovor" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="UtvZakazch_"/>
+      <constraint items="TipProgr_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="SBK"/>
+      <index field="KodDogovor"/>
+      <index field="TipProgr_"/>
+    </table>
+    <table access_level="0" description="Тип.решения по проектам" ht_table_flags="rws" name="PROJ_TIP" props="add, edit, delete">
+      <field domain="id_PROJ_T" name="id_PROJ_T" props="autocalculated" rname="id_PROJ_T" type=""/>
+      <field domain="ТипПрогр." name="TipProgr_" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="ТипПрогр." type=""/>
+      <field domain="КодТипРеш" name="KodTipResh" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="КодТипРеш" type=""/>
+      <field domain="ДатаПост." name="DataPost_" props="show_in_details" rname="ДатаПост." type=""/>
+      <field domain="ВремяПост." name="VremyaPost_" props="show_in_details" rname="ВремяПост." type=""/>
+      <field domain="Ответств." name="KtoVvel" props="show_in_details" rname="КтоВвел" type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <constraint items="id_PROJ_T" kind="PRIMARY"/>
+      <constraint items="KodTipResh" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodKontakt"/>
+      <constraint items="KtoVvel" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <constraint items="TipProgr_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="SBK"/>
+      <index field="DataIzmen_"/>
+      <index field="DataPost_"/>
+      <index field="KodTipResh"/>
+      <index field="KtoVvel"/>
+      <index field="Otvetstv_"/>
+      <index field="TipProgr_"/>
+      <index field="VremyaIzmen"/>
+      <index field="VremyaPost_"/>
+    </table>
+    <table access_level="0" description="Программы обучения" ht_table_flags="rws" name="PR_TEACH" props="add, edit">
+      <field domain="id_PR_TEAC" name="id_PR_TEAC" props="autocalculated" rname="id_PR_TEAC" type=""/>
+      <field domain="ТипПрогр." name="TipProgr_" props="input, edit, show_in_details, is_mean" rname="ТипПрогр." type=""/>
+      <field domain="КодУдостов" name="KodUdostov" props="input, edit, show_in_grid, show_in_details" rname="КодУдостов" type=""/>
+      <constraint items="id_PR_TEAC" kind="PRIMARY"/>
+      <constraint items="KodUdostov" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="Summa"/>
+      <constraint items="TipProgr_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="SBK"/>
+      <index field="KodUdostov"/>
+      <index field="TipProgr_"/>
+    </table>
+    <table access_level="0" description="Журнал регистр.входящих писем" ht_table_flags="rws" name="REG_KOR" props="add, edit, delete">
+      <field domain="КодЖурнВх" name="KodZHurnVx" props="show_in_grid, show_in_details, autocalculated" rname="КодЖурнВх" type=""/>
+      <field description="Входящий номер" domain="Номер" name="Vxodyashhij" props="input, edit, show_in_grid, show_in_details, required" rname="Входящий" type="Входящий номер"/>
+      <field description="Получено" domain="Дата" name="Data" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Дата" type="Получено"/>
+      <field domain="КодПисьмВх" name="Pismo" props="input, edit, show_in_grid, show_in_details, required" rname="Письмо" type=""/>
+      <field domain="КодМастера" name="Peredano" props="input, edit, show_in_details" rname="Передано" type=""/>
+      <field description="Контрольный срок" domain="Дата" name="KontrSrok" props="input, edit, show_in_details" rname="КонтрСрок" type="Контрольный срок"/>
+      <field domain="Примечание" name="Primechanie" props="input, edit, show_in_details" rname="Примечание" type=""/>
+      <field description="Ответ" domain="КодПисьмИс" name="KodPismIs" props="input, edit, show_in_details" rname="КодПисьмИс" type="Ответ"/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <field domain="ДатаПост." name="DataPost_" props="show_in_details" rname="ДатаПост." type=""/>
+      <field domain="ВремяПост." name="VremyaPost_" props="show_in_details" rname="ВремяПост." type=""/>
+      <field domain="Ответств." name="KtoVvel" props="show_in_details" rname="КтоВвел" type=""/>
+      <constraint items="KodZHurnVx" kind="PRIMARY"/>
+      <constraint items="KodPismIs" kind="FOREIGN" props="has_value_edit" reference="KodKlienta"/>
+      <constraint items="KtoVvel" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <constraint items="Peredano" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodUdostov"/>
+      <constraint items="Pismo" kind="FOREIGN" reference="Dom"/>
+      <index field="Data"/>
+      <index field="DataIzmen_"/>
+      <index field="DataPost_"/>
+      <index field="KodPismIs"/>
+      <index field="KontrSrok"/>
+      <index field="KtoVvel"/>
+      <index field="Otvetstv_"/>
+      <index field="Peredano"/>
+      <index field="Pismo"/>
+      <index field="VremyaIzmen"/>
+      <index field="VremyaPost_"/>
+      <index field="Vxodyashhij"/>
+    </table>
+    <table access_level="0" description="Журнал регистр.исходящих писем" ht_table_flags="rws" name="REG_KOUT" props="add, edit, delete">
+      <field domain="КодЖурнИсх" name="KodZHurnIsx" props="show_in_grid, show_in_details, autocalculated" rname="КодЖурнИсх" type=""/>
+      <field description="Исходящий номер" domain="N Исходящ" name="Isxodyashhij" props="input, edit, show_in_grid, show_in_details, required" rname="Исходящий" type="Исходящий номер"/>
+      <field domain="Дата" name="Data" props="input, edit, show_in_grid, show_in_details, required" rname="Дата" type=""/>
+      <field domain="КодПисьмИс" name="Pismo" props="input, edit, show_in_grid, show_in_details, required" rname="Письмо" type=""/>
+      <field domain="Примечание" name="Primechanie" props="input, edit, show_in_details" rname="Примечание" type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <field domain="ДатаПост." name="DataPost_" props="show_in_details" rname="ДатаПост." type=""/>
+      <field domain="ВремяПост." name="VremyaPost_" props="show_in_details" rname="ВремяПост." type=""/>
+      <field domain="Ответств." name="KtoVvel" props="show_in_details" rname="КтоВвел" type=""/>
+      <constraint items="KodZHurnIsx" kind="PRIMARY"/>
+      <constraint items="KtoVvel" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <constraint items="Pismo" kind="FOREIGN" props="has_value_edit" reference="KodKlienta"/>
+      <index field="Data"/>
+      <index field="DataIzmen_"/>
+      <index field="DataPost_"/>
+      <index field="Isxodyashhij"/>
+      <index field="KtoVvel"/>
+      <index field="Otvetstv_"/>
+      <index field="Pismo"/>
+      <index field="VremyaIzmen"/>
+      <index field="VremyaPost_"/>
+    </table>
+    <table access_level="0" description="Согласование с Рексофт" ht_table_flags="rws" name="REKSOFT" props="add, edit, delete">
+      <field domain="КодРексофт" name="KodReksoft" props="show_in_details, autocalculated" rname="КодРексофт" type=""/>
+      <field domain="КодРабКонт" name="KodRabKont" props="show_in_grid, show_in_details, is_mean, required" rname="КодРабКонт" type=""/>
+      <field domain="Оценка" name="Oczenka" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Оценка" type=""/>
+      <field domain="КодТочност" name="KodTochnost" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="КодТочност" type=""/>
+      <field domain="Очередь" name="Ochered" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Очередь" type=""/>
+      <constraint items="KodReksoft" kind="PRIMARY"/>
+      <constraint items="KodRabKont" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="Ulicza"/>
+      <constraint items="KodTochnost" kind="FOREIGN" props="has_value_edit" reference="KtoVvel"/>
+      <index field="KodRabKont"/>
+      <index field="KodTochnost"/>
+      <index field="Ochered"/>
+      <index field="Oczenka"/>
+    </table>
+    <table access_level="0" description="Решение" ht_table_flags="rws" name="RESCH" props="add, edit, delete">
+      <field domain="КодРешения" name="KodResheniya" props="show_in_grid, show_in_details, autocalculated" rname="КодРешения" type=""/>
+      <field domain="Примечание" name="Primechanie" props="input, edit, show_in_grid, show_in_details, is_mean" rname="Примечание" type=""/>
+      <field domain="Заметки" name="Zametki" props="input, edit, show_in_details" rname="Заметки" type=""/>
+      <field domain="ДатаПост." name="DataPost_" props="show_in_details" rname="ДатаПост." type=""/>
+      <field domain="ВремяПост." name="VremyaPost_" props="show_in_details" rname="ВремяПост." type=""/>
+      <field domain="Ответств." name="KtoVvel" props="show_in_details" rname="КтоВвел" type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <constraint items="KodResheniya" kind="PRIMARY"/>
+      <constraint items="KtoVvel" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <index field="DataIzmen_"/>
+      <index field="DataPost_"/>
+      <index field="KtoVvel"/>
+      <index field="Otvetstv_"/>
+      <index field="Primechanie"/>
+      <index field="VremyaIzmen"/>
+      <index field="VremyaPost_"/>
+    </table>
+    <table access_level="0" description="Права" ht_table_flags="rws" name="RIGHTS" props="add, edit, delete">
+      <field domain="id_RIGHTS" name="id_RIGHTS" props="autocalculated" rname="id_RIGHTS" type=""/>
+      <field description="Пользователь" domain="Ответств." name="LichnyjKod" props="input, show_in_grid, show_in_details, required" rname="ЛичныйКод" type="Пользователь"/>
+      <field domain="КодМенюОбс" name="KodMenyuObs" props="input, edit, show_in_grid, show_in_details, required" rname="КодМенюОбс" type=""/>
+      <field domain="Ввод" name="Vvod" props="input, edit, show_in_grid, show_in_details" rname="Ввод" type=""/>
+      <field domain="Изменение" name="Izmenenie" props="input, edit, show_in_grid, show_in_details" rname="Изменение" type=""/>
+      <field domain="ИзменЛичн" name="IzmenLichn" props="input, edit, show_in_grid, show_in_details" rname="ИзменЛичн" type=""/>
+      <field domain="Просмотр" name="Prosmotr" props="input, edit, show_in_grid, show_in_details" rname="Просмотр" type=""/>
+      <field domain="Удаление" name="Udalenie" props="input, edit, show_in_grid, show_in_details" rname="Удаление" type=""/>
+      <field domain="УдалЛичн" name="UdalLichn" props="input, edit, show_in_grid, show_in_details" rname="УдалЛичн" type=""/>
+      <field domain="Выборки" name="Vyborki" props="input, edit, show_in_grid, show_in_details" rname="Выборки" type=""/>
+      <field domain="ОтчетыОкна" name="OtchetyOkna" props="input, edit, show_in_grid, show_in_details" rname="ОтчетыОкна" type=""/>
+      <field domain="Ограничен." name="Ogranichen_" props="input, edit, show_in_grid, show_in_details" rname="Ограничен." type=""/>
+      <field domain="Визуализ." name="Vizualiz_" props="input, edit, show_in_grid, show_in_details" rname="Визуализ." type=""/>
+      <field domain="Слияние" name="Sliyanie" props="input, edit, show_in_grid, show_in_details" rname="Слияние" type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <constraint items="id_RIGHTS" kind="PRIMARY"/>
+      <constraint items="KodMenyuObs" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="VremyaIzmen"/>
+      <constraint items="LichnyjKod" kind="FOREIGN" props="cascading_delete" reference="KodRabKont"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" reference="KodRabKont"/>
+      <index field="DataIzmen_"/>
+      <index field="IzmenLichn"/>
+      <index field="Izmenenie"/>
+      <index field="KodMenyuObs"/>
+      <index field="LichnyjKod"/>
+      <index field="Ogranichen_"/>
+      <index field="OtchetyOkna"/>
+      <index field="Otvetstv_"/>
+      <index field="Prosmotr"/>
+      <index field="Sliyanie"/>
+      <index field="UdalLichn"/>
+      <index field="Udalenie"/>
+      <index field="Vizualiz_"/>
+      <index field="VremyaIzmen"/>
+      <index field="Vvod"/>
+      <index field="Vyborki"/>
+    </table>
+    <table access_level="0" description="Сотрудники" ht_table_flags="rws" name="RJ_LICO" props="add, edit, delete">
+      <field description="Организация" domain="КодКлиента" name="Organizacz_" props="input, edit, show_in_grid, show_in_details, required" rname="Организац." type="Организация"/>
+      <field domain="КодСотрудн" name="KodSotrudn" props="show_in_grid, show_in_details, autocalculated" rname="КодСотрудн" type=""/>
+      <field domain="ФИО" name="FIO" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="ФИО" type=""/>
+      <field domain="Телефон" name="Telefon" props="input, edit, show_in_grid, show_in_details" rname="Телефон" type=""/>
+      <field description="Район" domain="КодРайона" name="KodRajona" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="КодРайона" type="Район"/>
+      <field description="Тип сотрудника" domain="ТипСотруд." name="TipSotrud_" props="input, edit, show_in_details" rname="ТипСотруд." type="Тип сотрудника"/>
+      <field domain="Должность" name="Dolzhnost" props="input, edit, show_in_grid, show_in_details, is_mean" rname="Должность" type=""/>
+      <field description="Уровень грамотности" domain="УровГрам." name="UrovGram_" props="input, edit, show_in_grid, show_in_details" rname="УровГрам." type="Уровень грамотности"/>
+      <field description="Дата увольнения" domain="ДатаУвольн" name="DataUvoln" props="input, edit, show_in_grid, show_in_details" rname="ДатаУвольн" type="Дата увольнения"/>
+      <field description="Данные актуальны на дату" domain="ДатаАктуал" name="DataAktual" props="input, edit, show_in_details" rname="ДатаАктуал" type="Данные актуальны на дату"/>
+      <field description="Не выбирать" domain="НеВыбирать" name="NeVybirat" props="input, edit, show_in_details" rname="НеВыбирать" type="Не выбирать"/>
+      <field description="Не показывать" domain="НеПоказыв." name="NePokazyv_" props="input, edit, show_in_details" rname="НеПоказыв." type="Не показывать"/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <constraint items="KodSotrudn" kind="PRIMARY"/>
+      <constraint items="KodRajona" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodPunkta"/>
+      <constraint items="Organizacz_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="Klient"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <constraint items="TipSotrud_" kind="FOREIGN" props="has_value_edit" reference="DataIzmen_"/>
+      <constraint items="UrovGram_" kind="FOREIGN" props="has_value_edit" reference="Otvetstv_"/>
+      <index field="DataAktual"/>
+      <index field="DataIzmen_"/>
+      <index field="DataUvoln"/>
+      <index field="FIO"/>
+      <index field="KodRajona"/>
+      <index field="NePokazyv_"/>
+      <index field="NeVybirat"/>
+      <index field="Organizacz_"/>
+      <index field="Otvetstv_"/>
+      <index field="Telefon"/>
+      <index field="TipSotrud_"/>
+      <index field="UrovGram_"/>
+      <index field="VremyaIzmen"/>
+    </table>
+    <table access_level="0" description="Заметки" ht_table_flags="rws" name="RJ_PRIM" props="add, edit, delete">
+      <field domain="КодОрганиз" name="KodOrganiz" props="input, show_in_grid, show_in_details, required" rname="КодОрганиз" type=""/>
+      <field domain="Заметки" name="Zametki" props="input, edit, show_in_details" rname="Заметки" type=""/>
+      <index field="KodOrganiz" props="KodOrganiz"/>
+    </table>
+    <table access_level="0" description="Сеансы работы" ht_table_flags="rws" name="SEANS" props="delete">
+      <field domain="КодСеанса" name="KodSeansa" props="show_in_details, autocalculated" rname="КодСеанса" type=""/>
+      <field domain="КодСтанции" name="KodStanczii" props="edit, show_in_grid, show_in_details" rname="КодСтанции" type=""/>
+      <field domain="ДатаСеанса" name="DataVxoda" props="edit, show_in_grid, show_in_details" rname="ДатаВхода" type=""/>
+      <field domain="ВремяСеанс" name="VremyaVxoda" props="edit, show_in_grid, show_in_details" rname="ВремяВхода" type=""/>
+      <field domain="ДатаСеанса" name="DataVyxoda" props="edit, show_in_grid, show_in_details" rname="ДатаВыхода" type=""/>
+      <field domain="ВремяСеанс" name="VremyaVyxod" props="edit, show_in_grid, show_in_details" rname="ВремяВыход" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="edit, show_in_grid, show_in_details" rname="Ответств." type=""/>
+      <field domain="Проблемн." name="Problemn_" props="edit, show_in_details" rname="Проблемн." type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="edit, show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="edit, show_in_details" rname="ВремяИзмен" type=""/>
+      <constraint items="KodSeansa" kind="PRIMARY"/>
+      <constraint items="KodStanczii" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="DataIzmen_"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <index field="DataIzmen_"/>
+      <index field="DataVxoda"/>
+      <index field="DataVyxoda"/>
+      <index field="KodStanczii"/>
+      <index field="Otvetstv_"/>
+      <index field="Problemn_"/>
+      <index field="VremyaIzmen"/>
+      <index field="VremyaVxoda"/>
+      <index field="VremyaVyxod"/>
+    </table>
+    <table access_level="0" description="Системные настройки" ht_table_flags="rws" name="SETTINGS">
+      <field domain="КлючНастр" name="KlyuchNastr" props="show_in_grid, show_in_details, is_mean, required" rname="КлючНастр" type=""/>
+      <field domain="ЗначТекст" name="ZnachTekst" props="show_in_details" rname="ЗначТекст" type=""/>
+      <field domain="BinData" name="BinData" props="show_in_details" rname="BinData" type=""/>
+      <index field="KlyuchNastr" props="KlyuchNastr"/>
+      <index field="ZnachTekst"/>
+    </table>
+    <table access_level="0" description="Справочник областей" ht_table_flags="rws" name="SLOVO3">
+      <field domain="КодОбласти" name="KodOblasti" props="input, show_in_grid, show_in_details, autocalculated, required" rname="КодОбласти" type=""/>
+      <field domain="НазвОбласт" name="NazvOblast" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="НазвОбласт" type=""/>
+      <field domain="КодГос-ва" name="KodGosva" props="input, edit, show_in_details, required" rname="КодГос-ва" type=""/>
+      <field domain="НазвГИЦ" name="NazvGICZ" props="input, edit, show_in_details, required" rname="НазвГИЦ" type=""/>
+      <field domain="CODE" name="CODE" props="input, edit, show_in_details" rname="CODE" type=""/>
+      <constraint items="KodOblasti" kind="PRIMARY"/>
+      <index field="CODE"/>
+      <index field="KodGosva"/>
+      <index field="NazvGICZ"/>
+      <index field="NazvOblast" props="NazvOblast"/>
+    </table>
+    <table access_level="0" description="Чистка словарей" ht_table_flags="rws" name="SLV_CLN">
+      <field domain="IDC" name="IDC" props="input, show_in_grid, show_in_details, autocalculated, required" rname="IDC" type=""/>
+      <field domain="КодТаблицы" name="KodTabliczy" props="input, edit, show_in_grid, show_in_details, required" rname="КодТаблицы" type=""/>
+      <field domain="Таблица" name="Slovar" props="input, edit, show_in_grid, show_in_details, required" rname="Словарь" type=""/>
+      <field domain="Поле" name="Pole" props="input, edit, show_in_grid, show_in_details, required" rname="Поле" type=""/>
+      <field domain="Порядок" name="Poryadok" props="input, edit, show_in_grid, show_in_details, required" rname="Порядок" type=""/>
+      <field domain="Объекты" name="Obekty" props="input, edit, show_in_grid, show_in_details, required" rname="Объекты" type=""/>
+      <field domain="Список" name="Spisok" props="input, edit, show_in_grid, show_in_details, required" rname="Список" type=""/>
+      <constraint items="KodTabliczy" kind="FOREIGN" reference="Kategoriya"/>
+      <index field="IDC" props="IDC"/>
+      <index field="KodTabliczy"/>
+      <index field="Obekty"/>
+      <index field="Pole"/>
+      <index field="Poryadok"/>
+      <index field="Slovar"/>
+      <index field="Spisok"/>
+    </table>
+    <table access_level="0" description="Справочник подразделений" ht_table_flags="rws" name="SPR038">
+      <field domain="КодПодразд" name="KodPodrazd" props="input, show_in_grid, show_in_details, autocalculated, required" rname="КодПодразд" type=""/>
+      <field domain="НазвПодр." name="NazvPodr_" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="НазвПодр." type=""/>
+      <field domain="ЛинияСлуж." name="LiniyaSluzh_" props="show_in_details" rname="ЛинияСлуж." type=""/>
+      <field domain="СокрНазв." name="SokrNazv_" props="show_in_details" rname="СокрНазв." type=""/>
+      <field domain="РодПадеж" name="RodPadezh" props="input, edit, show_in_details, required" rname="РодПадеж" type=""/>
+      <field domain="ИмяСименс" name="ImyaSimens" props="show_in_details" rname="ИмяСименс" type=""/>
+      <field domain="Событ" name="Sobyt" props="show_in_details" rname="Событ" type=""/>
+      <field domain="Код в КУПе" name="Kod_v_KUPe" props="show_in_details" rname="Код в КУПе" type=""/>
+      <field domain="Гражд." name="Grazhd_" props="show_in_details" rname="Гражд." type=""/>
+      <field domain="НеПоказыв." name="NePokazyv_" props="input, edit, show_in_details" rname="НеПоказыв." type=""/>
+      <constraint items="KodPodrazd" kind="PRIMARY"/>
+      <index field="Grazhd_"/>
+      <index field="LiniyaSluzh_"/>
+      <index field="NazvPodr_" props="NazvPodr_"/>
+      <index field="NePokazyv_"/>
+      <index field="Sobyt"/>
+    </table>
+    <table access_level="0" description="Справочник состояний задач" ht_table_flags="rws" name="STATE" props="add, edit, delete">
+      <field domain="Состояние" name="Sostoyanie" props="input, show_in_grid, show_in_details" rname="Состояние" type=""/>
+      <field domain="Наименован" name="Naimenovan" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Наименован" type=""/>
+      <field domain="Актуальна" name="Aktualna" props="input, edit, show_in_details" rname="Актуальна" type=""/>
+      <constraint items="Sostoyanie" kind="PRIMARY"/>
+      <index field="Aktualna"/>
+      <index field="Naimenovan" props="Naimenovan"/>
+    </table>
+    <table access_level="0" description="Рабочие станции" ht_table_flags="rws" name="STATIONS" props="add, edit, delete">
+      <field domain="КодСтанции" name="KodStanczii" props="input, show_in_grid, show_in_details, autocalculated" rname="КодСтанции" type=""/>
+      <field domain="ИмяСтанции" name="ImyaStanczii" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="ИмяСтанции" type=""/>
+      <field domain="Уровень" name="Uroven" props="input, edit, show_in_grid, show_in_details, required" rname="Уровень" type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <constraint items="KodStanczii" kind="PRIMARY"/>
+      <index field="ImyaStanczii" props="ImyaStanczii"/>
+      <index field="Uroven"/>
+    </table>
+    <table access_level="0" description="Справочник программ" ht_table_flags="rws" name="SU_PROGR">
+      <field domain="ТипПрогр." name="TipProgr_" props="show_in_grid, show_in_details, autocalculated" rname="ТипПрогр." type=""/>
+      <field domain="НазвПрогр." name="NazvProgr_" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="НазвПрогр." type=""/>
+      <field domain="КодВедомст" name="KodVedomst" props="input, edit, show_in_grid, show_in_details" rname="КодВедомст" type=""/>
+      <field domain="НеВыбирать" name="NeVybirat" props="input, edit, show_in_details" rname="НеВыбирать" type=""/>
+      <field domain="НеПоказыв." name="NePokazyv_" props="input, edit, show_in_details" rname="НеПоказыв." type=""/>
+      <constraint items="TipProgr_" kind="PRIMARY"/>
+      <constraint items="KodVedomst" kind="FOREIGN" props="has_value_edit" reference="DataPost_"/>
+      <index field="KodVedomst"/>
+      <index field="NazvProgr_" props="NazvProgr_"/>
+      <index field="NePokazyv_"/>
+      <index field="NeVybirat"/>
+    </table>
+    <table access_level="0" description="Районы" ht_table_flags="rws" name="SU_RAJ" props="add, edit, delete">
+      <field domain="КодРайона" name="KodRajona" props="input, show_in_grid, show_in_details, autocalculated, required" rname="КодРайона" type=""/>
+      <field domain="НазвРайона" name="NazvRajona" props="input, edit, show_in_grid, show_in_details, is_mean" rname="НазвРайона" type=""/>
+      <field domain="Междуг.Код" name="Mezhdug_Kod" props="input, edit, show_in_grid, show_in_details" rname="Междуг.Код" type=""/>
+      <field domain="Регион" name="Region" props="input, edit, show_in_grid, show_in_details, required" rname="Регион" type=""/>
+      <constraint items="KodRajona" kind="PRIMARY"/>
+      <constraint items="Region" kind="FOREIGN" props="has_value_edit" reference="KodDogovor"/>
+      <index field="NazvRajona"/>
+      <index field="Region"/>
+    </table>
+    <table access_level="0" description="Справочник окраски" ht_table_flags="rws" name="S_CONT">
+      <field domain="ТипКонтакт" name="TipKontakt" props="input, show_in_grid, show_in_details, autocalculated, required" rname="ТипКонтакт" type=""/>
+      <field domain="Название" name="Nazvanie" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Название" type=""/>
+      <constraint items="TipKontakt" kind="PRIMARY"/>
+      <index field="Nazvanie" props="Nazvanie"/>
+    </table>
+    <table access_level="0" description="Справочник типов договоров" ht_table_flags="rws" name="S_DOG" props="add, edit, delete">
+      <field domain="ТипДоговор" name="TipDogovor" props="show_in_grid, show_in_details, autocalculated" rname="ТипДоговор" type=""/>
+      <field description="Название договора" domain="Название" name="Dogovor" props="input, edit, show_in_grid, show_in_details, is_mean" rname="Договор" type="Название договора"/>
+      <constraint items="TipDogovor" kind="PRIMARY"/>
+    </table>
+    <table access_level="0" description="Справочник типов файлов" ht_table_flags="rws" name="S_FILETP">
+      <field domain="Тип файла" name="Tip_fajla" props="input, show_in_grid, show_in_details, autocalculated, required" rname="Тип файла" type=""/>
+      <field domain="Расширение" name="Rasshirenie" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Расширение" type=""/>
+      <field domain="Название" name="Nazvanie" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Название" type=""/>
+      <constraint items="Tip_fajla" kind="PRIMARY"/>
+      <index field="Nazvanie"/>
+      <index field="Rasshirenie" props="Rasshirenie"/>
+    </table>
+    <table access_level="0" description="Уровень грамотности" ht_table_flags="rws" name="S_GRAM">
+      <field domain="УровГрам." name="UrovGram_" props="show_in_grid, show_in_details, autocalculated" rname="УровГрам." type=""/>
+      <field domain="Грамотн." name="Gramotn_" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Грамотн." type=""/>
+      <constraint items="UrovGram_" kind="PRIMARY"/>
+      <index field="Gramotn_" props="Gramotn_"/>
+    </table>
+    <table access_level="0" description="Справочник входящий\исходящий" ht_table_flags="rws" name="S_IN_OUT">
+      <field domain="КодВх\Исх" name="KodVxIsx" props="show_in_grid, show_in_details, autocalculated" rname="КодВх\Исх" type=""/>
+      <field domain="Название" name="Nazvanie" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Название" type=""/>
+      <constraint items="KodVxIsx" kind="PRIMARY"/>
+      <index field="Nazvanie" props="Nazvanie"/>
+    </table>
+    <table access_level="0" description="Типы сотрудников" ht_table_flags="rws" name="S_LIC" props="add, edit">
+      <field domain="ТипСотруд." name="TipSotrud_" props="show_in_grid, show_in_details, autocalculated" rname="ТипСотруд." type=""/>
+      <field domain="Название" name="Nazvanie" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Название" type=""/>
+      <constraint items="TipSotrud_" kind="PRIMARY"/>
+      <index field="Nazvanie" props="Nazvanie"/>
+    </table>
+    <table access_level="0" description="Тип электронных адресов" ht_table_flags="rws" name="S_MAIL">
+      <field domain="КодТипа" name="KodTipa" props="show_in_details, autocalculated" rname="КодТипа" type=""/>
+      <field domain="ТипАдреса" name="TipAdresa" props="input, edit, show_in_grid, show_in_details, is_mean" rname="ТипАдреса" type=""/>
+      <constraint items="KodTipa" kind="PRIMARY"/>
+      <index field="TipAdresa" props="TipAdresa"/>
+    </table>
+    <table access_level="0" description="Список населенных пунктов" ht_table_flags="rws" name="S_NAS_P" props="add, edit">
+      <field domain="КодНасПунк" name="KodNasPunk" props="input, show_in_details, autocalculated, required" rname="КодНасПунк" type=""/>
+      <field domain="НаселПункт" name="NaselPunkt" props="input, edit, show_in_grid, show_in_details, is_mean" rname="НаселПункт" type=""/>
+      <field domain="Междуг.Код" name="Mezhdug_Kod" props="input, edit, show_in_grid, show_in_details" rname="Междуг.Код" type=""/>
+      <constraint items="KodNasPunk" kind="PRIMARY"/>
+      <index field="NaselPunkt" props="NaselPunkt"/>
+    </table>
+    <table access_level="0" description="Справочник объединения баз" ht_table_flags="rws" name="S_OBBAZ" props="add, edit, delete">
+      <field domain="КодОбъедин" name="KodObedin" props="input, show_in_grid, show_in_details, autocalculated, required" rname="КодОбъедин" type=""/>
+      <field domain="НазвОбъед." name="NazvObed_" props="input, edit, show_in_grid, show_in_details, is_mean" rname="НазвОбъед." type=""/>
+      <constraint items="KodObedin" kind="PRIMARY"/>
+    </table>
+    <table access_level="0" description="Регионы" ht_table_flags="rws" name="S_OBL" props="add, edit, delete">
+      <field domain="Регион" name="Region" props="show_in_grid, show_in_details, autocalculated" rname="Регион" type=""/>
+      <field domain="Название" name="Nazvanie" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Название" type=""/>
+      <field domain="Название" name="NazvReksof" props="input, edit, show_in_details, required" rname="НазвРексоф" type=""/>
+      <field domain="НеПоказыв." name="NePokazyv_" props="input, edit, show_in_details" rname="НеПоказыв." type=""/>
+      <constraint items="Region" kind="PRIMARY"/>
+      <index field="Nazvanie" props="Nazvanie"/>
+      <index field="NePokazyv_"/>
+    </table>
+    <table access_level="0" description="Справочник точности оценки" ht_table_flags="rws" name="S_OCENK">
+      <field domain="КодТочност" name="KodTochnost" props="show_in_grid, show_in_details, autocalculated" rname="КодТочност" type=""/>
+      <field domain="Точность" name="Tochnost" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Точность" type=""/>
+      <constraint items="KodTochnost" kind="PRIMARY"/>
+      <index field="Tochnost" props="Tochnost"/>
+    </table>
+    <table access_level="0" description="Официальные органы" ht_table_flags="rws" name="S_ORG_M1">
+      <field domain="КодОргМ1" name="KodOrgM1" props="input, show_in_details, autocalculated, required" rname="КодОргМ1" type=""/>
+      <field domain="КодЦБДУИГ" name="KodCZBDUIG" props="input, edit, show_in_grid, show_in_details, required" rname="КодЦБДУИГ" type=""/>
+      <field domain="ОрганФМС" name="OrganFMS" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="ОрганФМС" type=""/>
+      <field domain="КодОбласти" name="KodOblasti" props="input, edit, show_in_grid, show_in_details" rname="КодОбласти" type=""/>
+      <field domain="КодПодразд" name="KodPodrazd" props="input, edit, show_in_grid, show_in_details" rname="КодПодразд" type=""/>
+      <field domain="АдресОрг." name="AdresOrg_" props="input, edit, show_in_details" rname="АдресОрг." type=""/>
+      <constraint items="KodOrgM1" kind="PRIMARY"/>
+      <constraint items="KodOblasti" kind="FOREIGN" props="has_value_edit" reference="Otvetstv_"/>
+      <constraint items="KodPodrazd" kind="FOREIGN" props="has_value_edit" reference="ID_punkta"/>
+      <index field="KodCZBDUIG"/>
+      <index field="KodOblasti"/>
+      <index field="KodPodrazd"/>
+    </table>
+    <table access_level="0" description="Справочник отделов" ht_table_flags="rws" name="S_OTDEL">
+      <field domain="КодОтдела" name="KodOtdela" props="input, show_in_grid, show_in_details, autocalculated, required" rname="КодОтдела" type=""/>
+      <field domain="Название" name="Nazvanie" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Название" type=""/>
+      <constraint items="KodOtdela" kind="PRIMARY"/>
+      <index field="Nazvanie" props="Nazvanie"/>
+    </table>
+    <table access_level="0" description="Виды поступления заявки" ht_table_flags="rws" name="S_POSTUP">
+      <field domain="КодПоступл" name="KodPostupl" props="show_in_grid, show_in_details, autocalculated" rname="КодПоступл" type=""/>
+      <field domain="НазвПоступ" name="Nazvanie" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Название" type=""/>
+      <constraint items="KodPostupl" kind="PRIMARY"/>
+      <index field="Nazvanie" props="Nazvanie"/>
+    </table>
+    <table access_level="0" description="Приоритеты" ht_table_flags="rws" name="S_PRIOR">
+      <field domain="КодПриорит" name="KodPriorit" props="show_in_grid, show_in_details, autocalculated" rname="КодПриорит" type=""/>
+      <field domain="Приоритет" name="Nazvanie" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Название" type=""/>
+      <field domain="Критичн-ть" name="Kritichnt" props="input, edit, show_in_details, required" rname="Критичн-ть" type=""/>
+      <constraint items="KodPriorit" kind="PRIMARY"/>
+      <index field="Nazvanie" props="Nazvanie"/>
+    </table>
+    <table access_level="0" description="Справочник видов проблем" ht_table_flags="rws" name="S_PROBL" props="add, edit, delete">
+      <field domain="ВидПроблем" name="VidProblem" props="input, show_in_details, autocalculated" rname="ВидПроблем" type=""/>
+      <field domain="Название" name="Nazvanie" props="input, edit, show_in_grid, show_in_details, is_mean" rname="Название" type=""/>
+      <constraint items="VidProblem" kind="PRIMARY"/>
+      <index field="Nazvanie" props="Nazvanie"/>
+    </table>
+    <table access_level="0" description="Справочник резуль-тов проверки" ht_table_flags="rws" name="S_PROVER">
+      <field domain="КодРезульт" name="KodRezult" props="input, show_in_grid, show_in_details, autocalculated, required" rname="КодРезульт" type=""/>
+      <field domain="Наименован" name="Naimenovan" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Наименован" type=""/>
+      <constraint items="KodRezult" kind="PRIMARY"/>
+    </table>
+    <table access_level="0" description="Справочник источника выгрузки" ht_table_flags="rws" name="S_REGSOF">
+      <field domain="КодПередач" name="KodPeredach" props="show_in_grid, show_in_details, autocalculated" rname="КодПередач" type=""/>
+      <field domain="Название" name="Nazvanie" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Название" type=""/>
+      <constraint items="KodPeredach" kind="PRIMARY"/>
+      <index field="Nazvanie" props="Nazvanie"/>
+    </table>
+    <table access_level="0" description="Статус заявки" ht_table_flags="rws" name="S_STATUS">
+      <field domain="КодСтатуса" name="KodStatusa" props="show_in_grid, show_in_details, autocalculated" rname="КодСтатуса" type=""/>
+      <field domain="Статус" name="Nazvanie" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Название" type=""/>
+      <constraint items="KodStatusa" kind="PRIMARY"/>
+      <index field="Nazvanie" props="Nazvanie"/>
+    </table>
+    <table access_level="0" description="Типы ресурсов" ht_table_flags="rws" name="S_STRGTP">
+      <field domain="КодТипРес" name="KodTipRes" props="input, show_in_grid, show_in_details, autocalculated" rname="КодТипРес" type=""/>
+      <field domain="Наименован" name="Naimenovan" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Наименован" type=""/>
+      <constraint items="KodTipRes" kind="PRIMARY"/>
+      <index field="Naimenovan" props="Naimenovan"/>
+    </table>
+    <table access_level="0" description="Таблицы" ht_table_flags="rws" name="S_TABLES">
+      <field domain="КодТаблицы" name="KodTabliczy" props="input, show_in_grid, show_in_details, autocalculated" rname="КодТаблицы" type=""/>
+      <field domain="Таблица" name="Tablicza" props="input, edit, show_in_grid, show_in_details, is_mean" rname="Таблица" type=""/>
+      <field domain="Название" name="Nazvanie" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Название" type=""/>
+      <field domain="Уровень" name="Uroven" props="input, edit, show_in_grid, show_in_details, required" rname="Уровень" type=""/>
+      <field domain="НеПротокол" name="NeProtokol" props="input, edit, show_in_grid, show_in_details, required" rname="НеПротокол" type=""/>
+      <field domain="КонтрКлюч" name="KontrKlyuch" props="input, edit, show_in_grid, show_in_details, required" rname="КонтрКлюч" type=""/>
+      <constraint items="KodTabliczy" kind="PRIMARY"/>
+      <index field="KontrKlyuch"/>
+      <index field="Nazvanie" props="Nazvanie"/>
+      <index field="NeProtokol"/>
+      <index field="Tablicza" props="Tablicza"/>
+      <index field="Uroven"/>
+    </table>
+    <table access_level="0" description="Тип обучения" ht_table_flags="rws" name="S_TECH">
+      <field domain="ТипОбуч." name="TipObuch_" props="show_in_grid, show_in_details, autocalculated" rname="ТипОбуч." type=""/>
+      <field domain="Название" name="Nazvanie" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Название" type=""/>
+      <constraint items="TipObuch_" kind="PRIMARY"/>
+      <index field="Nazvanie" props="Nazvanie"/>
+    </table>
+    <table access_level="0" description="Тип заявки" ht_table_flags="rws" name="S_TPCONT">
+      <field domain="КодТипаКон" name="KodTipaKon" props="input, show_in_grid, show_in_details" rname="КодТипаКон" type=""/>
+      <field domain="НазвТипа" name="Nazvanie" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Название" type=""/>
+      <field domain="СБК" name="SBK" props="show_in_details" rname="СБК" type=""/>
+      <constraint items="KodTipaKon" kind="PRIMARY"/>
+      <index field="Nazvanie" props="Nazvanie"/>
+      <index field="SBK"/>
+    </table>
+    <table access_level="0" description="Типы экспорта" ht_table_flags="rws" name="S_TP_EXP">
+      <field domain="ТипЭкспорт" name="TipEksport" props="input, show_in_grid, show_in_details, autocalculated, required" rname="ТипЭкспорт" type=""/>
+      <field domain="Название" name="Nazvanie" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Название" type=""/>
+      <constraint items="TipEksport" kind="PRIMARY"/>
+      <index field="Nazvanie" props="Nazvanie"/>
+    </table>
+    <table access_level="0" description="Справочник степени важности" ht_table_flags="rws" name="S_VAJN">
+      <field domain="КодВажн." name="KodVazhn_" props="input, show_in_grid, show_in_details, autocalculated, required" rname="КодВажн." type=""/>
+      <field domain="Название" name="Vazhnost" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Важность" type=""/>
+      <constraint items="KodVazhn_" kind="PRIMARY"/>
+      <index field="Vazhnost" props="Vazhnost"/>
+    </table>
+    <table access_level="0" description="Справочник ведомств" ht_table_flags="rws" name="S_VEDOMS">
+      <field domain="КодВедомст" name="KodVedomst" props="show_in_grid, show_in_details, autocalculated" rname="КодВедомст" type=""/>
+      <field domain="Название" name="Nazvanie" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Название" type=""/>
+      <constraint items="KodVedomst" kind="PRIMARY"/>
+      <index field="Nazvanie" props="Nazvanie"/>
+    </table>
+    <table access_level="0" description="Виды работ по заявке" ht_table_flags="rws" name="S_WORK">
+      <field domain="КодВидРаб" name="KodVidRab" props="show_in_grid, show_in_details, autocalculated" rname="КодВидРаб" type=""/>
+      <field domain="Название" name="Nazvanie" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Название" type=""/>
+      <field domain="КодСтатуса" name="KodStatusa" props="input, edit, show_in_details" rname="КодСтатуса" type=""/>
+      <constraint items="KodVidRab" kind="PRIMARY"/>
+      <constraint items="KodStatusa" kind="FOREIGN" props="has_value_edit" reference="VremyaIzmen"/>
+      <index field="KodStatusa"/>
+      <index field="Nazvanie" props="Nazvanie"/>
+    </table>
+    <table access_level="0" description="Права пользователей на таблицы" ht_table_flags="rws" name="TAB_RTS" props="add, edit, delete">
+      <field domain="id_TAB_RTS" name="id_TAB_RTS" props="show_in_grid, show_in_details, autocalculated" rname="id_TAB_RTS" type=""/>
+      <field description="Пользователь" domain="Ответств." name="LichnyjKod" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="ЛичныйКод" type="Пользователь"/>
+      <field description="Таблица" domain="КодТаблицы" name="KodTabliczy" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="КодТаблицы" type="Таблица"/>
+      <field domain="Ввод" name="Vvod" props="input, edit, show_in_grid, show_in_details" rname="Ввод" type=""/>
+      <field domain="Изменение" name="Izmenenie" props="input, edit, show_in_grid, show_in_details" rname="Изменение" type=""/>
+      <field domain="Удаление" name="Udalenie" props="input, edit, show_in_grid, show_in_details" rname="Удаление" type=""/>
+      <field domain="КоличСтрок" name="KolichStrok" props="input, edit, show_in_grid, show_in_details" rname="КоличСтрок" type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <constraint items="id_TAB_RTS" kind="PRIMARY"/>
+      <constraint items="KodTabliczy" kind="FOREIGN" props="has_value_edit" reference="Kategoriya"/>
+      <constraint items="LichnyjKod" kind="FOREIGN" reference="KodRabKont"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" reference="KodRabKont"/>
+      <index field="DataIzmen_"/>
+      <index field="Izmenenie"/>
+      <index field="KodTabliczy"/>
+      <index field="KolichStrok"/>
+      <index field="LichnyjKod"/>
+      <index field="Otvetstv_"/>
+      <index field="Udalenie"/>
+      <index field="VremyaIzmen"/>
+      <index field="Vvod"/>
+    </table>
+    <table access_level="0" description="Задачи" ht_table_flags="rws" name="TASKS" props="add, edit, delete">
+      <field domain="КодЗадачи" name="KodZadachi" props="show_in_grid, show_in_details, autocalculated" rname="КодЗадачи" type=""/>
+      <field domain="Тема" name="Tema" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Тема" type=""/>
+      <field domain="Дата" name="DataVvoda" props="input, edit, show_in_grid, show_in_details, required" rname="ДатаВвода" type=""/>
+      <field domain="Время" name="VremyaVvoda" props="input, edit, show_in_grid, show_in_details, required" rname="ВремяВвода" type=""/>
+      <field description="Ответственный за ввод" domain="КодПольз." name="OtvZaVvod" props="show_in_details" rname="ОтвЗаВвод" type="Ответственный за ввод"/>
+      <field description="Ответственный за ввод" domain="КодМастера" name="Vvod" props="input, edit, show_in_details, required" rname="Ввод" type="Ответственный за ввод"/>
+      <field description="Ответственный за реализацию" domain="КодПольз." name="OtvRealiz" props="show_in_details" rname="ОтвРеализ" type="Ответственный за реализацию"/>
+      <field description="Ответственный за реализацию" domain="КодМастера" name="Realizacz" props="input, edit, show_in_details, required" rname="Реализац" type="Ответственный за реализацию"/>
+      <field domain="КодВажн." name="Vazhnost" props="input, edit, show_in_grid, show_in_details" rname="Важность" type=""/>
+      <field description="Планируемые трудозатраты" domain="Затраты" name="Zatraty" props="input, edit, show_in_grid, show_in_details" rname="Затраты" type="Планируемые трудозатраты"/>
+      <field domain="Срок" name="Srok" props="input, edit, show_in_details" rname="Срок" type=""/>
+      <field domain="Состояние" name="Sostoyanie" props="input, edit, show_in_grid, show_in_details, required" rname="Состояние" type=""/>
+      <field description="Дата реализации" domain="Дата" name="DataRealiz" props="input, edit, show_in_grid, show_in_details" rname="ДатаРеализ" type="Дата реализации"/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <field domain="ДатаПост." name="DataPost_" props="show_in_details" rname="ДатаПост." type=""/>
+      <field domain="ВремяПост." name="VremyaPost_" props="show_in_details" rname="ВремяПост." type=""/>
+      <field domain="Ответств." name="KtoVvel" props="show_in_details" rname="КтоВвел" type=""/>
+      <field domain="ВерсПрогр" name="VersProgr" props="input, edit, show_in_grid, show_in_details" rname="ВерсПрогр" type=""/>
+      <constraint items="KodZadachi" kind="PRIMARY"/>
+      <constraint items="KtoVvel" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <constraint items="Realizacz" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodUdostov"/>
+      <constraint items="Sostoyanie" kind="FOREIGN" props="has_value_edit" reference="Aktualna"/>
+      <constraint items="Vazhnost" kind="FOREIGN" props="has_value_edit" reference="VremyaIzmen"/>
+      <constraint items="Vvod" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodUdostov"/>
+      <index field="DataIzmen_"/>
+      <index field="DataPost_"/>
+      <index field="DataRealiz"/>
+      <index field="DataVvoda"/>
+      <index field="KtoVvel"/>
+      <index field="OtvRealiz"/>
+      <index field="OtvZaVvod"/>
+      <index field="Otvetstv_"/>
+      <index field="Realizacz"/>
+      <index field="Sostoyanie"/>
+      <index field="Srok"/>
+      <index field="Tema"/>
+      <index field="Vazhnost"/>
+      <index field="VersProgr"/>
+      <index field="VremyaIzmen"/>
+      <index field="VremyaPost_"/>
+      <index field="VremyaVvoda"/>
+      <index field="Vvod"/>
+      <index field="Zatraty"/>
+    </table>
+    <table access_level="0" description="~К~атегории задач" ht_table_flags="rws" name="TASKSCTG" props="add, edit, delete">
+      <field domain="id_TASKSCT" name="id_TASKSCT" props="autocalculated" rname="id_TASKSCT" type=""/>
+      <field domain="КодЗадачи" name="KodZadachi" props="input, edit, show_in_grid, show_in_details, required" rname="КодЗадачи" type=""/>
+      <field domain="Категория" name="Kategoriya" props="input, edit, show_in_details, is_mean, required" rname="Категория" type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <constraint items="id_TASKSCT" kind="PRIMARY"/>
+      <constraint items="Kategoriya" kind="FOREIGN" props="has_value_edit" reference="Primechanie"/>
+      <constraint items="KodZadachi" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="VremyaPost_"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <index field="DataIzmen_"/>
+      <index field="Kategoriya"/>
+      <index field="KodZadachi"/>
+      <index field="Otvetstv_"/>
+      <index field="VremyaIzmen"/>
+    </table>
+    <table access_level="0" description="~П~остановка задачи" ht_table_flags="rws" name="TAS_POST" props="add, edit, delete">
+      <field domain="id_TAS_POS" name="id_TAS_POS" props="autocalculated" rname="id_TAS_POS" type=""/>
+      <field domain="КодЗадачи" name="KodZadachi" props="input, edit, show_in_grid, show_in_details, required" rname="КодЗадачи" type=""/>
+      <field domain="ID пункта" name="ID_punkta" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="ID пункта" type=""/>
+      <constraint items="id_TAS_POS" kind="PRIMARY"/>
+      <constraint items="ID_punkta" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="id_ACT"/>
+      <constraint items="KodZadachi" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="VremyaPost_"/>
+      <index field="ID_punkta"/>
+      <index field="KodZadachi"/>
+    </table>
+    <table access_level="0" description="~Р~езультаты проверки" ht_table_flags="rws" name="TAS_PROV" props="add, edit, delete">
+      <field domain="КодЗадачи" name="KodZadachi" props="show_in_grid, show_in_details, is_mean, required" rname="КодЗадачи" type=""/>
+      <field domain="Дата" name="Data" props="input, edit, show_in_grid, show_in_details, required" rname="Дата" type=""/>
+      <field domain="КодПольз." name="Proveril" props="show_in_details" rname="Проверил" type=""/>
+      <field description="Проверил" domain="КодМастера" name="KodMastera" props="input, edit, show_in_details, required" rname="КодМастера" type="Проверил"/>
+      <field domain="КодРезульт" name="KodRezult" props="input, edit, show_in_grid, show_in_details, required" rname="КодРезульт" type=""/>
+      <field domain="Примечание" name="Primechanie" props="input, edit, show_in_details" rname="Примечание" type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <field domain="ДатаПост." name="DataPost_" props="show_in_details" rname="ДатаПост." type=""/>
+      <field domain="ВремяПост." name="VremyaPost_" props="show_in_details" rname="ВремяПост." type=""/>
+      <field domain="Ответств." name="KtoVvel" props="show_in_details" rname="КтоВвел" type=""/>
+      <constraint items="KodMastera" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodUdostov"/>
+      <constraint items="KodRezult" kind="FOREIGN" props="has_value_edit" reference="id_CONTROL"/>
+      <constraint items="KodZadachi" kind="FOREIGN" props="cascading_delete" reference="VremyaPost_"/>
+      <constraint items="KtoVvel" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <index field="Data"/>
+      <index field="DataIzmen_"/>
+      <index field="DataPost_"/>
+      <index field="KodMastera"/>
+      <index field="KodRezult"/>
+      <index field="KodZadachi" props="KodZadachi"/>
+      <index field="KtoVvel"/>
+      <index field="Otvetstv_"/>
+      <index field="Proveril"/>
+      <index field="VremyaIzmen"/>
+      <index field="VremyaPost_"/>
+    </table>
+    <table access_level="0" description="~Т~рудозатраты" ht_table_flags="rws" name="TAS_TIME" props="add, edit, delete">
+      <field domain="id_TAS_TIM" name="id_TAS_TIM" props="autocalculated" rname="id_TAS_TIM" type=""/>
+      <field domain="КодЗадачи" name="KodZadachi" props="show_in_grid, show_in_details, required" rname="КодЗадачи" type=""/>
+      <field domain="Дата" name="Data" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Дата" type=""/>
+      <field domain="КодПольз." name="Sotrudnik" props="show_in_details, is_mean" rname="Сотрудник" type=""/>
+      <field description="Сотрудник" domain="КодМастера" name="KodMastera" props="input, edit, show_in_details, is_mean, required" rname="КодМастера" type="Сотрудник"/>
+      <field domain="Затраты" name="Zatraty" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Затраты" type=""/>
+      <field domain="Примечание" name="Primechanie" props="input, edit, show_in_grid, show_in_details" rname="Примечание" type=""/>
+      <field domain="TextData" name="TextData" props="input, edit, show_in_details" rname="TextData" type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <constraint items="id_TAS_TIM" kind="PRIMARY"/>
+      <constraint items="KodMastera" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodUdostov"/>
+      <constraint items="KodZadachi" kind="FOREIGN" props="cascading_delete" reference="VremyaPost_"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <index field="Data"/>
+      <index field="DataIzmen_"/>
+      <index field="KodMastera"/>
+      <index field="KodZadachi"/>
+      <index field="Otvetstv_"/>
+      <index field="Sotrudnik"/>
+      <index field="VremyaIzmen"/>
+      <index field="Zatraty"/>
+    </table>
+    <table access_level="0" description="Типовые решения" ht_table_flags="rws" name="TIPAG" props="add, edit, delete">
+      <field domain="КодТипРеш" name="KodTipResh" props="show_in_grid, show_in_details, autocalculated" rname="КодТипРеш" type=""/>
+      <field domain="Примечание" name="Primechanie" props="input, edit, show_in_grid, show_in_details, is_mean" rname="Примечание" type=""/>
+      <field domain="КодПроблем" name="KodProblem" props="input, edit, show_in_details, required" rname="КодПроблем" type=""/>
+      <field domain="КодРешения" name="KodResheniya" props="input, edit, show_in_details, required" rname="КодРешения" type=""/>
+      <field domain="НеАктуальн" name="NeAktualn" props="input, edit, show_in_grid, show_in_details, is_mean" rname="НеАктуальн" type=""/>
+      <field domain="ДатаПост." name="DataPost_" props="show_in_details" rname="ДатаПост." type=""/>
+      <field domain="ВремяПост." name="VremyaPost_" props="show_in_details" rname="ВремяПост." type=""/>
+      <field domain="Ответств." name="KtoVvel" props="show_in_details" rname="КтоВвел" type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <constraint items="KodTipResh" kind="PRIMARY"/>
+      <constraint items="KodProblem" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="Organizacz_"/>
+      <constraint items="KodResheniya" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="VremyaIzmen"/>
+      <constraint items="KtoVvel" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <index field="DataIzmen_"/>
+      <index field="DataPost_"/>
+      <index field="KodProblem"/>
+      <index field="KodResheniya"/>
+      <index field="KtoVvel"/>
+      <index field="NeAktualn"/>
+      <index field="Otvetstv_"/>
+      <index field="Primechanie"/>
+      <index field="VremyaIzmen"/>
+      <index field="VremyaPost_"/>
+    </table>
+    <table access_level="0" description="Файл-документ" ht_table_flags="rws" name="TXT" props="add, edit, delete">
+      <field domain="КодТексЗад" name="KodTeksZad" props="show_in_details, autocalculated" rname="КодТексЗад" type=""/>
+      <field domain="Расширение" name="Rasshirenie" props="input, edit, show_in_grid, show_in_details, required" rname="Расширение" type=""/>
+      <field description="Имя файла" domain="ИмяФайла" name="ImyaFajla" props="input, edit, show_in_grid, show_in_details, is_mean" rname="ИмяФайла" type="Имя файла"/>
+      <field domain="Примечание" name="Primechanie" props="input, edit, show_in_grid, show_in_details" rname="Примечание" type=""/>
+      <field domain="BinData" name="BinData" props="show_in_details" rname="BinData" type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <field domain="ДатаПост." name="DataPost_" props="show_in_details" rname="ДатаПост." type=""/>
+      <field domain="ВремяПост." name="VremyaPost_" props="show_in_details" rname="ВремяПост." type=""/>
+      <field domain="Ответств." name="KtoVvel" props="show_in_details" rname="КтоВвел" type=""/>
+      <constraint items="KodTeksZad" kind="PRIMARY"/>
+      <constraint items="KtoVvel" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <index field="DataIzmen_"/>
+      <index field="DataPost_"/>
+      <index field="KtoVvel"/>
+      <index field="Otvetstv_"/>
+      <index field="Rasshirenie"/>
+      <index field="VremyaIzmen"/>
+      <index field="VremyaPost_"/>
+    </table>
+    <table access_level="0" description="Текст письма (заявки)" ht_table_flags="rws" name="TXT_CONT" props="add, edit, delete">
+      <field domain="КодТексЗая" name="KodTeksZaya" props="show_in_details, autocalculated" rname="КодТексЗая" type=""/>
+      <field domain="КодКонтакт" name="KodKontakt" props="show_in_details" rname="КодКонтакт" type=""/>
+      <field domain="Расширение" name="Rasshirenie" props="input, edit, show_in_grid, show_in_details, required" rname="Расширение" type=""/>
+      <field domain="Примечание" name="Primechanie" props="input, edit, show_in_grid, show_in_details" rname="Примечание" type=""/>
+      <field domain="BinData" name="BinData" props="show_in_details" rname="BinData" type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <field domain="ДатаПост." name="DataPost_" props="show_in_details" rname="ДатаПост." type=""/>
+      <field domain="ВремяПост." name="VremyaPost_" props="show_in_details" rname="ВремяПост." type=""/>
+      <field domain="Ответств." name="KtoVvel" props="show_in_details" rname="КтоВвел" type=""/>
+      <constraint items="KodTeksZaya" kind="PRIMARY"/>
+      <constraint items="KodKontakt" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="Naimenovan"/>
+      <constraint items="KtoVvel" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <index field="DataIzmen_"/>
+      <index field="DataPost_"/>
+      <index field="KodKontakt"/>
+      <index field="KtoVvel"/>
+      <index field="Otvetstv_"/>
+      <index field="Rasshirenie"/>
+      <index field="VremyaIzmen"/>
+      <index field="VremyaPost_"/>
+    </table>
+    <table access_level="0" description="Текст входящего письма" ht_table_flags="rws" name="TXT_IN" props="add, edit, delete">
+      <field domain="КодТексВх" name="KodTeksVx" props="show_in_details, autocalculated" rname="КодТексВх" type=""/>
+      <field domain="КодПисьмВх" name="KodPismVx" props="show_in_details" rname="КодПисьмВх" type=""/>
+      <field domain="Расширение" name="Rasshirenie" props="input, edit, show_in_grid, show_in_details, required" rname="Расширение" type=""/>
+      <field domain="Примечание" name="Primechanie" props="input, edit, show_in_grid, show_in_details" rname="Примечание" type=""/>
+      <field domain="BinData" name="BinData" props="show_in_details" rname="BinData" type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <field domain="ДатаПост." name="DataPost_" props="show_in_details" rname="ДатаПост." type=""/>
+      <field domain="ВремяПост." name="VremyaPost_" props="show_in_details" rname="ВремяПост." type=""/>
+      <field domain="Ответств." name="KtoVvel" props="show_in_details" rname="КтоВвел" type=""/>
+      <constraint items="KodTeksVx" kind="PRIMARY"/>
+      <constraint items="KodPismVx" kind="FOREIGN" props="has_value_edit" reference="Dom"/>
+      <constraint items="KtoVvel" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <index field="DataIzmen_"/>
+      <index field="DataPost_"/>
+      <index field="KodPismVx"/>
+      <index field="KtoVvel"/>
+      <index field="Otvetstv_"/>
+      <index field="Rasshirenie"/>
+      <index field="VremyaIzmen"/>
+      <index field="VremyaPost_"/>
+    </table>
+    <table access_level="0" description="Текст исходящего письма" ht_table_flags="rws" name="TXT_OUT" props="add, edit, delete">
+      <field domain="КодТексИсх" name="KodTeksIsx" props="show_in_details, autocalculated" rname="КодТексИсх" type=""/>
+      <field domain="КодПисьмИс" name="KodPismIs" props="show_in_details" rname="КодПисьмИс" type=""/>
+      <field domain="Расширение" name="Rasshirenie" props="input, edit, show_in_grid, show_in_details, required" rname="Расширение" type=""/>
+      <field domain="Примечание" name="Primechanie" props="input, edit, show_in_grid, show_in_details" rname="Примечание" type=""/>
+      <field domain="BinData" name="BinData" props="show_in_details" rname="BinData" type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <field domain="ДатаПост." name="DataPost_" props="show_in_details" rname="ДатаПост." type=""/>
+      <field domain="ВремяПост." name="VremyaPost_" props="show_in_details" rname="ВремяПост." type=""/>
+      <field domain="Ответств." name="KtoVvel" props="show_in_details" rname="КтоВвел" type=""/>
+      <constraint items="KodTeksIsx" kind="PRIMARY"/>
+      <constraint items="KodPismIs" kind="FOREIGN" props="has_value_edit" reference="KodKlienta"/>
+      <constraint items="KtoVvel" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <index field="DataIzmen_"/>
+      <index field="DataPost_"/>
+      <index field="KodPismIs"/>
+      <index field="KtoVvel"/>
+      <index field="Otvetstv_"/>
+      <index field="Rasshirenie"/>
+      <index field="VremyaIzmen"/>
+      <index field="VremyaPost_"/>
+    </table>
+    <table access_level="0" description="Файл-документ к задаче" ht_table_flags="rws" name="TXT_TASK" props="add, edit, delete">
+      <field domain="КодТекста" name="KodTeksta" props="show_in_grid, show_in_details, autocalculated" rname="КодТекста" type=""/>
+      <field domain="КодЗадачи" name="KodZadachi" props="input, edit, show_in_grid, show_in_details" rname="КодЗадачи" type=""/>
+      <field domain="КодТексЗад" name="KodTeksZad" props="input, edit, show_in_grid, show_in_details" rname="КодТексЗад" type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <field domain="ДатаПост." name="DataPost_" props="show_in_details" rname="ДатаПост." type=""/>
+      <field domain="ВремяПост." name="VremyaPost_" props="show_in_details" rname="ВремяПост." type=""/>
+      <field domain="Ответств." name="KtoVvel" props="show_in_details" rname="КтоВвел" type=""/>
+      <constraint items="KodTeksta" kind="PRIMARY"/>
+      <constraint items="KodTeksZad" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodSotrudn"/>
+      <constraint items="KodZadachi" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="VremyaPost_"/>
+      <constraint items="KtoVvel" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <index field="DataIzmen_"/>
+      <index field="DataPost_"/>
+      <index field="KodTeksZad"/>
+      <index field="KodZadachi"/>
+      <index field="KtoVvel"/>
+      <index field="Otvetstv_"/>
+      <index field="VremyaIzmen"/>
+      <index field="VremyaPost_"/>
+    </table>
+    <table access_level="0" description="Пользователи системы" ht_table_flags="rws" name="USERS" props="add, edit">
+      <field domain="КодПольз." name="KodPolz_" props="input, edit, show_in_details, required" rname="КодПольз." type=""/>
+      <field domain="КодМенюОбс" name="KodMenyuObs" props="input, edit, show_in_grid, show_in_details" rname="КодМенюОбс" type=""/>
+      <field domain="Ответств." name="LichnyjKod" props="show_in_grid, show_in_details, autocalculated" rname="ЛичныйКод" type=""/>
+      <field domain="ИмяПольз." name="ImyaPolz_" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="ИмяПольз." type=""/>
+      <field domain="КодОтдела" name="KodOtdela" props="input, edit, show_in_details, required" rname="КодОтдела" type=""/>
+      <field domain="Уровень" name="Uroven" props="input, edit, show_in_grid, show_in_details" rname="Уровень" type=""/>
+      <field domain="Логин" name="Login" props="input, edit, show_in_grid, show_in_details, required" rname="Логин" type=""/>
+      <field domain="СистПароль" name="SistParol" props="edit, show_in_details" rname="СистПароль" type=""/>
+      <field domain="ХешПароль" name="XeshParol" props="input, edit, show_in_grid, show_in_details" rname="ХешПароль" type=""/>
+      <field domain="ЛичнПароль" name="LichnParol" props="show_in_details" rname="ЛичнПароль" type=""/>
+      <field domain="Заблокиров" name="Zablokirov" props="input, edit, show_in_details" rname="Заблокиров" type=""/>
+      <field domain="КодМастера" name="KodMastera" props="input, edit, show_in_grid, show_in_details" rname="КодМастера" type=""/>
+      <field domain="СБК" name="SBK" props="show_in_details" rname="СБК" type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="ДатаПост." name="DataPost_" props="show_in_details" rname="ДатаПост." type=""/>
+      <field domain="Ответств." name="KtoVvel" props="show_in_details" rname="КтоВвел" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <field domain="ВремяПост." name="VremyaPost_" props="show_in_details" rname="ВремяПост." type=""/>
+      <constraint items="LichnyjKod" kind="PRIMARY"/>
+      <constraint items="KodMastera" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodUdostov"/>
+      <constraint items="KodMenyuObs" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="VremyaIzmen"/>
+      <constraint items="KodOtdela" kind="FOREIGN" props="has_value_edit" reference="Platelshhik"/>
+      <constraint items="KtoVvel" kind="FOREIGN" reference="KodRabKont"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" reference="KodRabKont"/>
+      <index field="DataIzmen_"/>
+      <index field="DataPost_"/>
+      <index field="ImyaPolz_"/>
+      <index field="KodMastera"/>
+      <index field="KodMenyuObs"/>
+      <index field="KodOtdela"/>
+      <index field="KodPolz_"/>
+      <index field="KtoVvel"/>
+      <index field="LichnParol"/>
+      <index field="Login" props="Login"/>
+      <index field="Otvetstv_"/>
+      <index field="SBK"/>
+      <index field="SistParol"/>
+      <index field="Uroven"/>
+      <index field="VremyaIzmen"/>
+      <index field="VremyaPost_"/>
+      <index field="XeshParol"/>
+      <index field="Zablokirov"/>
+    </table>
+    <table access_level="0" description="Версии проектов" ht_table_flags="rws" name="VERSION" props="add, edit">
+      <field domain="КодВерсии" name="KodVersii" props="show_in_details, autocalculated" rname="КодВерсии" type=""/>
+      <field domain="Верс\Редак" name="VersRedak" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Верс\Редак" type=""/>
+      <field domain="Дата" name="Data" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Дата" type=""/>
+      <field domain="Примечание" name="Primechanie" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="Примечание" type=""/>
+      <constraint items="KodVersii" kind="PRIMARY"/>
+      <index field="Data"/>
+      <index field="Primechanie"/>
+      <index field="VersRedak"/>
+    </table>
+    <table access_level="0" description="Заявки на лицензию" ht_table_flags="rws" name="ZAYV_LIC" props="add, edit, delete">
+      <field domain="КодЛиценз" name="KodLiczenz" props="show_in_details, autocalculated" rname="КодЛиценз" type=""/>
+      <field domain="КодКонтакт" name="KodKontakt" props="show_in_details, required" rname="КодКонтакт" type=""/>
+      <field domain="ДатаЗаявки" name="DataZayavki" props="show_in_details" rname="ДатаЗаявки" type=""/>
+      <field domain="КодСотрудн" name="Zayavka_ot" props="show_in_details" rname="Заявка от" type=""/>
+      <field domain="ТипПрогр." name="TipProgr_" props="show_in_details" rname="ТипПрогр." type=""/>
+      <field domain="КодВерсии" name="KodVersii" props="input, edit, show_in_grid, show_in_details, is_mean, required" rname="КодВерсии" type=""/>
+      <field domain="Выдана" name="Vydana" props="show_in_details" rname="Выдана" type=""/>
+      <field domain="КодМастера" name="Vydal" props="show_in_details" rname="Выдал" type=""/>
+      <field domain="ДатаОтправ" name="DataOtprav" props="show_in_details" rname="ДатаОтправ" type=""/>
+      <field domain="Примечание" name="Primechanie" props="input, edit, show_in_details" rname="Примечание" type=""/>
+      <field domain="ОкончЛицен" name="OkonchLiczen" props="input, edit, show_in_details" rname="ОкончЛицен" type=""/>
+      <field domain="ДатаИзмен." name="DataIzmen_" props="show_in_details" rname="ДатаИзмен." type=""/>
+      <field domain="ВремяИзмен" name="VremyaIzmen" props="show_in_details" rname="ВремяИзмен" type=""/>
+      <field domain="Ответств." name="Otvetstv_" props="show_in_details" rname="Ответств." type=""/>
+      <constraint items="KodLiczenz" kind="PRIMARY"/>
+      <constraint items="KodKontakt" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="Naimenovan"/>
+      <constraint items="KodVersii" kind="FOREIGN" reference="VremyaIzmen"/>
+      <constraint items="Otvetstv_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodRabKont"/>
+      <constraint items="TipProgr_" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="SBK"/>
+      <constraint items="Vydal" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="KodUdostov"/>
+      <constraint items="Zayavka_ot" kind="FOREIGN" props="has_value_edit, cascading_delete" reference="DataIzmen_"/>
+      <index field="DataIzmen_"/>
+      <index field="DataOtprav"/>
+      <index field="DataZayavki"/>
+      <index field="KodKontakt"/>
+      <index field="KodVersii"/>
+      <index field="Otvetstv_"/>
+      <index field="TipProgr_"/>
+      <index field="VremyaIzmen"/>
+      <index field="Vydal"/>
+      <index field="Vydana"/>
+      <index field="Zayavka_ot"/>
+    </table>
+  </tables>
+</dbd_schema>

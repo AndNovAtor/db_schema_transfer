@@ -192,7 +192,7 @@ class SchemaToSqliteDb:
     def _put_constraints(self):
         self.cursor.executescript("""create temporary table constraints_tmp (c_id, c_t_name, c_n, c_t, c_ref_t_n,
                                        c_hve, c_cd,c_exp,c_uuid);
-                                     create temporary table con_details_tmp (cd_c_id, cd_pos, f_name);""")
+                                     create temporary table con_details_tmp (cd_c_id, cd_pos, f_name, c_t_name);""")
         c_id = self.cursor.execute("SELECT seq from sqlite_sequence where name = 'dbd$constraints'").fetchone()
         self.cursor.execute("UPDATE sqlite_sequence set seq = seq + ? where name = 'dbd$constraints'",
                             (self.schema.con_num,)).fetchone()
@@ -200,35 +200,43 @@ class SchemaToSqliteDb:
         c_id = init_id_from_seq(c_id)
         for table in self.schema.tables:
             con_pos = 0
-            t_constraints = [table.pr_constraint] + table.fr_constraints + [table.ch_constraint]
+            t_constraints = table.pr_constraints + table.fr_constraints + table.ch_constraints
             t_name = table.name
             for t_constraint in t_constraints:
-                if t_constraint is not None:
-                    c_id += 1
-                    c_name = t_constraint.name
-                    c_type = t_constraint.const_type
-                    c_ref_t_n = getattr(t_constraint, "ref_name", None)
-                    c_has_v_ed = ("has_value_edit" in getattr(t_constraint, "props", ""))
-                    if c_type == "FOREIGN":
-                        c_cas_del = ("cascading_delete" in t_constraint.props)
-                    else:
-                        c_cas_del = None
-                    c_expr = getattr(t_constraint, "expression", None)
-                    c_uuid = uuid.uuid4().hex
-                    self.cursor.execute("insert into constraints_tmp values (?,?,?,?,?,?,?,?,?);", (c_id, t_name,
-                                        c_name, c_type, c_ref_t_n, c_has_v_ed, c_cas_del, c_expr, c_uuid))
-                    con_pos += 1
-                    con_f_name = t_constraint.item_name
-                    self.cursor.execute("insert into con_details_tmp values (?,?,?);", (c_id, con_pos, con_f_name))
+                c_id += 1
+                c_name = t_constraint.name
+                c_type = t_constraint.const_type
+                c_ref_t_n = getattr(t_constraint, "ref_name", None)
+                c_has_v_ed = ("has_value_edit" in getattr(t_constraint, "props", ""))
+                if c_type == "FOREIGN":
+                    c_cas_del = ("cascading_delete" in t_constraint.props)
+                else:
+                    c_cas_del = None
+                c_expr = getattr(t_constraint, "expression", None)
+                c_uuid = uuid.uuid4().hex
+                self.cursor.execute("insert into constraints_tmp values (?,?,?,?,?,?,?,?,?);", (c_id, t_name,
+                                    c_name, c_type, c_ref_t_n, c_has_v_ed, c_cas_del, c_expr, c_uuid))
+                con_pos += 1
+                con_f_name = t_constraint.item_name
+                self.cursor.execute("insert into con_details_tmp values (?,?,?,?);",
+                                    (c_id, con_pos, con_f_name, t_name))
         self.connect.commit()
-        self.cursor.executescript("""insert into dbd$constraints select con.c_id, t.id, con.c_n, con.c_t, ca.c_id,
-                                       con.c_hve, con.c_cd, con.c_exp, con.c_uuid
+        self.cursor.executescript("""insert into dbd$constraints
+                                       select con.c_id, t.id, con.c_n, con.c_t, ca.c_id,
+                                        con.c_hve, con.c_cd, con.c_exp, con.c_uuid
                                        from (constraints_tmp con left join (select c_id, c_t_name
                                          from constraints_tmp where c_t="PRIMARY") ca on con.c_ref_t_n=ca.c_t_name)
                                        inner join dbd$tables t on con.c_t_name=t.name;
 
-                                     insert into dbd$constraint_details select null, cd.cd_c_id, cd.cd_pos, f.id
-                                       from con_details_tmp cd inner join dbd$fields f on cd.f_name = f.name;
+                                     insert into dbd$constraint_details
+                                       select null, cd_tabl.c_id, cd_tabl.pos, f.id
+                                       from (select cd.cd_c_id c_id, cd.cd_pos pos, cd.f_name, tabls.id tab_id
+                                         from con_details_tmp cd
+                                         inner join dbd$tables tabls
+                                           on cd.c_t_name = tabls.name) cd_tabl
+                                         inner join dbd$fields f
+                                           on cd_tabl.f_name = f.name
+                                           and cd_tabl.tab_id = f.table_id;
 
                                      DROP TABLE constraints_tmp;
                                      DROP TABLE con_details_tmp;""")
@@ -290,6 +298,7 @@ class SchemaToSqliteDb:
                 self._put_indices()
                 self.connect.commit()
                 print("Database schema was successfully writen into '.db' file.")
+                return True
 
             except Exception as ex:
                 print("Error occurred!")
@@ -297,6 +306,7 @@ class SchemaToSqliteDb:
                 traceback.print_exc()
                 print("Invalid db file was created!")
                 print("Error catched in 'create_schema_db' method of 'SchemaToSqliteDb' class")
-                return
+                return False
         else:
             print("Error - db file was not created")
+            return False

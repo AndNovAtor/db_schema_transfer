@@ -82,10 +82,6 @@ class XmlSchemaParsing:
             table_obj.ht_table_flags = table_el.get("ht_table_flags", "")
             table_obj.temporal_mode = table_el.get("temporal_mode", None)
             table_obj.means = table_el.get("means", None)
-            table_obj.fields = {}
-            table_obj.pr_constraint = None
-            table_obj.fr_constraints = []
-            table_obj.indices = []
             self.schema.tables.append(table_obj)
 
     def _xml_parse_table_fields(self):
@@ -156,11 +152,11 @@ class XmlSchemaParsing:
                 con_kind = constraint_el.get("kind", "")
                 con_name = constraint_el.get("name")
                 if con_kind == "PRIMARY":
-                    table_obj.pr_constraint = ddl_classes.PrConstraint(items_field, con_name)
+                    table_obj.append_constraint(ddl_classes.PrConstraint(items_field, con_name))
                 else:
-                    con_props = constraint_el.get("props", "")
                     ref_t_name = constraint_el.get("reference")
                     if con_kind == "FOREIGN":
+                        con_props = constraint_el.get("props", "")
                         ref_table = next((t for t in self.schema.tables if t.name == ref_t_name), None)
                         if ref_table is None:
                             #    !!!  This error situation, so - incorrect xml!!!
@@ -168,12 +164,12 @@ class XmlSchemaParsing:
                                   "', in table '", table_obj.name, "') does not exist (a reference of table '",
                                   ref_t_name, "' does not exist in input xml file).", sep="")
                         else:
-                            table_obj.fr_constraints.append(ddl_classes.ForConstraint(items_field, ref_table,
-                                                                                      con_props, con_name))
+                            table_obj.append_constraint(ddl_classes.ForConstraint(items_field, ref_table,
+                                                                                  con_props, con_name))
                     else:
                         if con_kind == "CHECK":
-                            table_obj.ch_constraint.append(ddl_classes.CheckConstraint(constraint_el.get("reference"),
-                                                                                       con_props, con_name),)
+                            table_obj.append_constraint(ddl_classes.CheckConstraint(constraint_el.get("reference"),
+                                                                                    con_name),)
                         else:
                             print("Incorrect constraint")
             i += 1
