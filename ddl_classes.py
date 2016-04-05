@@ -141,7 +141,7 @@ class CheckConstraint:
     def __init__(self, expression_i="", field_item=None, name_i=None):
         self.expression = expression_i
         self.name = name_i
-        if field_item.__class__ == ddl_classes.Field:
+        if field_item.__class__ == Field:
             self.item = field_item
             self.item_name = field_item.name
         else:
@@ -180,8 +180,15 @@ class Schema:
         self.domains = [d for d in domains_lst if d.__class__ == Domain] if domains_lst is not None else []
         self.un_domains = [un_d for un_d in un_dom_lst if un_d.__class__ == Domain] if un_dom_lst is not None else []
         self.tables = [t for t in tables_lst if t.__class__ == Table] if tables_lst is not None else []
+        self.tables_map = {}
         self.con_num = const_num
         self.ind_num = indices_num
 
     def get_all_domains(self):
         return self.domains+self.un_domains
+
+    #def append_table(self, table):
+    #    if table.__class__ == Table:
+    #        self.tables.append(table)
+    #        if table.name:
+    #            self.tables_map[table.name] = table

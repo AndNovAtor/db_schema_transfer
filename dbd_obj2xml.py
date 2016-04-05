@@ -101,7 +101,7 @@ class DbdSchemaToXml:
                     if fr_constr_obj.props:
                         for_constr.setAttribute("props", fr_constr_obj.props)
                     table_tag.appendChild(for_constr)
-            if table.ch_constraint:
+            if table.ch_constraints:
                 for ch_const_obj in table.ch_constraints:
                     ch_constr = self.xml_root.createElement("constraint")
                     ch_constr.setAttribute("name", ch_const_obj.name)

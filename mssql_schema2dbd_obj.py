@@ -1,19 +1,37 @@
-from MSDBD_TO_XML.SQL import *
-from Shared.Types import *
-# from ddl_classes import *
+from ddl_classes import *
+import pypyodbc
 
-def create_schema(conn)
-    MssqlSchemaToSchema(conn).create_schema()
 
 class MssqlSchemaToSchema:
-    def __init__(self, conn, schema_i=None):
+    def __init__(self, conn=None, schema_i=None, db_name='Northwind', is_sql_expr_con=True):
         self.connection = conn
-        self.cursor = conn.cursor()
+        self.cursor = conn.cursor() if conn.__class__ == pypyodbc.Connection else None
         self.schema = schema_i
-    
-    def create_schema():
-        cur = self.cursor
-        row = cur.execute("""
+        self.databaseName = db_name
+        self.driver_str = '{SQL Server Native Client 11.0}' if is_sql_expr_con else '{SQL Server}'
+        self.is_localdb_con = is_sql_expr_con
+
+    def init_connection(self):
+        serv_name = '.\SQLServer}'
+        if self.is_localdb_con:
+            serv_name = '(localdb)\\v11.0'
+        self.connection = pypyodbc.connect(
+            # driver=self.driver_str,
+            # server=serv_name,
+            # database=self.databaseName,
+            # trusted_Connection='yes'
+            driver='{SQL Server Native Client 11.0}',
+            server='(localdb)\\v11.0',
+            database='Northwind',
+            trusted_Connection='yes'
+        )
+        self.cursor = self.connection.cursor()
+        return self
+
+    def create_schema(self):
+        cur = self.connection.cursor()
+        cur.execute("use Northwind;")
+        row = cur.execute("""\
                           SELECT
                           TOP(1) TABLE_SCHEMA
                           FROM
@@ -22,11 +40,12 @@ class MssqlSchemaToSchema:
                           """).fetchone()
         self.schema = Schema()
         self.schema.name = row[0]
-        create_tables()
+        self.create_tables()
+        return self
 
     def create_tables(self):
-        cur = self.cursor
-        cur.execute("""
+        cur = self.connection.cursor()
+        cur.execute("""\
                     SELECT
                         TABLE_NAME
                     FROM
@@ -43,17 +62,17 @@ class MssqlSchemaToSchema:
         cur.close()
 
         for table in self.schema.tables:
-            create_fields(table)
+            self.create_fields(table)
         
         for table in self.schema.tables:
-            create_constraints(table)
+            self.create_constraints(table)
         
         for table in self.schema.tables:
-            create_index(table)
+            self.create_index(table)
 
     def create_fields(self, table):
-        cur = self.cursor
-        cur.execute("""
+        cur = self.connection.cursor()
+        cur.execute("""\
                     SELECT
                         COLUMN_NAME,
                         DATA_TYPE,
@@ -74,7 +93,7 @@ class MssqlSchemaToSchema:
         cur.close()
 
     def create_constraints(self, table):
-        cur = self.cursor
+        cur = self.connection.cursor()
         cur.execute("""
                     SELECT
                         ic.key_ordinal,
@@ -101,6 +120,9 @@ class MssqlSchemaToSchema:
             table.append_constraint(constraint)
             row = cur.fetchone()
 
+        tables_map = {}
+        for table in self.schema.tables:
+            tables_map[table.name] = table
         cur.execute("""
                     SELECT
                         COL_NAME(parent_object_id, parent_column_id) ColumnName,
@@ -116,11 +138,11 @@ class MssqlSchemaToSchema:
             constraint = ForConstraint()
             constraint.item = table.fields_map[row[0]]
             constraint.item_name = row[0]
-            constraint.reference = table.fields_map[row[1]]
+            constraint.reference = tables_map[row[1]]
             constraint.ref_name = row[1]
-            if constraint.kind == 'FOREIGN' and constraint.reference == '':
+            if constraint.const_type == 'FOREIGN' and constraint.ref_name == '':
                 raise Exception('No reference table for foreign key')
-            if constraint.items == '':
+            if constraint.item_name == '':
                 raise Exception('Items value is empty!')
 
             table.append_constraint(constraint)
@@ -133,7 +155,7 @@ class MssqlSchemaToSchema:
                     """, (table.name, ))
         row = cur.fetchone()
         while row is not None:
-            constraint = ChConstraint()
+            constraint = CheckConstraint()
             constraint.express = table.fields_map[row[0]]
             constraint.expression = row[0]
             constraint.item = table.fields_map[row[1]]
@@ -141,8 +163,11 @@ class MssqlSchemaToSchema:
             table.append_constraint(constraint)
             row = cur.fetchone()
 
-    def create_index(conn, table):
-        cur = conn.cursor()
+    def create_index(self, table):
+        cur = self.connection.cursor()
+        tables_map = {}
+        for table in self.schema.tables:
+            tables_map[table.name] = table
         cur.execute("""
                     SELECT ind.name IndexName
                     FROM sys.indexes ind
@@ -162,8 +187,8 @@ class MssqlSchemaToSchema:
         row = cur.fetchone()
         while row is not None:
             index = Index()
-            index.field_name.append(row[0])
-            index.field = table.fields_map[row[0]]
+            index.field_name = row[0]
+            index.field = tables_map[row[0]]
             table.append_index(index)
             row = cur.fetchone()
 
