@@ -31,7 +31,7 @@ class MssqlSchemaToSchema:
     def create_schema(self):
         cur = self.connection.cursor()
         cur.execute("use Northwind;")
-        row = cur.execute("""\
+        row = cur.execute("""
                           SELECT
                           TOP(1) TABLE_SCHEMA
                           FROM
@@ -45,7 +45,7 @@ class MssqlSchemaToSchema:
 
     def create_tables(self):
         cur = self.connection.cursor()
-        cur.execute("""\
+        cur.execute("""
                     SELECT
                         TABLE_NAME
                     FROM
@@ -72,7 +72,7 @@ class MssqlSchemaToSchema:
 
     def create_fields(self, table):
         cur = self.connection.cursor()
-        cur.execute("""\
+        cur.execute("""
                     SELECT
                         COLUMN_NAME,
                         DATA_TYPE,

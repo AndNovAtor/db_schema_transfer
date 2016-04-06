@@ -7,6 +7,9 @@ from sqlite_schema2dbd_obj import SqliteDbToSchema
 from dbd_obj2xml import DbdSchemaToXml
 from mssql_schema2dbd_obj import MssqlSchemaToSchema
 from dbd_object2mssqlddl import SchemaToMssqlDDL
+from dbd_obj2psql_data import DbdobjToPslDate
+
+tmp_ddl_file_path = "tmp.sql"
 
 
 def parse_xml(xml_path):
@@ -42,8 +45,17 @@ def parse_mssql(ddl_path):
         ddl_path = "northwind_ddl.sql"
     mssql_parsed = MssqlSchemaToSchema().init_connection().create_schema()
     if mssql_parsed is not None:
-        ddl_gen = SchemaToMssqlDDL(ddl_path, mssql_parsed.schema)
-        ddl_gen.make_schema()
+        SchemaToMssqlDDL(ddl_path, mssql_parsed.schema).make_schema()
+
+
+def transfer_mssql_psql(passw):
+    mssql_parsed = MssqlSchemaToSchema().init_connection().create_schema()
+    if mssql_parsed is not None:
+        schema = mssql_parsed.schema
+        SchemaToMssqlDDL(tmp_ddl_file_path, mssql_parsed.schema).make_schema()
+        DbdobjToPslDate(tmp_ddl_file_path, schema.tables,)
+
+
 
 
 parser = argparse.ArgumentParser()
@@ -56,6 +68,9 @@ parser.add_argument("-sq2x", "--sqlitetoxml",
 parser.add_argument("-ms2ddl", "--mssqltoddl",
                     help="ddl file path - Northwind db in MS SQL Server will be parse into this ddl file",
                     metavar='ddl_file_path')
+parser.add_argument("-ms2psql", "--mssqltopostgresql",
+                    help="password - for postgresql user, use transfer between MS Sql Server and PostgreSql ",
+                    metavar='pass')
 args = parser.parse_args()
 was_no_arguments = True
 if args.xmltosqlite:
@@ -66,6 +81,9 @@ if args.sqlitetoxml:
     was_no_arguments = False
 if args.mssqltoddl:
     parse_mssql(args.mssqltoddl)
+    was_no_arguments = False
+if args.mssqltopostgresql:
+    transfer_mssql_psql(args.mssqltopostgresql)
     was_no_arguments = False
 if was_no_arguments:
     print("No arguments")

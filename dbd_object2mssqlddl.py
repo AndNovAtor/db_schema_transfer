@@ -11,8 +11,10 @@ class SchemaToMssqlDDL:
         ddl_string += self.parse_tables()
         ddl_string += self.parse_for_cons()
         ddl_string += self.parse_check_cons()
-        with open(self.ddl_path, 'w', encoding='utf-8') as file:
-            file.write(ddl_string)
+        if self.ddl_path:
+            with open(self.ddl_path, 'w', encoding='utf-8') as file:
+                file.write(ddl_string)
+        return ddl_string
 
     def parse_domains(self):
         ddl_string = ''
